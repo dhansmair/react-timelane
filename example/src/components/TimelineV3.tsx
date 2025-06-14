@@ -135,7 +135,7 @@ export default function TimelineV3({
             range={range}
             pixels={pixels}
             focusedDay={focusedDay}
-            setFocusedDay={setFocusedDay}
+            // setFocusedDay={setFocusedDay}
           />
         </TimelineLayout.Background>
         <TimelineLayout.Aside>

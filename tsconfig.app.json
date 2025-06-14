@@ -14,10 +14,6 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-    "allowSyntheticDefaultImports": true,
-    "allowArbitraryExtensions": true,
-    "allowJs": true,
-    "isolatedModules": true,
 
     /* Linting */
     "strict": true,

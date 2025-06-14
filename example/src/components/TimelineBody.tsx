@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import TimelineAllocationV3 from "./TimelineAllocationV3";
-// import { doOverlap } from "./core/CoreSwimlane/utils";
+import { doOverlap } from "react-timeline-calendar";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import {
   type TimeRange,
@@ -67,7 +67,7 @@ export default function TimelineBody({
 
     const newAllocation: Allocation = {
       ...item.payload,
-      resourceId: item.resourceId,
+      resourceId: item.swimlaneId,
       start: item.start.toISOString(),
       end: item.end.toISOString(),
       size: item.size,
@@ -223,17 +223,17 @@ export default function TimelineBody({
           .filter((a) => a.resourceId === area.id)
           .map((a: Allocation) => ({
             ...a,
-            resourceId: a.resourceId,
+            swimlaneId: a.resourceId,
             start: new Date(a.start),
             end: new Date(a.end),
             payload: a,
           }));
 
         return (
-          <CoreSwimlane
+          <CoreSwimlane<Allocation>
             key={index}
             range={range}
-            resource={resource}
+            swimlane={resource}
             items={items}
             pixels={pixels}
             focused={focusedArea !== null && focusedArea.id === area.id}
