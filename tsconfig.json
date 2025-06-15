@@ -25,8 +25,9 @@
     "noUnusedParameters": false,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "outDir": "dist"
   },
   "include": ["src"],
-  "exclude": ["docs"]
+  "exclude": ["docs", "node_modules", ".github"],
 }

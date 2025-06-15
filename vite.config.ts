@@ -9,7 +9,7 @@ export default defineConfig({
   plugins: [
     react(),
     // vitePluginSass(),
-    dts({ include: ["src"] }),
+    dts({ include: ["src"], exclude: ["docs", ".github"] }),
   ],
   build: {
     lib: {
