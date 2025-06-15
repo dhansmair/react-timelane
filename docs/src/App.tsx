@@ -3,11 +3,8 @@ import Timeline from "./components/Timeline";
 import type Allocation from "./models/Allocation";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { DEFAULT_ALLOCATIONS, DEFAULT_RESOURCES } from "./constants";
-import {
-  TimelineWrapper,
-  type TimelineSettings,
-} from "react-timeline-calendar";
-import "react-timeline-calendar/style.css";
+import { TimelineWrapper, type TimelineSettings } from "react-timelane";
+import "react-timelane/style.css";
 import "./App.css";
 
 function App() {

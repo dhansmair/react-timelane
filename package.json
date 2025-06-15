@@ -1,5 +1,5 @@
 {
-  "name": "react-timeline-calendar",
+  "name": "react-timelane",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -37,8 +37,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/react-timeline-calendar.js"
+      "default": "./dist/react-timelane.js"
     },
-    "./style.css": "./dist/react-timeline-calendar.css"
+    "./style.css": "./dist/react-timelane.css"
   }
 }

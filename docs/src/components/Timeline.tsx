@@ -12,7 +12,7 @@ import {
   TimelineBody,
   TimelineSelectionLayer,
   useScroll,
-} from "react-timeline-calendar";
+} from "react-timelane";
 import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
 import AllocationComponent from "./AllocationComponent";
