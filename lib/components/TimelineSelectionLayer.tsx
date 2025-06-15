@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useRef, useState } from "react";
-import { ItemId, Rectangle } from "./types";
+import { ItemId, Rectangle } from "../types";
 import { doOverlap } from "./core/CoreSwimlane/utils";
 import { MouseEvent } from "react";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";

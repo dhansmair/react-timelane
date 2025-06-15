@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { TimelineSettings } from "./types/TimelineSettings";
+import { TimelineSettings } from "../types/TimelineSettings";
 import { TimelineContext } from "./TimelineContext";
 
 interface TimelineContextProviderProps {

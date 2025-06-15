@@ -1,6 +1,6 @@
 import { PropsWithChildren, useEffect } from "react";
 import { TimelineContextProvider } from "./TimelineContextProvider";
-import { SwimlaneT } from "./types";
+import { SwimlaneT } from "../types";
 import "./Timeline.scss";
 import "./core/style.scss";
 

@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { TimelineSettings } from "./types/TimelineSettings";
+import { TimelineSettings } from "../types/TimelineSettings";
 
 const defaultTimelineSettings: TimelineSettings = {
   start: new Date(2025, 1, 1),

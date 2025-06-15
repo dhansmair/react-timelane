@@ -1,5 +1,5 @@
 import { MouseEvent, ReactElement } from "react";
-import { Pixels, TimeRange } from "../types";
+import { Pixels, TimeRange } from "../../types";
 import { eachDayOfInterval, isSameDay } from "date-fns";
 import { renderDayHeader } from "./renderingUtils";
 

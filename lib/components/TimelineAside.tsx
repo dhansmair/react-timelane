@@ -1,5 +1,5 @@
-import { useTimelineContext } from "./hooks/useTimelineContext";
-import { SwimlaneT } from "./types";
+import { useTimelineContext } from "../hooks/useTimelineContext";
+import { SwimlaneT } from "../types";
 
 interface TimelineAsideProps {
   swimlanes: SwimlaneT[];

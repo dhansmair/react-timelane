@@ -17,7 +17,7 @@ import {
   Rectangle,
   SwimlaneT,
   TimeRange,
-} from "../../types";
+} from "../../../types";
 
 export function getDropPreviewRectangle<S, T>(
   swimlane: SwimlaneT,

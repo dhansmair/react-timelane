@@ -11,7 +11,7 @@ import {
   Rectangle,
   SwimlaneT,
   TimeRange,
-} from "../types";
+} from "../../types";
 
 export function getDropTargetDimensions(
   swimlane: SwimlaneT,

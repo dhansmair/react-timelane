@@ -1,40 +1,39 @@
 import { MouseEvent, ReactElement } from "react";
-import { Pixels, TimeRange } from "../types";
+import { Pixels, TimeRange } from "../../types";
 import {
   differenceInCalendarDays,
-  eachWeekOfInterval,
-  isSunday,
-  nextSunday,
+  eachMonthOfInterval,
+  lastDayOfMonth,
 } from "date-fns";
-import { renderWeekHeader } from "./renderingUtils";
+import { renderMonthHeader } from "./renderingUtils";
 
-interface WeeksHeaderProps {
+interface MonthsHeaderProps {
   range: TimeRange;
   pixels: Pixels;
   setFocusedDay?: (day: Date | null) => void;
   render?: (firstDay: Date, lastDay: Date) => ReactElement;
-  onWeekClick?: (params: {
+  onMonthClick?: (params: {
     firstDay: Date;
     lastDay: Date;
     e: MouseEvent;
   }) => void;
 }
 
-export function WeeksHeader({
+export function MonthsHeader({
   range,
   pixels,
   setFocusedDay = () => {},
-  render = renderWeekHeader,
-  onWeekClick = () => undefined,
-}: WeeksHeaderProps) {
+  render = renderMonthHeader,
+  onMonthClick = () => undefined,
+}: MonthsHeaderProps) {
   return (
-    <div className="timeline-header-weeks">
-      {eachWeekOfInterval(range, { weekStartsOn: 1 }).map((firstDay, index) => {
+    <div className="timeline-header-months">
+      {eachMonthOfInterval(range).map((firstDay, index) => {
         if (firstDay < range.start) {
           firstDay = range.start;
         }
 
-        let lastDay = isSunday(firstDay) ? firstDay : nextSunday(firstDay);
+        let lastDay = lastDayOfMonth(firstDay);
 
         if (lastDay > range.end) {
           lastDay = range.end;
@@ -45,12 +44,12 @@ export function WeeksHeader({
         return (
           <div
             key={index}
-            className="timeline-header-week-label"
+            className="timeline-header-month-label"
             style={{
               width: `${pixels.pixelsPerDay * numberOfDays}px`,
             }}
             onClick={(e) => {
-              onWeekClick({ firstDay, lastDay, e });
+              onMonthClick({ firstDay, lastDay, e });
               setFocusedDay(firstDay);
             }}
           >

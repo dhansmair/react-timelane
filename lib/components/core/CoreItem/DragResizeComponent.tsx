@@ -3,7 +3,7 @@ import invariant from "tiny-invariant";
 import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { getGrabPosition } from "../utils";
 import { Resizable } from "re-resizable";
-import { Position, Rectangle, Dimensions } from "../../types";
+import { Position, Rectangle, Dimensions } from "../../../types";
 
 interface DragResizeComponentProps {
   rectangle: Rectangle;

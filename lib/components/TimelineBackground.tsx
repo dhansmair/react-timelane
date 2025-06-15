@@ -1,6 +1,6 @@
 import { eachDayOfInterval, format, isSunday } from "date-fns";
 import { dateToPixel } from "./core/utils";
-import { useTimelineContext } from "./hooks/useTimelineContext";
+import { useTimelineContext } from "../hooks/useTimelineContext";
 
 interface TimelineBackgroundProps {
   focusedDay?: Date | null;

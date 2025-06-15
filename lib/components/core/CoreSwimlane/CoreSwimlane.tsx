@@ -27,8 +27,8 @@ import {
   Rectangle,
   SwimlaneT,
   isCoreItem,
-} from "../../types";
-import { useTimelineContext } from "../../hooks/useTimelineContext";
+} from "../../../types";
+import { useTimelineContext } from "../../../hooks/useTimelineContext";
 
 interface CoreSwimlaneProps<T> {
   swimlane: SwimlaneT;

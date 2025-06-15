@@ -5,8 +5,13 @@ import {
   getUpdatedItem as getUpdatedItem,
 } from "../utils";
 import { PropsWithChildren } from "react";
-import { CoreItem, Position, Rectangle, SwimlaneT } from "../../types";
-import { TimelineSettings } from "../../types/TimelineSettings";
+import {
+  CoreItem,
+  Position,
+  Rectangle,
+  SwimlaneT,
+  TimelineSettings,
+} from "../../../types";
 
 interface CoreItemComponentProps<T> {
   item: CoreItem<T>;

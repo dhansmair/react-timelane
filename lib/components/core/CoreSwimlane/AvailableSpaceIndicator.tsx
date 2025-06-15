@@ -9,7 +9,7 @@ import {
   Rectangle,
   SwimlaneT,
   TimeRange,
-} from "../../types";
+} from "../../../types";
 
 interface AvailableSpaceIndicatorProps<T> {
   pixels: Pixels;

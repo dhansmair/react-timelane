@@ -2,7 +2,7 @@ import { MouseEvent, ReactElement } from "react";
 import { MonthsHeader } from "./MonthsHeader";
 import { WeeksHeader } from "./WeeksHeader";
 import { DaysHeader } from "./DaysHeader";
-import { useTimelineContext } from "../hooks/useTimelineContext";
+import { useTimelineContext } from "../../hooks/useTimelineContext";
 
 interface TimelineHeaderProps {
   focusedDay?: Date | null;
