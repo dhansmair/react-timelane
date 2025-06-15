@@ -11,6 +11,7 @@
   --timeline-focused-color: rgba(0, 0, 255, 0.1);
   --timeline-hover-color: rgba(0, 0, 0, 0.05);
 
+  overflow: auto;
   position: relative;
   width: 100%;
   height: 100%;
@@ -98,42 +99,22 @@
     position: relative;
     width: fit-content;
 
-    .timeline-row {
+    .timeline-swimlane {
       border-color: var(--timeline-border-color-normal) !important;
+      border-top: 1px solid gray;
+      border-bottom: 1px solid gray;
+      margin-top: -1px;
+      overflow: hidden;
 
-      .timeline-drag-item {
-        -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-        -moz-user-select: none; /* Old versions of Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently
-                                      supported by Chrome, Edge, Opera and Firefox */
-        &.timeline-drag-item-marked {
-          // background: green;
-          // border: 2px solid red;
-          .timeline-allocation {
-            border: 2px dashed rgba(0, 0, 0, 0.5);
-          }
-        }
-        .timeline-core-drag-item-resize-handle {
-          background: transparent !important;
-          transition: 0.2s;
+      .timeline-drop-target {
+        position: relative;
+        width: 100%;
+        height: 100%;
 
-          &:hover {
-            background: rgba(0, 0, 0, 0.1) !important;
-          }
-        }
-
-        .timeline-allocation {
-          background: #92a8d1;
-          border-radius: 2px;
-          border: 2px solid transparent;
-          height: calc(100% - 1px);
-          overflow: hidden;
+        .timeline-item {
+          position: absolute;
           cursor: pointer;
-          padding: 0 4px;
-          margin-left: 1px;
+          border-radius: 3px;
 
           -webkit-touch-callout: none; /* iOS Safari */
           -webkit-user-select: none; /* Safari */
@@ -142,31 +123,90 @@
           -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none; /* Non-prefixed version, currently
                                       supported by Chrome, Edge, Opera and Firefox */
-
-          container-type: size;
-          container-name: timeline-allocation;
-
-          .timeline-allocation-title {
-            font-weight: bold;
-            transform-origin: top left;
-            // font-size: 20px;
-            line-height: 30px;
-            white-space: nowrap;
-          }
-
-          @container timeline-allocation (max-height: 30px) {
-            .timeline-allocation-title {
-              margin: 0;
+          &.timeline-item-marked {
+            .timeline-allocation {
+              border: 2px dashed rgba(0, 0, 0, 0.5);
             }
           }
 
-          &.timeline-allocation-selected {
-            border: 2px dashed rgba(0, 0, 0, 0.5);
+          .timeline-item-drag-handle {
+            height: 100%;
+          }
+
+          .timeline-item-resize-handle {
+            background: #bed7dc;
+            border-radius: 5px;
+            top: 4px !important;
+            bottom: 4px !important;
+            height: auto !important;
+            width: 6px !important;
+            z-index: 2;
+            background: transparent !important;
+            transition: 0.2s;
+
+            &:hover {
+              background: rgba(0, 0, 0, 0.1) !important;
+            }
+
+            &.timeline-item-resize-handle-left {
+              left: 0 !important;
+              margin-left: 1px;
+            }
+            &.timeline-item-resize-handle-right {
+              right: 0 !important;
+            }
+          }
+
+          .timeline-allocation {
+            background: #92a8d1;
+            border-radius: 2px;
+            border: 2px solid transparent;
+            height: calc(100% - 1px);
+            overflow: hidden;
+            cursor: pointer;
+            padding: 0 4px;
+            margin-left: 1px;
+
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                      supported by Chrome, Edge, Opera and Firefox */
+
+            container-type: size;
+            container-name: timeline-allocation;
+
+            .timeline-allocation-title {
+              font-weight: bold;
+              transform-origin: top left;
+              // font-size: 20px;
+              line-height: 30px;
+              white-space: nowrap;
+            }
+
+            @container timeline-allocation (max-height: 30px) {
+              .timeline-allocation-title {
+                margin: 0;
+              }
+            }
+
+            &.timeline-allocation-selected {
+              border: 2px dashed rgba(0, 0, 0, 0.5);
+            }
+          }
+
+          &.dragging {
+            opacity: 0;
           }
         }
 
-        &.dragging {
-          opacity: 0;
+        .timeline-drop-preview {
+          background: blue;
+          position: absolute;
+          border-radius: 2px;
+          color: white;
         }
       }
 

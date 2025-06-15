@@ -180,7 +180,10 @@ export default function CoreSwimlane<T>({
 
   return (
     <div
-      className={`timeline-row ${focused ? "timeline-row-focused" : ""}`}
+      id={`timeline-swimlane-${swimlane.id}`}
+      className={`timeline-swimlane ${
+        focused ? "timeline-swimlane-focused" : ""
+      }`}
       data-timeline-swimlane-id={swimlane.id}
       style={dimensions}
       onMouseUp={onMouseUp}

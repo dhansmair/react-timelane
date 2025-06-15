@@ -66,7 +66,8 @@ export default function DragResizeComponent<T>({
 
   return (
     <div
-      className="timeline-drag-item"
+      id={`timeline-item-${item.id}`}
+      className="timeline-item"
       data-timeline-item-id={item.id}
       ref={ref}
       style={{
@@ -94,9 +95,9 @@ export default function DragResizeComponent<T>({
           bottom: true,
         }}
         handleClasses={{
-          left: "timeline-core-drag-item-resize-handle timeline-core-drag-item-resize-handle-left",
+          left: "timeline-item-resize-handle timeline-item-resize-handle-left",
           right:
-            "timeline-core-drag-item-resize-handle timeline-core-drag-item-resize-handle-right",
+            "timeline-item-resize-handle timeline-item-resize-handle-right",
         }}
         size={{
           width: tmpRectangle.width,
@@ -170,7 +171,7 @@ export default function DragResizeComponent<T>({
         }}
         style={{ overflow: "hidden" }}
       >
-        <div className="timeline-drag-item-handle" ref={handleRef}>
+        <div className="timeline-item-drag-handle" ref={handleRef}>
           {children}
         </div>
       </Resizable>

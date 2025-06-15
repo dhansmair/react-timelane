@@ -41,9 +41,10 @@ export const useScroll = () => {
 
   function scrollToLane(laneId: SwimlaneId) {
     window.requestAnimationFrame(() => {
-      const el: Element | null = document.querySelector(
-        `.timeline-row[data-timeline-swimlane-id="${laneId}"]`
+      const el: HTMLElement | null = document.getElementById(
+        `timeline-swimlane-${laneId}`
       );
+
       if (el) {
         el.scrollIntoView({ block: "center", behavior: "smooth" });
       }
@@ -52,8 +53,8 @@ export const useScroll = () => {
 
   function scrollToItem(itemId: ItemId) {
     window.requestAnimationFrame(() => {
-      const el: Element | null = document.querySelector(
-        `.timeline-drag-item[data-timeline-item-id="${itemId}"]`
+      const el: HTMLElement | null = document.getElementById(
+        `timeline-item-${itemId}`
       );
 
       if (el) {

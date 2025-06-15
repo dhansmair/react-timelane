@@ -65,11 +65,11 @@ export function TimelineSelectionLayer({
 
       document.querySelectorAll(".timeline-drop-target").forEach((row) => {
         if (doOverlap(row.getBoundingClientRect(), selectedRect)) {
-          row.querySelectorAll(".timeline-drag-item").forEach((item) => {
+          row.querySelectorAll(".timeline-item").forEach((item) => {
             if (doOverlap(item.getBoundingClientRect(), selectedRect)) {
-              item.classList.add("timeline-drag-item-marked");
+              item.classList.add("timeline-item-marked");
             } else {
-              item.classList.remove("timeline-drag-item-marked");
+              item.classList.remove("timeline-item-marked");
             }
           });
         }
@@ -99,13 +99,12 @@ export function TimelineSelectionLayer({
         document.querySelectorAll(".timeline-drop-target")
       )
         .filter((row) => doOverlap(row.getBoundingClientRect(), selectedRect))
-        .map((row) => Array.from(row.querySelectorAll(".timeline-drag-item")))
-        .flatMap((els) => els)
-        .filter((item) => doOverlap(item.getBoundingClientRect(), selectedRect))
-        .map((item) => {
-          const el = item.querySelector(".timeline-allocation");
+        .map((row) => Array.from(row.querySelectorAll(".timeline-item")))
+        .flatMap((elements) => elements)
+        .filter((el) => doOverlap(el.getBoundingClientRect(), selectedRect))
+        .map((el) => {
           if (el instanceof HTMLElement) {
-            return Number.parseInt(el.dataset.allocationId || "-1");
+            return Number.parseInt(el.dataset.timelineItemId || "-1");
           } else {
             return -1;
           }
@@ -122,8 +121,8 @@ export function TimelineSelectionLayer({
         }
       }
 
-      document.querySelectorAll(".timeline-drag-item-marked").forEach((el) => {
-        el.classList.remove("timeline-drag-item-marked");
+      document.querySelectorAll(".timeline-item-marked").forEach((el) => {
+        el.classList.remove("timeline-item-marked");
       });
     }
 

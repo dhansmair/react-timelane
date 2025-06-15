@@ -2,7 +2,7 @@ import { PropsWithChildren, useEffect } from "react";
 import { TimelineSettingsProvider } from "./TimelineSettingsProvider";
 import { SwimlaneT } from "../types";
 import "./Timeline.scss";
-import "./core/style.scss";
+// import "./core/style.scss";
 
 interface TimelineWrapperProps {
   focusedDay?: Date | null;

@@ -47,7 +47,6 @@ export default function CoreItemComponent<T>({
       item={item}
       rectangle={rectangle}
       boundingRectangle={boundingRectangle}
-      // data={item}
       onDrag={onDrag}
       onDragStart={onDragStart}
       onDrop={onDrop}

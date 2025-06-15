@@ -79,7 +79,7 @@ export default function AvailableSpaceIndicator<T>({
 
         setAvailableSpace(availableSpace);
       }}
-      onMouseLeave={(e) => {
+      onMouseLeave={() => {
         if (!debug) return;
         setAvailableSpace(null);
       }}
@@ -134,7 +134,7 @@ function AvailableSpaceIndicatorItem({
       width,
       height,
     });
-  }, [availableSpace]);
+  }, [availableSpace, pixels, range.start, swimlane.capacity]);
 
   return (
     <div
