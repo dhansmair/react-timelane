@@ -49,6 +49,8 @@ jobs:
         run: pwd
       - name: List files
         run: ls -la # or use tree . for a tree like structure
+      - name: List files
+        run: ls -la dist # or use tree . for a tree like structure
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
