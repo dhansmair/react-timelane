@@ -45,13 +45,15 @@ jobs:
         run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: show current working directrloy
+        run: pwd
       - name: List files
         run: ls -la # or use tree . for a tree like structure
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: "dist/"
+          path: dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
