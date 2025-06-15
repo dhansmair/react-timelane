@@ -43,10 +43,11 @@ export default function CoreItemComponent<T>({
   );
 
   return (
-    <DragResizeComponent
+    <DragResizeComponent<T>
+      item={item}
       rectangle={rectangle}
       boundingRectangle={boundingRectangle}
-      data={item}
+      // data={item}
       onDrag={onDrag}
       onDragStart={onDragStart}
       onDrop={onDrop}

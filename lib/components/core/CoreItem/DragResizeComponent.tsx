@@ -3,12 +3,12 @@ import invariant from "tiny-invariant";
 import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { getGrabPosition } from "../utils";
 import { Resizable } from "re-resizable";
-import { Position, Rectangle, Dimensions } from "../../../types";
+import { Position, Rectangle, Dimensions, CoreItem } from "../../../types";
 
-interface DragResizeComponentProps {
+interface DragResizeComponentProps<T> {
+  item: CoreItem<T>;
   rectangle: Rectangle;
   boundingRectangle: Dimensions;
-  data: Record<string, unknown>;
   onDragStart: (grabPosition: Position, relativeGrabPosition: Position) => void;
   onDrag: () => void;
   onDrop: () => void;
@@ -22,17 +22,17 @@ interface DragResizeComponentProps {
  * @param param0 t
  * @returns
  */
-export default function DragResizeComponent({
+export default function DragResizeComponent<T>({
+  item,
   rectangle,
   boundingRectangle,
   children,
-  data,
   onDrag,
   onDragStart,
   onDrop,
   onUpdate,
   onResizeStart,
-}: PropsWithChildren<DragResizeComponentProps>) {
+}: PropsWithChildren<DragResizeComponentProps<T>>) {
   const ref = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLDivElement>(null);
 
@@ -60,13 +60,14 @@ export default function DragResizeComponent({
       onDrop: () => {
         onDrop();
       },
-      getInitialData: () => ({ ...data }),
+      getInitialData: () => ({ ...item }),
     });
-  }, [data, onDrag, onDragStart, onDrop]);
+  }, [item, onDrag, onDragStart, onDrop]);
 
   return (
     <div
       className="timeline-drag-item"
+      data-timeline-item-id={item.id}
       ref={ref}
       style={{
         width: `${tmpRectangle.width}px`,

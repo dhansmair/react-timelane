@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect } from "react";
-import { TimelineContextProvider } from "./TimelineContextProvider";
+import { TimelineSettingsProvider } from "./TimelineSettingsProvider";
 import { SwimlaneT } from "../types";
 import "./Timeline.scss";
 import "./core/style.scss";
@@ -56,7 +56,7 @@ export default function TimelineWrapper({
 
   return (
     <div className="timeline-v3">
-      <TimelineContextProvider
+      <TimelineSettingsProvider
         settings={{
           start,
           end,
@@ -70,7 +70,7 @@ export default function TimelineWrapper({
         }}
       >
         {children}
-      </TimelineContextProvider>
+      </TimelineSettingsProvider>
     </div>
   );
 }

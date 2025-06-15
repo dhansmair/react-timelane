@@ -1,3 +1,4 @@
+import { MouseEvent, PropsWithChildren, ReactElement } from "react";
 import { useTimelineContext } from "../hooks/useTimelineContext";
 import { SwimlaneT } from "../types";
 
@@ -5,34 +6,76 @@ interface TimelineAsideProps {
   swimlanes: SwimlaneT[];
   focusedSwimlane?: SwimlaneT | null;
   setFocusedSwimlane?: (lane: SwimlaneT | null) => void;
+  onSwimlaneHeaderClick?: (lane: SwimlaneT, e: MouseEvent) => void;
+  onSwimlaneHeaderDoubleClick?: (lane: SwimlaneT, e: MouseEvent) => void;
+  onSwimlaneHeaderContextMenu?: (lane: SwimlaneT, e: MouseEvent) => void;
+  renderSwimlaneHeader?: (lane: SwimlaneT) => ReactElement;
 }
 
 export default function TimelineAside({
   swimlanes,
   focusedSwimlane,
-  setFocusedSwimlane = () => {},
+  setFocusedSwimlane = () => undefined,
+  onSwimlaneHeaderClick = () => undefined,
+  onSwimlaneHeaderDoubleClick = () => undefined,
+  onSwimlaneHeaderContextMenu = () => undefined,
+  renderSwimlaneHeader = defaultRenderSwimlaneHeader,
 }: TimelineAsideProps) {
   const { settings } = useTimelineContext();
 
   return (
     <div className="timeline-aside">
       {swimlanes &&
-        swimlanes.map((swimlane, index) => (
-          <div
-            key={index}
-            className={`timeline-aside-resource-label ${
-              focusedSwimlane && focusedSwimlane.id === swimlane.id
-                ? "timeline-aside-resource-label-focused"
-                : ""
-            }`}
-            style={{ height: `${settings.pixelsPerResource}px` }}
-            onClick={() => {
-              setFocusedSwimlane(swimlane);
+        swimlanes.map((lane) => (
+          <SwimlaneHeader
+            key={lane.id}
+            height={settings.pixelsPerResource}
+            isFocused={focusedSwimlane ? focusedSwimlane.id === lane.id : false}
+            onClick={(e) => {
+              setFocusedSwimlane(lane);
+              onSwimlaneHeaderClick(lane, e);
             }}
+            onDoubleClick={(e) => onSwimlaneHeaderDoubleClick(lane, e)}
+            onContextMenu={(e) => onSwimlaneHeaderContextMenu(lane, e)}
           >
-            {swimlane.id}
-          </div>
+            {renderSwimlaneHeader(lane)}
+          </SwimlaneHeader>
         ))}
     </div>
   );
+}
+
+interface SwimlaneHeaderProps {
+  height: number;
+  isFocused?: boolean;
+  onClick?: (e: MouseEvent) => void;
+  onDoubleClick?: (e: MouseEvent) => void;
+  onContextMenu?: (e: MouseEvent) => void;
+}
+
+function SwimlaneHeader({
+  height,
+  isFocused,
+  onClick,
+  onDoubleClick,
+  onContextMenu,
+  children,
+}: PropsWithChildren<SwimlaneHeaderProps>) {
+  return (
+    <div
+      className={`timeline-aside-resource-label ${
+        isFocused ? "timeline-aside-resource-label-focused" : ""
+      }`}
+      style={{ height: `${height}px` }}
+      onClick={onClick}
+      onDoubleClick={onDoubleClick}
+      onContextMenu={onContextMenu}
+    >
+      {children}
+    </div>
+  );
+}
+
+function defaultRenderSwimlaneHeader(lane: SwimlaneT) {
+  return <div>{lane.id}</div>;
 }

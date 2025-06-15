@@ -27,22 +27,15 @@ export default function TimelineBackground({
           ></div>
         )}
 
-        {settings.focusedDate && (
-          <div
-            className="timeline-background-focused-date-position"
-            style={{
-              position: "absolute",
-              top: 0,
-              width: `1px`,
-              height: "100%",
-              left: `${dateToPixel(
-                settings.focusedDate,
-                settings.start,
-                settings
-              )}px`,
-            }}
-          ></div>
-        )}
+        <div
+          id="timeline-background-date-anchor"
+          style={{
+            position: "absolute",
+            top: 0,
+            width: `1px`,
+            height: "100%",
+          }}
+        ></div>
 
         {eachDayOfInterval(settings).map((day, index) => (
           <div

@@ -181,6 +181,7 @@ export default function CoreSwimlane<T>({
   return (
     <div
       className={`timeline-row ${focused ? "timeline-row-focused" : ""}`}
+      data-timeline-swimlane-id={swimlane.id}
       style={dimensions}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e, "single")}

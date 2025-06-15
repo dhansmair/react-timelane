@@ -1,15 +1,15 @@
 import { PropsWithChildren, useEffect, useState } from "react";
 import { TimelineSettings } from "../types/TimelineSettings";
-import { TimelineContext } from "./TimelineContext";
+import { TimelineSettingsContext } from "./TimelineSettingsContext";
 
-interface TimelineContextProviderProps {
+interface TimelineSettingsProviderProps {
   settings: TimelineSettings;
 }
 
-export const TimelineContextProvider = ({
+export const TimelineSettingsProvider = ({
   settings: _settings,
   children,
-}: PropsWithChildren<TimelineContextProviderProps>) => {
+}: PropsWithChildren<TimelineSettingsProviderProps>) => {
   const [settings, setSettings] = useState<TimelineSettings>(_settings);
 
   useEffect(() => {
@@ -17,8 +17,8 @@ export const TimelineContextProvider = ({
   }, [_settings]);
 
   return (
-    <TimelineContext.Provider value={{ settings, setSettings }}>
+    <TimelineSettingsContext.Provider value={{ settings, setSettings }}>
       {children}
-    </TimelineContext.Provider>
+    </TimelineSettingsContext.Provider>
   );
 };

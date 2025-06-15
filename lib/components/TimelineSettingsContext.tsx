@@ -23,5 +23,5 @@ const defaultContext: TimelineContextOuter = {
   setSettings: () => undefined,
 };
 
-export const TimelineContext =
+export const TimelineSettingsContext =
   createContext<TimelineContextOuter>(defaultContext);
