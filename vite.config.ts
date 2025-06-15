@@ -9,11 +9,11 @@ export default defineConfig({
   plugins: [
     react(),
     // vitePluginSass(),
-    dts({ include: ["lib"] }),
+    dts({ include: ["src"] }),
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, "lib/index.ts"),
+      entry: resolve(__dirname, "src/index.ts"),
       formats: ["es"],
     },
     rollupOptions: {

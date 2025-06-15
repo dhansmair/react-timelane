@@ -1,5 +1,5 @@
 import { MouseEvent, ReactElement } from "react";
-import CoreSwimlane from "../components/core/CoreSwimlane/CoreSwimlane";
+import CoreSwimlane from "./core/CoreSwimlane/CoreSwimlane";
 import { AvailableSpace, CoreItem, SwimlaneT } from "../types";
 
 interface TimelineBodyProps<T> {

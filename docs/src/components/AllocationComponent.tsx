@@ -5,22 +5,20 @@ import { Tooltip } from "@mui/material";
 
 const SCALE_THRESHOLD_IN_PX = 30;
 
-interface TimelineAllocationV3Props {
+interface AllocationComponentProps {
   allocation: Allocation;
   isSelected?: boolean;
   isDragged?: boolean;
   onClick: (allocation: Allocation, e: MouseEvent) => void;
   onContextMenu: (allocation: Allocation, e: MouseEvent) => void;
 }
-export default function TimelineAllocationV3({
+export default function AllocationComponent({
   allocation,
   isSelected = false,
   isDragged = false,
   onClick,
   onContextMenu,
-}: TimelineAllocationV3Props) {
-  // const { t } = useTranslation();
-
+}: AllocationComponentProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   let scale = 1;
@@ -28,12 +26,10 @@ export default function TimelineAllocationV3({
   if (ref.current) {
     const height = ref.current.getBoundingClientRect().height;
 
-    if (height < SCALE_THRESHOLD_IN_PX) {
+    if (height > 0 && height < SCALE_THRESHOLD_IN_PX) {
       scale = height / SCALE_THRESHOLD_IN_PX;
     }
   }
-
-  const color = "blue";
 
   return (
     <Tooltip
@@ -47,9 +43,9 @@ export default function TimelineAllocationV3({
           }}
         >
           <div>
-            {format(new Date(allocation.start), "YYYY-mm-dd")}
+            {format(new Date(allocation.start), "yyyy-MM-dd")}
             &nbsp;-&nbsp;
-            {format(new Date(allocation.end), "YYYY-mm-dd")}
+            {format(new Date(allocation.end), "yyyy-MM-dd")}
           </div>
           <div>{allocation.description}</div>
         </div>
@@ -67,7 +63,7 @@ export default function TimelineAllocationV3({
         }}
         ref={ref}
         style={{
-          background: color,
+          background: allocation.color,
         }}
         data-allocation-id={`${allocation.id}`}
       >
@@ -77,7 +73,7 @@ export default function TimelineAllocationV3({
             transform: `scale(${scale})`,
           }}
         >
-          {allocation.name}
+          {allocation.name} (#{allocation.id})
         </div>
         <div style={{ fontSize: "small" }}>{allocation.description}</div>
       </div>
