@@ -1,8 +1,7 @@
-import { PropsWithChildren, useEffect } from "react";
+import { PropsWithChildren } from "react";
 import { TimelineSettingsProvider } from "./TimelineSettingsProvider";
 import { SwimlaneT } from "../types";
 import "./Timeline.scss";
-// import "./core/style.scss";
 
 interface TimelineWrapperProps {
   focusedDay?: Date | null;
@@ -20,8 +19,6 @@ interface TimelineWrapperProps {
 
 export default function TimelineWrapper({
   children,
-  focusedDay,
-  focusedSwimlane,
   start = new Date(2025, 1, 1),
   end = new Date(2025, 5, 1),
   pixelsPerDay = 30,
@@ -32,30 +29,8 @@ export default function TimelineWrapper({
   allowOverlaps = true,
   focusedDate = null,
 }: PropsWithChildren<TimelineWrapperProps>) {
-  useEffect(() => {
-    const el: Element | null = document.querySelector(
-      ".timeline-background-focused-day-position"
-    );
-
-    if (el) {
-      el.scrollIntoView({
-        block: "nearest",
-        inline: "center",
-        behavior: "smooth",
-      });
-    }
-  }, [focusedDay]);
-
-  useEffect(() => {
-    const el: Element | null = document.querySelector(".timeline-row-focused");
-
-    if (el) {
-      el.scrollIntoView({ block: "center", behavior: "smooth" });
-    }
-  }, [focusedSwimlane]);
-
   return (
-    <div className="timeline-v3">
+    <div className="timeline">
       <TimelineSettingsProvider
         settings={{
           start,

@@ -63,8 +63,8 @@ function SwimlaneHeader({
 }: PropsWithChildren<SwimlaneHeaderProps>) {
   return (
     <div
-      className={`timeline-aside-resource-label ${
-        isFocused ? "timeline-aside-resource-label-focused" : ""
+      className={`timeline-aside-swimlane-header ${
+        isFocused ? "timeline-aside-swimlane-header-focused" : ""
       }`}
       style={{ height: `${height}px` }}
       onClick={onClick}
