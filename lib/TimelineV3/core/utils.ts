@@ -37,7 +37,7 @@ export function getDropTargetWidth(
   range: TimeRange
 ): number {
   return Math.abs(
-    differenceInCalendarDays(range.end, range.start) * pixels.pixelsPerDay
+    (differenceInCalendarDays(range.end, range.start) + 1) * pixels.pixelsPerDay
   );
 }
 

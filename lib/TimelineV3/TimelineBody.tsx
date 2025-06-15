@@ -1,12 +1,10 @@
 import { MouseEvent, ReactElement } from "react";
 import CoreSwimlane from "./core/CoreSwimlane/CoreSwimlane";
 import { AvailableSpace, CoreItem, SwimlaneT } from "./types";
-import { TimelineSettings } from "./types/TimelineSettings";
 
 interface TimelineBodyProps<T> {
   lanes: SwimlaneT[];
   items: CoreItem<T>[];
-  settings: TimelineSettings;
   renderItem?: (item: CoreItem<T>, isDragged: boolean) => ReactElement;
   onItemUpdate?: (item: CoreItem<T>) => void;
   onLaneClick?: (
@@ -27,7 +25,6 @@ interface TimelineBodyProps<T> {
 export function TimelineBody<T>({
   lanes,
   items,
-  settings,
   renderItem,
   onItemUpdate = () => undefined,
   onLaneClick = () => undefined,
@@ -41,7 +38,6 @@ export function TimelineBody<T>({
           key={lane.id}
           swimlane={lane}
           items={items.filter((item) => item.swimlaneId === lane.id)}
-          settings={settings}
           renderItem={renderItem}
           onItemUpdate={onItemUpdate}
           onClick={(when, availableSpace, e) =>

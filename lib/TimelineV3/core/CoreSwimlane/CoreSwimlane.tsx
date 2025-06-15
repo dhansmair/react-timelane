@@ -28,16 +28,12 @@ import {
   SwimlaneT,
   isCoreItem,
 } from "../../types";
-import { TimelineSettings } from "../../types/TimelineSettings";
+import { useTimelineContext } from "../../hooks/useTimelineContext";
 
 interface CoreSwimlaneProps<T> {
-  // range: TimeRange;
   swimlane: SwimlaneT;
   items: CoreItem<T>[];
-  settings: TimelineSettings;
-  // pixels: Pixels;
   focused?: boolean;
-  // allowOverlaps?: boolean;
   onItemUpdate?: (item: CoreItem<T>) => void;
   onMouseUp?: (e: MouseEvent) => void;
   onClick?: (
@@ -56,13 +52,9 @@ interface CoreSwimlaneProps<T> {
 }
 
 export default function CoreSwimlane<T>({
-  // range,
   swimlane,
   items,
-  // pixels,
   focused = false,
-  settings,
-  // allowOverlaps = false,
   onItemUpdate = () => {},
   onMouseUp = () => {},
   onClick = () => {},
@@ -71,6 +63,8 @@ export default function CoreSwimlane<T>({
   renderItem = defaultRenderItem,
   onResizeStart = () => {},
 }: CoreSwimlaneProps<T>) {
+  const { settings } = useTimelineContext();
+
   const grid: Grid = {
     x: settings.pixelsPerDay,
     offsetX: settings.pixelsPerDay / 2,

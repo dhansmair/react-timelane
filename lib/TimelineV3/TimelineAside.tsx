@@ -1,7 +1,7 @@
+import { useTimelineContext } from "./hooks/useTimelineContext";
 import { SwimlaneT } from "./types";
 
 interface TimelineAsideProps {
-  pixelsPerResource: number;
   swimlanes: SwimlaneT[];
   focusedSwimlane?: SwimlaneT | null;
   setFocusedSwimlane?: (lane: SwimlaneT | null) => void;
@@ -9,10 +9,11 @@ interface TimelineAsideProps {
 
 export default function TimelineAside({
   swimlanes,
-  pixelsPerResource,
   focusedSwimlane,
   setFocusedSwimlane = () => {},
 }: TimelineAsideProps) {
+  const { settings } = useTimelineContext();
+
   return (
     <div className="timeline-aside">
       {swimlanes &&
@@ -24,7 +25,7 @@ export default function TimelineAside({
                 ? "timeline-aside-resource-label-focused"
                 : ""
             }`}
-            style={{ height: `${pixelsPerResource}px` }}
+            style={{ height: `${settings.pixelsPerResource}px` }}
             onClick={() => {
               setFocusedSwimlane(swimlane);
             }}

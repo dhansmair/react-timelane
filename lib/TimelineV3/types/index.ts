@@ -12,3 +12,4 @@ export { type SwimlaneId } from "./SwimlaneId";
 export { type SwimlaneT } from "./SwimlaneT";
 export { type DateBounds } from "./DateBounds";
 export { type OffsetBounds } from "./OffsetBounds";
+export { type TimelineSettings } from "./TimelineSettings";
