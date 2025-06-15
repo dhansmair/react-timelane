@@ -5,7 +5,7 @@ import { format } from "date-fns";
 import { MouseEvent, ReactElement, useState } from "react";
 import { addDays, setHours } from "date-fns";
 import {
-  getAllocationRectangle,
+  getItemRectangle,
   getDropTargetDimensions as getSwimlaneDimensions,
   getUpdatedItem as getUpdatedItem,
 } from "../utils";
@@ -162,7 +162,7 @@ export default function CoreSwimlane<T>({
 
   const rects = items.map((x) => ({
     id: x.id,
-    ...getAllocationRectangle(x, swimlane, settings, settings),
+    ...getItemRectangle(x, swimlane, settings, settings),
   }));
 
   const overlaps: Rectangle[] = rects

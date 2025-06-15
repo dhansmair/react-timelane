@@ -41,14 +41,14 @@ export function getDropTargetWidth(
   );
 }
 
-export function getAllocationRectangle<T>(
+export function getItemRectangle<T>(
   item: CoreItem<T>,
   swimlane: SwimlaneT,
   range: TimeRange,
   pixels: Pixels
 ): Rectangle {
   const dimensions = getItemDimensions(item, swimlane, pixels);
-  const position = getAllocationPosition(item, swimlane, range.start, pixels);
+  const position = getItemPosition(item, swimlane, range.start, pixels);
 
   return {
     ...dimensions,
@@ -84,7 +84,7 @@ export function offsetToPixel(
   return (offset / capacity) * pixels.pixelsPerResource;
 }
 
-export function getAllocationPosition<T>(
+export function getItemPosition<T>(
   item: CoreItem<T>,
   swimlane: SwimlaneT,
   start: Date,
@@ -125,7 +125,7 @@ export function getUpdatedItem<T>(
   pixels: Pixels,
   range: TimeRange
 ): CoreItem<T> {
-  // convert drop preview position to allocation
+  // convert drop preview position to item
   return {
     id: oldItem.id,
     swimlaneId: swimlane.id,

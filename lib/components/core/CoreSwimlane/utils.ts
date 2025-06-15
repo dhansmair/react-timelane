@@ -1,7 +1,7 @@
 import { max, min } from "date-fns";
 import {
   getItemDimensions,
-  getAllocationRectangle,
+  getItemRectangle,
   getDropTargetDimensions,
 } from "../utils";
 import {
@@ -42,7 +42,7 @@ export function getDropPreviewRectangle<S, T>(
 
   const itemRectangles: Rectangle[] = items
     .filter((a) => a.id !== item.id)
-    .map((a) => getAllocationRectangle(a, swimlane, range, pixels));
+    .map((a) => getItemRectangle(a, swimlane, range, pixels));
 
   let dropPreviewRectangle: Rectangle | null = null;
 

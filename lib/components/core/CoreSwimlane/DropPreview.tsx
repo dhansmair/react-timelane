@@ -14,15 +14,16 @@ export default function DropPreview({
   height,
   children,
 }: PropsWithChildren<DropPreviewProps>) {
-  const style = {
-    left: `${x}px`,
-    top: `${y}px`,
-    width: `${width}px`,
-    height: `${height}px`,
-  };
-
   return (
-    <div className="timeline-drop-preview" style={style}>
+    <div
+      className="timeline-drop-preview"
+      style={{
+        left: `${x}px`,
+        top: `${y}px`,
+        width: `${width}px`,
+        height: `${height}px`,
+      }}
+    >
       {children}
     </div>
   );

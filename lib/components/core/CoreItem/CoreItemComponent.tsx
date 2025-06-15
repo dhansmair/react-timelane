@@ -1,7 +1,7 @@
 import DragResizeComponent from "./DragResizeComponent";
 import {
   getDropTargetDimensions,
-  getAllocationRectangle as getItemRectangle,
+  getItemRectangle as getItemRectangle,
   getUpdatedItem as getUpdatedItem,
 } from "../utils";
 import { PropsWithChildren } from "react";
