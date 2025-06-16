@@ -6,7 +6,7 @@ import { TimelaneLayout } from "..";
 
 interface TimelaneWrapperProps {
   focusedDay?: Date | null;
-  focusedSwimlane?: Lane | null;
+  focusedLane?: Lane | null;
   start?: Date;
   end?: Date;
   pixelsPerDay?: number;

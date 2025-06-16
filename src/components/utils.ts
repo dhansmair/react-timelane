@@ -125,7 +125,7 @@ export function getGrabPosition(
 
 export function getUpdatedItem<T>(
   oldItem: Item<T>,
-  swimlane: Lane,
+  lane: Lane,
   dropPreviewRect: Rectangle,
   pixels: Pixels,
   range: TimeRange
@@ -133,7 +133,7 @@ export function getUpdatedItem<T>(
   // convert drop preview position to item
   return {
     id: oldItem.id,
-    swimlaneId: swimlane.id,
+    laneId: lane.id,
 
     start: setHours(
       addDays(range.start, Math.floor(dropPreviewRect.x / pixels.pixelsPerDay)),
@@ -149,17 +149,17 @@ export function getUpdatedItem<T>(
       12
     ),
     offset: Math.floor(
-      (dropPreviewRect.y / pixels.pixelsPerResource) * swimlane.capacity
+      (dropPreviewRect.y / pixels.pixelsPerResource) * lane.capacity
     ),
     size: Math.floor(
-      (dropPreviewRect.height / pixels.pixelsPerResource) * swimlane.capacity
+      (dropPreviewRect.height / pixels.pixelsPerResource) * lane.capacity
     ),
     payload: oldItem.payload,
   };
 }
 
 export function getDropPreviewRectangle<S, T>(
-  swimlane: Lane,
+  lane: Lane,
   items: Item<T>[],
   item: Item<S>,
   mousePosition: Position | null,
@@ -174,19 +174,19 @@ export function getDropPreviewRectangle<S, T>(
   }
 
   const dropTargetDimensions: Dimensions = getDropTargetDimensions(
-    swimlane,
+    lane,
     pixels,
     range
   );
 
   const itemRectangles: Rectangle[] = items
     .filter((a) => a.id !== item.id)
-    .map((a) => getItemRectangle(a, swimlane, range, pixels));
+    .map((a) => getItemRectangle(a, lane, range, pixels));
 
   let dropPreviewRectangle: Rectangle | null = null;
 
   dropPreviewRectangle = getRectangleUnderCursor(
-    swimlane,
+    lane,
     item,
     grabInfo,
     pixels,
@@ -213,19 +213,19 @@ export function getDropPreviewRectangle<S, T>(
 /**
  * computes rectangle for DropPreview that is under the cursor, in pixel coordinates relative to the current DropTarget
  * @param dragData
- * @param swimlane
+ * @param lane
  * @param pixels
  * @param mousePosition
  * @returns
  */
 function getRectangleUnderCursor<T>(
-  swimlane: Lane,
+  lane: Lane,
   item: Item<T>,
   grabInfo: GrabInfo,
   pixels: Pixels,
   mousePosition: Position
 ): Rectangle {
-  const { width, height } = getItemDimensions(item, swimlane, pixels);
+  const { width, height } = getItemDimensions(item, lane, pixels);
   const x = mousePosition.x + width * grabInfo.relative.x;
   const y = mousePosition.y + height * grabInfo.relative.y;
 
@@ -387,14 +387,14 @@ export function isWithinTargetDimensions(
 export function getAvailableSpace<T>(
   clickedDate: Date,
   clickedOffset: number,
-  swimlane: Lane,
+  lane: Lane,
   items: Item<T>[],
   range: TimeRange
 ): AvailableSpace | null {
   const offsetBounds = getOffsetBounds(
     clickedDate,
     clickedOffset,
-    swimlane.capacity,
+    lane.capacity,
     items
   );
 
@@ -474,7 +474,7 @@ function getDateBounds<T>(
 ): DateBounds | null {
   const dummyItem: Item<null> = {
     id: -1,
-    swimlaneId: -1,
+    laneId: -1,
     start: minLowerBound,
     end: maxUpperBound,
     offset: offsetBounds.lower,

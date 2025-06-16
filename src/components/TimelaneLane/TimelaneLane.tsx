@@ -6,7 +6,7 @@ import { MouseEvent, ReactElement, useState } from "react";
 import { addDays, setHours } from "date-fns";
 import {
   getItemRectangle,
-  getDropTargetDimensions as getSwimlaneDimensions,
+  getDropTargetDimensions as getLaneDimensions,
   getUpdatedItem as getUpdatedItem,
   getAvailableSpace,
   getDropPreviewRectangle,
@@ -29,7 +29,7 @@ import {
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
 interface TimelaneLaneProps<T> {
-  swimlane: Lane;
+  lane: Lane;
   items: Item<T>[];
   focused?: boolean;
   onItemUpdate?: (item: Item<T>) => void;
@@ -50,7 +50,7 @@ interface TimelaneLaneProps<T> {
 }
 
 export function TimelaneLane<T>({
-  swimlane,
+  lane,
   items,
   focused = false,
   onItemUpdate = () => {},
@@ -68,11 +68,7 @@ export function TimelaneLane<T>({
     offsetX: settings.pixelsPerDay / 2,
   };
 
-  const dimensions: Dimensions = getSwimlaneDimensions(
-    swimlane,
-    settings,
-    settings
-  );
+  const dimensions: Dimensions = getLaneDimensions(lane, settings, settings);
 
   const [draggedItem, setDraggedItem] = useState<Item<T> | null>(null);
 
@@ -95,14 +91,14 @@ export function TimelaneLane<T>({
     const clientRect = e.currentTarget.getBoundingClientRect();
     const relativePxOffsetY = (e.pageY - clientRect.top) / clientRect.height;
 
-    return relativePxOffsetY * swimlane.capacity;
+    return relativePxOffsetY * lane.capacity;
   }
 
   function handleDrag(mousePos: Position, grabInfo: GrabInfo, data: object) {
     if (!isItem(data)) return;
 
     const newDropPreviewRect: Rectangle | null = getDropPreviewRectangle(
-      swimlane,
+      lane,
       items,
       data,
       mousePos,
@@ -121,7 +117,7 @@ export function TimelaneLane<T>({
 
     const updatedItem: Item<T> = getUpdatedItem<T>(
       data,
-      swimlane,
+      lane,
       dropPreviewRect,
       settings,
       settings
@@ -142,7 +138,7 @@ export function TimelaneLane<T>({
     const availableSpace: AvailableSpace | null = getAvailableSpace(
       clickedDate,
       clickedOffset,
-      swimlane,
+      lane,
       items,
       settings
     );
@@ -156,7 +152,7 @@ export function TimelaneLane<T>({
 
   const rects = items.map((x) => ({
     id: x.id,
-    ...getItemRectangle(x, swimlane, settings, settings),
+    ...getItemRectangle(x, lane, settings, settings),
   }));
 
   const overlaps: Rectangle[] = rects
@@ -174,11 +170,9 @@ export function TimelaneLane<T>({
 
   return (
     <div
-      id={`timelane-swimlane-${swimlane.id}`}
-      className={`timelane-swimlane ${
-        focused ? "timelane-swimlane-focused" : ""
-      }`}
-      data-timelane-swimlane-id={swimlane.id}
+      id={`timelane-lane-${lane.id}`}
+      className={`timelane-lane ${focused ? "timelane-lane-focused" : ""}`}
+      data-timelane-lane-id={lane.id}
       style={dimensions}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e, "single")}
@@ -197,7 +191,7 @@ export function TimelaneLane<T>({
             key={index}
             item={item}
             settings={settings}
-            lane={swimlane}
+            lane={lane}
             onDragStart={() => {
               setDraggedItem(item);
             }}

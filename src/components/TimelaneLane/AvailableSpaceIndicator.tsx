@@ -13,7 +13,7 @@ import {
 interface AvailableSpaceIndicatorProps<T> {
   pixels: Pixels;
   range: TimeRange;
-  swimlane: Lane;
+  lane: Lane;
   debug: boolean;
   items: Item<T>[];
 }
@@ -31,7 +31,7 @@ interface AvailableSpaceIndicatorProps<T> {
 export default function AvailableSpaceIndicator<T>({
   pixels,
   range,
-  swimlane,
+  lane,
   items,
   debug = false,
   children,
@@ -52,7 +52,7 @@ export default function AvailableSpaceIndicator<T>({
     const clientRect = e.currentTarget.getBoundingClientRect();
     const relativePxOffsetY = (e.pageY - clientRect.top) / clientRect.height;
 
-    return relativePxOffsetY * swimlane.capacity;
+    return relativePxOffsetY * lane.capacity;
   }
 
   return (
@@ -71,7 +71,7 @@ export default function AvailableSpaceIndicator<T>({
         const availableSpace: AvailableSpace | null = getAvailableSpace(
           clickedDate,
           clickedOffset,
-          swimlane,
+          lane,
           items,
           range
         );
@@ -87,7 +87,7 @@ export default function AvailableSpaceIndicator<T>({
       <AvailableSpaceIndicatorItem
         availableSpace={availableSpace}
         pixels={pixels}
-        swimlane={swimlane}
+        lane={lane}
         range={range}
       />
     </div>
@@ -98,14 +98,14 @@ interface AvailableSpaceIndicatorItemProps {
   availableSpace: AvailableSpace | null;
   range: TimeRange;
   pixels: Pixels;
-  swimlane: Lane;
+  lane: Lane;
 }
 
 function AvailableSpaceIndicatorItem({
   availableSpace,
   range,
   pixels,
-  swimlane,
+  lane,
 }: AvailableSpaceIndicatorItemProps) {
   const [hoverRect, setHoverRect] = useState<Rectangle | null>(null);
 
@@ -119,13 +119,9 @@ function AvailableSpaceIndicatorItem({
 
     const width = dateToPixel(availableSpace.end, range.start, pixels) - x;
 
-    const y = offsetToPixel(
-      availableSpace.minOffset,
-      swimlane.capacity,
-      pixels
-    );
+    const y = offsetToPixel(availableSpace.minOffset, lane.capacity, pixels);
     const height =
-      offsetToPixel(availableSpace.maxOffset, swimlane.capacity, pixels) - y;
+      offsetToPixel(availableSpace.maxOffset, lane.capacity, pixels) - y;
 
     setHoverRect({
       x,
@@ -133,7 +129,7 @@ function AvailableSpaceIndicatorItem({
       width,
       height,
     });
-  }, [availableSpace, pixels, range.start, swimlane.capacity]);
+  }, [availableSpace, pixels, range.start, lane.capacity]);
 
   return (
     <div

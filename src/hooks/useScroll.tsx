@@ -42,7 +42,7 @@ export const useScroll = () => {
   function scrollToLane(laneId: LaneId) {
     window.requestAnimationFrame(() => {
       const el: HTMLElement | null = document.getElementById(
-        `timelane-swimlane-${laneId}`
+        `timelane-lane-${laneId}`
       );
 
       if (el) {

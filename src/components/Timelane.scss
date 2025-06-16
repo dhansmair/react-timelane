@@ -99,7 +99,7 @@
     position: relative;
     width: fit-content;
 
-    .timelane-swimlane {
+    .timelane-lane {
       border-color: var(--timelane-border-color-normal) !important;
       border-top: 1px solid gray;
       border-bottom: 1px solid gray;
@@ -221,7 +221,7 @@
     width: var(--timelane-aside-width);
     background: white;
 
-    .timelane-aside-swimlane-header {
+    .timelane-aside-lane-header {
       border: 1px solid var(--timelane-border-color-normal);
       border-right: none;
       border-left: none;
@@ -231,7 +231,7 @@
       position: relative;
       cursor: pointer;
 
-      &.timelane-aside-swimlane-header-focused {
+      &.timelane-aside-lane-header-focused {
         background: var(--timelane-focused-color);
       }
 

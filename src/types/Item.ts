@@ -3,7 +3,7 @@ import { LaneId } from "./LaneId";
 
 export type Item<T = void> = {
   id: ItemId;
-  swimlaneId: LaneId;
+  laneId: LaneId;
   start: Date;
   end: Date;
   size: number;
@@ -14,7 +14,7 @@ export type Item<T = void> = {
 export function isItem(a: object): a is Item {
   return (
     "id" in a &&
-    "swimlaneId" in a &&
+    "laneId" in a &&
     "start" in a &&
     "end" in a &&
     "size" in a &&

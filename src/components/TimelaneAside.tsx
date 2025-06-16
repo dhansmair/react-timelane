@@ -66,8 +66,8 @@ function LaneHeader({
 }: PropsWithChildren<LaneHeaderProps>) {
   return (
     <div
-      className={`timelane-aside-swimlane-header ${
-        isFocused ? "timelane-aside-swimlane-header-focused" : ""
+      className={`timelane-aside-lane-header ${
+        isFocused ? "timelane-aside-lane-header-focused" : ""
       }`}
       style={{ height: `${height}px` }}
       onClick={onClick}

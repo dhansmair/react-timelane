@@ -103,7 +103,7 @@ function MyTimelaneContent({
 
   const items: Item<Allocation>[] = allocations.map((allocation) => ({
     id: allocation.id,
-    swimlaneId: allocation.resourceId,
+    laneId: allocation.resourceId,
     start: allocation.start,
     end: allocation.end,
     size: allocation.size,
@@ -118,7 +118,7 @@ function MyTimelaneContent({
 
     const updatedAllocation: Allocation = {
       ...item.payload,
-      resourceId: item.swimlaneId,
+      resourceId: item.laneId,
       start: item.start,
       end: item.end,
       size: item.size,
@@ -173,8 +173,8 @@ function MyTimelaneContent({
         {lanes.map((lane) => (
           <TL.Lane
             key={lane.id}
-            swimlane={lane}
-            items={items.filter((item) => item.swimlaneId === lane.id)}
+            lane={lane}
+            items={items.filter((item) => item.laneId === lane.id)}
             onItemUpdate={handleItemUpdate}
             onClick={(when) => handleLaneClick(lane, when)}
             onDoubleClick={(when, availableSpace) =>
