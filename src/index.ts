@@ -1,15 +1,15 @@
-export { default as TimelineLayout } from "./components/layout/TimelineLayout";
-export { default as TimelineAside } from "./components/TimelineAside";
-export { default as TimelineBackground } from "./components/TimelineBackground";
-export * from "./components/TimelineHeader";
-export { default as TimelineWrapper } from "./components/TimelineWrapper";
+export { default as TimelaneLayout } from "./components/layout/TimelaneLayout";
+export { default as TimelaneAside } from "./components/TimelaneAside";
+export { default as TimelaneBackground } from "./components/TimelaneBackground";
+export * from "./components/TimelaneHeader";
+export { default as TimelaneWrapper } from "./components/TimelaneWrapper";
 export { default as CoreSwimlane } from "./components/core/CoreSwimlane/CoreSwimlane";
-export { TimelineBody } from "./components/TimelineBody";
-export { TimelineSelectionLayer } from "./components/TimelineSelectionLayer";
+export { TimelaneBody } from "./components/TimelaneBody";
+export { TimelaneSelectionLayer } from "./components/TimelaneSelectionLayer";
 
 export * from "./types";
 export * from "./components/core/utils";
 export * from "./components/core/CoreSwimlane/utils";
 
 export { useScroll } from "./hooks/useScroll";
-export { useTimelineContext } from "./hooks/useTimelineContext";
+export { useTimelaneContext } from "./hooks/useTimelaneContext";

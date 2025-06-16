@@ -1,8 +1,8 @@
 import { MouseEvent, PropsWithChildren, ReactElement } from "react";
-import { useTimelineContext } from "../hooks/useTimelineContext";
+import { useTimelaneContext } from "../hooks/useTimelaneContext";
 import { SwimlaneT } from "../types";
 
-interface TimelineAsideProps {
+interface TimelaneAsideProps {
   swimlanes: SwimlaneT[];
   focusedSwimlane?: SwimlaneT | null;
   setFocusedSwimlane?: (lane: SwimlaneT | null) => void;
@@ -12,7 +12,7 @@ interface TimelineAsideProps {
   renderSwimlaneHeader?: (lane: SwimlaneT) => ReactElement;
 }
 
-export default function TimelineAside({
+export default function TimelaneAside({
   swimlanes,
   focusedSwimlane,
   setFocusedSwimlane = () => undefined,
@@ -20,11 +20,11 @@ export default function TimelineAside({
   onSwimlaneHeaderDoubleClick = () => undefined,
   onSwimlaneHeaderContextMenu = () => undefined,
   renderSwimlaneHeader = defaultRenderSwimlaneHeader,
-}: TimelineAsideProps) {
-  const { settings } = useTimelineContext();
+}: TimelaneAsideProps) {
+  const { settings } = useTimelaneContext();
 
   return (
-    <div className="timeline-aside">
+    <div className="timelane-aside">
       {swimlanes &&
         swimlanes.map((lane) => (
           <SwimlaneHeader
@@ -63,8 +63,8 @@ function SwimlaneHeader({
 }: PropsWithChildren<SwimlaneHeaderProps>) {
   return (
     <div
-      className={`timeline-aside-swimlane-header ${
-        isFocused ? "timeline-aside-swimlane-header-focused" : ""
+      className={`timelane-aside-swimlane-header ${
+        isFocused ? "timelane-aside-swimlane-header-focused" : ""
       }`}
       style={{ height: `${height}px` }}
       onClick={onClick}

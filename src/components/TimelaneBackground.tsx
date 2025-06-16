@@ -1,22 +1,22 @@
 import { eachDayOfInterval, format, isSunday } from "date-fns";
 import { dateToPixel } from "./core/utils";
-import { useTimelineContext } from "../hooks/useTimelineContext";
+import { useTimelaneContext } from "../hooks/useTimelaneContext";
 
-interface TimelineBackgroundProps {
+interface TimelaneBackgroundProps {
   focusedDay?: Date | null;
 }
 
-export default function TimelineBackground({
+export default function TimelaneBackground({
   focusedDay,
-}: TimelineBackgroundProps) {
-  const { settings } = useTimelineContext();
+}: TimelaneBackgroundProps) {
+  const { settings } = useTimelaneContext();
 
   return (
-    <div className="timeline-background">
-      <div className="timeline-background-inner">
+    <div className="timelane-background">
+      <div className="timelane-background-inner">
         {focusedDay && (
           <div
-            className="timeline-background-focused-day-position"
+            className="timelane-background-focused-day-position"
             style={{
               width: `${settings.pixelsPerDay}px`,
               marginLeft: `${
@@ -28,7 +28,7 @@ export default function TimelineBackground({
         )}
 
         <div
-          id="timeline-background-date-anchor"
+          id="timelane-background-date-anchor"
           style={{
             position: "absolute",
             top: 0,
@@ -40,8 +40,8 @@ export default function TimelineBackground({
         {eachDayOfInterval(settings).map((day, index) => (
           <div
             key={index}
-            className={`timeline-background-day-label ${
-              isSunday(day) ? "timeline-background-day-label-sunday" : ""
+            className={`timelane-background-day-label ${
+              isSunday(day) ? "timelane-background-day-label-sunday" : ""
             } `}
             style={{ width: `${settings.pixelsPerDay}px` }}
             data-day={format(day, "yyyy-MM-dd")}

@@ -10,13 +10,13 @@ import {
   Position,
   Rectangle,
   SwimlaneT,
-  TimelineSettings,
+  TimelaneSettings,
 } from "../../../types";
 
 interface CoreItemComponentProps<T> {
   item: CoreItem<T>;
   swimlane: SwimlaneT;
-  settings: TimelineSettings;
+  settings: TimelaneSettings;
   onDragStart: (grabPosition: Position, relativeGrabPosition: Position) => void;
   onDrop: () => void;
   onDrag: () => void;

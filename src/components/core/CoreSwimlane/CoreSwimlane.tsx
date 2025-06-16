@@ -28,7 +28,7 @@ import {
   SwimlaneT,
   isCoreItem,
 } from "../../../types";
-import { useTimelineContext } from "../../../hooks/useTimelineContext";
+import { useTimelaneContext } from "../../../hooks/useTimelaneContext";
 
 interface CoreSwimlaneProps<T> {
   swimlane: SwimlaneT;
@@ -63,7 +63,7 @@ export default function CoreSwimlane<T>({
   renderItem = defaultRenderItem,
   onResizeStart = () => {},
 }: CoreSwimlaneProps<T>) {
-  const { settings } = useTimelineContext();
+  const { settings } = useTimelaneContext();
 
   const grid: Grid = {
     x: settings.pixelsPerDay,
@@ -180,11 +180,11 @@ export default function CoreSwimlane<T>({
 
   return (
     <div
-      id={`timeline-swimlane-${swimlane.id}`}
-      className={`timeline-swimlane ${
-        focused ? "timeline-swimlane-focused" : ""
+      id={`timelane-swimlane-${swimlane.id}`}
+      className={`timelane-swimlane ${
+        focused ? "timelane-swimlane-focused" : ""
       }`}
-      data-timeline-swimlane-id={swimlane.id}
+      data-timelane-swimlane-id={swimlane.id}
       style={dimensions}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e, "single")}

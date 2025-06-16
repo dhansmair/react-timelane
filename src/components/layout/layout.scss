@@ -1,10 +1,10 @@
-.timeline-layout {
+.timelane-layout {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: auto;
 
-  .timeline-layout-inner {
+  .timelane-layout-inner {
     position: relative;
     width: fit-content;
     height: fit-content;
@@ -15,14 +15,14 @@
       "aside-l body aside-r"
       "corner-bl footer corner-br";
 
-    .timeline-layout-header,
-    .timeline-layout-footer,
-    .timeline-layout-aside,
-    .timeline-layout-corner {
+    .timelane-layout-header,
+    .timelane-layout-footer,
+    .timelane-layout-aside,
+    .timelane-layout-corner {
       background: white;
     }
 
-    .timeline-layout-header {
+    .timelane-layout-header {
       grid-area: header;
 
       position: sticky;
@@ -32,17 +32,17 @@
       overflow: hidden;
     }
 
-    .timeline-layout-body {
+    .timelane-layout-body {
       grid-area: body;
       z-index: 100;
     }
 
-    .timeline-layout-background {
+    .timelane-layout-background {
       grid-area: body;
       z-index: -1;
     }
 
-    .timeline-layout-footer {
+    .timelane-layout-footer {
       grid-area: footer;
 
       position: sticky;
@@ -52,7 +52,7 @@
       border-top: 1px solid lightgray;
     }
 
-    .timeline-layout-aside {
+    .timelane-layout-aside {
       grid-area: aside-l;
 
       position: sticky;
@@ -60,7 +60,7 @@
       left: 0;
       z-index: 101;
 
-      &.timeline-layout-aside-right {
+      &.timelane-layout-aside-right {
         grid-area: aside-r;
 
         right: 0;
@@ -69,33 +69,33 @@
       }
     }
 
-    .timeline-layout-corner {
+    .timelane-layout-corner {
       position: sticky;
       position: -webkit-sticky;
       z-index: 102;
 
-      &.timeline-layout-corner-top-left {
+      &.timelane-layout-corner-top-left {
         grid-area: corner-tl;
         top: 0;
         left: 0;
         border-bottom: 1px solid lightgray;
         border-right: 1px solid lightgray;
       }
-      &.timeline-layout-corner-top-right {
+      &.timelane-layout-corner-top-right {
         grid-area: corner-tr;
         top: 0;
         right: 0;
         border-bottom: 1px solid lightgray;
         border-left: 1px solid lightgray;
       }
-      &.timeline-layout-corner-bottom-left {
+      &.timelane-layout-corner-bottom-left {
         grid-area: corner-bl;
         bottom: 0;
         left: 0;
         border-top: 1px solid lightgray;
         border-right: 1px solid lightgray;
       }
-      &.timeline-layout-corner-bottom-right {
+      &.timelane-layout-corner-bottom-right {
         grid-area: corner-br;
         bottom: 0;
         right: 0;

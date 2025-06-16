@@ -4,14 +4,14 @@ import { doOverlap } from "./core/CoreSwimlane/utils";
 import { MouseEvent } from "react";
 import { monitorForElements } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 
-interface TimelineSelectionLayerProps {
+interface TimelaneSelectionLayerProps {
   onSelect: (selection: number[]) => void;
 }
 
-export function TimelineSelectionLayer({
+export function TimelaneSelectionLayer({
   children,
   onSelect,
-}: PropsWithChildren<TimelineSelectionLayerProps>) {
+}: PropsWithChildren<TimelaneSelectionLayerProps>) {
   const [selectedItemIds, setSelectedItemIds] = useState<ItemId[]>([]);
 
   const callbackRef = useRef<EventListener | null>(null);
@@ -63,13 +63,13 @@ export function TimelineSelectionLayer({
         y: selectedRect.y - rect.top,
       });
 
-      document.querySelectorAll(".timeline-drop-target").forEach((row) => {
+      document.querySelectorAll(".timelane-drop-target").forEach((row) => {
         if (doOverlap(row.getBoundingClientRect(), selectedRect)) {
-          row.querySelectorAll(".timeline-item").forEach((item) => {
+          row.querySelectorAll(".timelane-item").forEach((item) => {
             if (doOverlap(item.getBoundingClientRect(), selectedRect)) {
-              item.classList.add("timeline-item-marked");
+              item.classList.add("timelane-item-marked");
             } else {
-              item.classList.remove("timeline-item-marked");
+              item.classList.remove("timelane-item-marked");
             }
           });
         }
@@ -96,15 +96,15 @@ export function TimelineSelectionLayer({
       };
 
       const ids: ItemId[] = Array.from(
-        document.querySelectorAll(".timeline-drop-target")
+        document.querySelectorAll(".timelane-drop-target")
       )
         .filter((row) => doOverlap(row.getBoundingClientRect(), selectedRect))
-        .map((row) => Array.from(row.querySelectorAll(".timeline-item")))
+        .map((row) => Array.from(row.querySelectorAll(".timelane-item")))
         .flatMap((elements) => elements)
         .filter((el) => doOverlap(el.getBoundingClientRect(), selectedRect))
         .map((el) => {
           if (el instanceof HTMLElement) {
-            return Number.parseInt(el.dataset.timelineItemId || "-1");
+            return Number.parseInt(el.dataset.timelaneItemId || "-1");
           } else {
             return -1;
           }
@@ -121,8 +121,8 @@ export function TimelineSelectionLayer({
         }
       }
 
-      document.querySelectorAll(".timeline-item-marked").forEach((el) => {
-        el.classList.remove("timeline-item-marked");
+      document.querySelectorAll(".timelane-item-marked").forEach((el) => {
+        el.classList.remove("timelane-item-marked");
       });
     }
 

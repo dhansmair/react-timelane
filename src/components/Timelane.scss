@@ -1,34 +1,34 @@
 * {
   box-sizing: border-box;
 }
-.timeline {
-  --timeline-aside-width: 150px;
-  --timeline-border-color-light: #f0f0f0;
-  --timeline-border-color-normal: lightgray;
-  --timeline-border-color-dark: gray;
+.timelane {
+  --timelane-aside-width: 150px;
+  --timelane-border-color-light: #f0f0f0;
+  --timelane-border-color-normal: lightgray;
+  --timelane-border-color-dark: gray;
 
-  --timeline-highlight-color: #f8f8f8;
-  --timeline-focused-color: rgba(0, 0, 255, 0.1);
-  --timeline-hover-color: rgba(0, 0, 0, 0.05);
+  --timelane-highlight-color: #f8f8f8;
+  --timelane-focused-color: rgba(0, 0, 255, 0.1);
+  --timelane-hover-color: rgba(0, 0, 0, 0.05);
 
   overflow: auto;
   position: relative;
   width: 100%;
   height: 100%;
-  border-left: 1px solid var(--timeline-border-color-normal);
+  border-left: 1px solid var(--timelane-border-color-normal);
 
-  .timeline-header {
+  .timelane-header {
     top: 0;
     z-index: 101;
     background: white;
 
-    .timeline-header-months {
+    .timelane-header-months {
       display: flex;
       flex-flow: row nowrap;
 
-      .timeline-header-month-label {
-        border-right: 1px solid var(--timeline-border-color-normal);
-        border-bottom: 1px solid var(--timeline-border-color-normal);
+      .timelane-header-month-label {
+        border-right: 1px solid var(--timelane-border-color-normal);
+        border-bottom: 1px solid var(--timelane-border-color-normal);
         overflow: hidden;
         font-size: 1em;
         height: 30px;
@@ -37,18 +37,18 @@
         cursor: pointer;
 
         &:hover {
-          background: var(--timeline-hover-color);
+          background: var(--timelane-hover-color);
         }
       }
     }
 
-    .timeline-header-weeks {
+    .timelane-header-weeks {
       display: flex;
       flex-flow: row nowrap;
 
-      .timeline-header-week-label {
-        border-right: 1px solid var(--timeline-border-color-normal);
-        border-bottom: 1px solid var(--timeline-border-color-normal);
+      .timelane-header-week-label {
+        border-right: 1px solid var(--timelane-border-color-normal);
+        border-bottom: 1px solid var(--timelane-border-color-normal);
         overflow: hidden;
         font-size: 1em;
         height: 30px;
@@ -57,18 +57,18 @@
         cursor: pointer;
 
         &:hover {
-          background: var(--timeline-hover-color);
+          background: var(--timelane-hover-color);
         }
       }
     }
 
-    .timeline-header-days {
+    .timelane-header-days {
       display: flex;
       flex-flow: row nowrap;
 
-      .timeline-header-day-label {
-        border-right: 1px solid var(--timeline-border-color-normal);
-        border-bottom: 1px solid var(--timeline-border-color-normal);
+      .timelane-header-day-label {
+        border-right: 1px solid var(--timelane-border-color-normal);
+        border-bottom: 1px solid var(--timelane-border-color-normal);
         overflow: hidden;
         font-size: 0.8em;
         height: 20px;
@@ -77,41 +77,41 @@
         cursor: pointer;
 
         &:hover {
-          background: var(--timeline-hover-color);
+          background: var(--timelane-hover-color);
         }
 
-        &.timeline-header-day-label-focused {
-          background: var(--timeline-focused-color);
+        &.timelane-header-day-label-focused {
+          background: var(--timelane-focused-color);
         }
       }
     }
   }
 
-  .timeline-header-corner {
+  .timelane-header-corner {
     z-index: 102;
     background: white;
-    border-right: 1px solid var(--timeline-border-color-normal);
-    border-bottom: 1px solid var(--timeline-border-color-normal);
+    border-right: 1px solid var(--timelane-border-color-normal);
+    border-bottom: 1px solid var(--timelane-border-color-normal);
   }
 
-  .timeline-body {
+  .timelane-body {
     z-index: 99;
     position: relative;
     width: fit-content;
 
-    .timeline-swimlane {
-      border-color: var(--timeline-border-color-normal) !important;
+    .timelane-swimlane {
+      border-color: var(--timelane-border-color-normal) !important;
       border-top: 1px solid gray;
       border-bottom: 1px solid gray;
       margin-top: -1px;
       overflow: hidden;
 
-      .timeline-drop-target {
+      .timelane-drop-target {
         position: relative;
         width: 100%;
         height: 100%;
 
-        .timeline-item {
+        .timelane-item {
           position: absolute;
           cursor: pointer;
           border-radius: 3px;
@@ -123,17 +123,17 @@
           -ms-user-select: none; /* Internet Explorer/Edge */
           user-select: none; /* Non-prefixed version, currently
                                       supported by Chrome, Edge, Opera and Firefox */
-          &.timeline-item-marked {
-            .timeline-allocation {
+          &.timelane-item-marked {
+            .timelane-allocation {
               border: 2px dashed rgba(0, 0, 0, 0.5);
             }
           }
 
-          .timeline-item-drag-handle {
+          .timelane-item-drag-handle {
             height: 100%;
           }
 
-          .timeline-item-resize-handle {
+          .timelane-item-resize-handle {
             background: #bed7dc;
             border-radius: 5px;
             top: 4px !important;
@@ -148,16 +148,16 @@
               background: rgba(0, 0, 0, 0.1) !important;
             }
 
-            &.timeline-item-resize-handle-left {
+            &.timelane-item-resize-handle-left {
               left: 0 !important;
               margin-left: 1px;
             }
-            &.timeline-item-resize-handle-right {
+            &.timelane-item-resize-handle-right {
               right: 0 !important;
             }
           }
 
-          .timeline-allocation {
+          .timelane-allocation {
             background: #92a8d1;
             border-radius: 2px;
             border: 2px solid transparent;
@@ -176,9 +176,9 @@
                                       supported by Chrome, Edge, Opera and Firefox */
 
             container-type: size;
-            container-name: timeline-allocation;
+            container-name: timelane-allocation;
 
-            .timeline-allocation-title {
+            .timelane-allocation-title {
               font-weight: bold;
               transform-origin: top left;
               // font-size: 20px;
@@ -186,13 +186,13 @@
               white-space: nowrap;
             }
 
-            @container timeline-allocation (max-height: 30px) {
-              .timeline-allocation-title {
+            @container timelane-allocation (max-height: 30px) {
+              .timelane-allocation-title {
                 margin: 0;
               }
             }
 
-            &.timeline-allocation-selected {
+            &.timelane-allocation-selected {
               border: 2px dashed rgba(0, 0, 0, 0.5);
             }
           }
@@ -202,7 +202,7 @@
           }
         }
 
-        .timeline-drop-preview {
+        .timelane-drop-preview {
           background: blue;
           position: absolute;
           border-radius: 2px;
@@ -210,19 +210,19 @@
         }
       }
 
-      &.timeline-row-focused {
-        background: var(--timeline-focused-color);
+      &.timelane-row-focused {
+        background: var(--timelane-focused-color);
       }
     }
   }
 
-  .timeline-aside {
-    border-right: 1px solid var(--timeline-border-color-normal);
-    width: var(--timeline-aside-width);
+  .timelane-aside {
+    border-right: 1px solid var(--timelane-border-color-normal);
+    width: var(--timelane-aside-width);
     background: white;
 
-    .timeline-aside-swimlane-header {
-      border: 1px solid var(--timeline-border-color-normal);
+    .timelane-aside-swimlane-header {
+      border: 1px solid var(--timelane-border-color-normal);
       border-right: none;
       border-left: none;
       margin-top: -1px;
@@ -231,67 +231,67 @@
       position: relative;
       cursor: pointer;
 
-      &.timeline-aside-swimlane-header-focused {
-        background: var(--timeline-focused-color);
+      &.timelane-aside-swimlane-header-focused {
+        background: var(--timelane-focused-color);
       }
 
       &:hover {
-        .timeline-aside-resource-menu {
+        .timelane-aside-resource-menu {
           opacity: 1;
         }
       }
 
-      .timeline-aside-resource-menu {
+      .timelane-aside-resource-menu {
         position: absolute;
         top: 5px;
         right: 5px;
         opacity: 0;
         transition: 0.15s;
 
-        &.timeline-aside-resource-menu-open {
+        &.timelane-aside-resource-menu-open {
           opacity: 1;
         }
       }
     }
   }
 
-  .timeline-background {
+  .timelane-background {
     position: relative;
     width: 100%;
     height: 100%;
 
-    .timeline-background-inner {
+    .timelane-background-inner {
       display: flex;
       flex-flow: row nowrap;
       height: 100%;
 
-      .timeline-background-day-label {
-        border-right: 1px solid var(--timeline-border-color-light);
+      .timelane-background-day-label {
+        border-right: 1px solid var(--timelane-border-color-light);
         overflow: hidden;
         font-size: 0.8em;
         height: 100%;
         z-index: -100;
 
-        &.timeline-background-day-label-sunday {
-          border-right: 1px solid var(--timeline-border-color-normal);
+        &.timelane-background-day-label-sunday {
+          border-right: 1px solid var(--timelane-border-color-normal);
         }
 
-        &.timeline-background-day-label-focused {
-          background: var(--timeline-focused-color);
+        &.timelane-background-day-label-focused {
+          background: var(--timelane-focused-color);
         }
       }
 
-      .timeline-background-focused-day-position {
+      .timelane-background-focused-day-position {
         position: absolute;
         height: 100%;
-        background: var(--timeline-focused-color);
+        background: var(--timelane-focused-color);
         z-index: -101;
       }
     }
   }
 }
 
-.timeline-header-tooltip,
-.timeline-header-day-tooltip {
+.timelane-header-tooltip,
+.timelane-header-day-tooltip {
   font-size: 2em;
 }

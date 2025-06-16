@@ -1,9 +1,9 @@
 import { PropsWithChildren } from "react";
-import { TimelineSettingsProvider } from "./TimelineSettingsProvider";
+import { TimelaneSettingsProvider } from "./TimelaneSettingsProvider";
 import { SwimlaneT } from "../types";
-import "./Timeline.scss";
+import "./Timelane.scss";
 
-interface TimelineWrapperProps {
+interface TimelaneWrapperProps {
   focusedDay?: Date | null;
   focusedSwimlane?: SwimlaneT | null;
   start?: Date;
@@ -17,7 +17,7 @@ interface TimelineWrapperProps {
   focusedDate?: Date | null;
 }
 
-export default function TimelineWrapper({
+export default function TimelaneWrapper({
   children,
   start = new Date(2025, 1, 1),
   end = new Date(2025, 5, 1),
@@ -28,10 +28,10 @@ export default function TimelineWrapper({
   showDays = true,
   allowOverlaps = true,
   focusedDate = null,
-}: PropsWithChildren<TimelineWrapperProps>) {
+}: PropsWithChildren<TimelaneWrapperProps>) {
   return (
-    <div className="timeline">
-      <TimelineSettingsProvider
+    <div className="timelane">
+      <TimelaneSettingsProvider
         settings={{
           start,
           end,
@@ -45,7 +45,7 @@ export default function TimelineWrapper({
         }}
       >
         {children}
-      </TimelineSettingsProvider>
+      </TimelaneSettingsProvider>
     </div>
   );
 }

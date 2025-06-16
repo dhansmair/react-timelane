@@ -24,7 +24,7 @@ export function renderWeekHeader(firstDay: Date, lastDay: Date): ReactElement {
   //   <Tooltip
   //     arrow
   //     title={
-  //       <div className="timeline-header-tooltip timeline-header-week-tooltip">
+  //       <div className="timelane-header-tooltip timelane-header-week-tooltip">
   //         KW {format(firstDay, "w")} ({format(firstDay, "MM-dd")} -{" "}
   //         {format(lastDay, "MM-dd")}
   //       </div>
@@ -45,7 +45,7 @@ export function renderDayHeader(day: Date): ReactElement {
   //   <Tooltip
   //     arrow
   //     title={
-  //       <div className="timeline-header-tooltip timeline-header-day-tooltip">
+  //       <div className="timelane-header-tooltip timelane-header-day-tooltip">
   //         {format(day, "yyyy-MM-dd")}
   //       </div>
   //     }

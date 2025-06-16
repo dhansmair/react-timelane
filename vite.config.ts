@@ -24,7 +24,7 @@ export default defineConfig({
   //   preprocessorOptions: {
   //     scss: {
   //       additionalData: `
-  //         @import "TimelineV3/layout/layout.scss";
+  //         @import "TimelaneV3/layout/layout.scss";
   //       `,
   //     },
   //   },

@@ -1,4 +1,4 @@
-export interface TimelineSettings {
+export interface TimelaneSettings {
   start: Date;
   end: Date;
   pixelsPerDay: number;

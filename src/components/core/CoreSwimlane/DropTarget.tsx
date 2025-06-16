@@ -64,7 +64,7 @@ export default function DropTarget({
     });
   }, [onDrag, onDragLeave, onDragStart, onDrop, onDragEnter]);
   return (
-    <div className="timeline-drop-target" ref={ref}>
+    <div className="timelane-drop-target" ref={ref}>
       {children}
     </div>
   );

@@ -52,8 +52,8 @@ export default function AllocationComponent({
       }
     >
       <div
-        className={`timeline-allocation ${
-          isSelected ? "timeline-allocation-selected" : ""
+        className={`timelane-allocation ${
+          isSelected ? "timelane-allocation-selected" : ""
         }`}
         onClick={(e) => onClick(allocation, e)}
         onContextMenu={(e) => {
@@ -68,7 +68,7 @@ export default function AllocationComponent({
         data-allocation-id={`${allocation.id}`}
       >
         <div
-          className="timeline-allocation-title"
+          className="timelane-allocation-title"
           style={{
             transform: `scale(${scale})`,
           }}

@@ -5,12 +5,12 @@ import {
   type SwimlaneT,
   type CoreItem,
   type ItemId,
-  TimelineLayout,
-  TimelineHeader,
-  TimelineAside,
-  TimelineBackground,
-  TimelineBody,
-  TimelineSelectionLayer,
+  TimelaneLayout,
+  TimelaneHeader,
+  TimelaneAside,
+  TimelaneBackground,
+  TimelaneBody,
+  TimelaneSelectionLayer,
   useScroll,
 } from "react-timelane";
 import type Allocation from "../models/Allocation";
@@ -22,7 +22,7 @@ import {
   DEFAULT_ALLOCATION_NAME,
 } from "../constants";
 
-interface TimelineProps {
+interface TimelaneProps {
   resources: Resource[];
   allocations: Allocation[];
   focusedDay?: Date | null;
@@ -37,14 +37,14 @@ interface TimelineProps {
   onAreaClick?: (area: Resource, e: MouseEvent) => void;
 }
 
-export default function Timeline({
+export default function MyTimelane({
   resources,
   allocations,
   focusedDay,
   setFocusedDay,
   onAllocationCreate = () => {},
   onAllocationUpdate = () => {},
-}: TimelineProps) {
+}: TimelaneProps) {
   function handleResourceDoubleClick(
     resource: Resource,
     when: Date,
@@ -96,9 +96,9 @@ export default function Timeline({
   const { scrollTo } = useScroll();
 
   return (
-    <TimelineLayout>
-      <TimelineLayout.Header>
-        <TimelineHeader
+    <TimelaneLayout>
+      <TimelaneLayout.Header>
+        <TimelaneHeader
           focusedDay={focusedDay}
           setFocusedDay={setFocusedDay}
           onDayClick={({ day }) => {
@@ -111,15 +111,15 @@ export default function Timeline({
             console.log("week clicked", firstDay);
           }}
         />
-      </TimelineLayout.Header>
-      <TimelineLayout.Body>
-        <TimelineSelectionLayer
+      </TimelaneLayout.Header>
+      <TimelaneLayout.Body>
+        <TimelaneSelectionLayer
           onSelect={(selection) => {
             console.info(selection);
             setSelection(selection);
           }}
         >
-          <TimelineBody
+          <TimelaneBody
             lanes={lanes}
             items={items}
             renderItem={(item, isDragged) => (
@@ -163,21 +163,21 @@ export default function Timeline({
               onAllocationUpdate(updatedAllocation);
             }}
           />
-        </TimelineSelectionLayer>
-      </TimelineLayout.Body>
-      <TimelineLayout.Background>
-        <TimelineBackground focusedDay={focusedDay} />
-      </TimelineLayout.Background>
-      <TimelineLayout.Aside>
-        <TimelineAside
+        </TimelaneSelectionLayer>
+      </TimelaneLayout.Body>
+      <TimelaneLayout.Background>
+        <TimelaneBackground focusedDay={focusedDay} />
+      </TimelaneLayout.Background>
+      <TimelaneLayout.Aside>
+        <TimelaneAside
           swimlanes={lanes}
           onSwimlaneHeaderClick={(lane) => {
             scrollTo({ vert: lane.id });
           }}
           renderSwimlaneHeader={(lane) => <div>{lane.id}</div>}
         />
-      </TimelineLayout.Aside>
-      <TimelineLayout.Corner />
-    </TimelineLayout>
+      </TimelaneLayout.Aside>
+      <TimelaneLayout.Corner />
+    </TimelaneLayout>
   );
 }

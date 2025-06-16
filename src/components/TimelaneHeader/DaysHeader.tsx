@@ -21,13 +21,13 @@ export function DaysHeader({
   onDayClick = () => undefined,
 }: DaysHeaderProps) {
   return (
-    <div className="timeline-header-days">
+    <div className="timelane-header-days">
       {eachDayOfInterval(range).map((day, index) => (
         <div
           key={index}
-          className={`timeline-header-day-label ${
+          className={`timelane-header-day-label ${
             focusedDay && isSameDay(focusedDay, day)
-              ? "timeline-header-day-label-focused"
+              ? "timelane-header-day-label-focused"
               : ""
           }`}
           style={{ width: `${pixels.pixelsPerDay}px` }}

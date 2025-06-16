@@ -2,9 +2,9 @@ import { MouseEvent, ReactElement } from "react";
 import { MonthsHeader } from "./MonthsHeader";
 import { WeeksHeader } from "./WeeksHeader";
 import { DaysHeader } from "./DaysHeader";
-import { useTimelineContext } from "../../hooks/useTimelineContext";
+import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
-interface TimelineHeaderProps {
+interface TimelaneHeaderProps {
   focusedDay?: Date | null;
   setFocusedDay?: (day: Date | null) => void;
 
@@ -17,7 +17,7 @@ interface TimelineHeaderProps {
   onDayClick?: (_: { day: Date; e: MouseEvent }) => void;
 }
 
-export function TimelineHeader({
+export function TimelaneHeader({
   focusedDay,
   setFocusedDay = () => {},
   renderMonthHeader,
@@ -26,11 +26,11 @@ export function TimelineHeader({
   onMonthClick,
   onDayClick,
   onWeekClick,
-}: TimelineHeaderProps) {
-  const { settings } = useTimelineContext();
+}: TimelaneHeaderProps) {
+  const { settings } = useTimelaneContext();
 
   return (
-    <div className="timeline-header">
+    <div className="timelane-header">
       {settings.showMonths && (
         <MonthsHeader
           range={settings}

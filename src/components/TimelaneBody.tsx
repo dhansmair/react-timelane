@@ -2,7 +2,7 @@ import { MouseEvent, ReactElement } from "react";
 import CoreSwimlane from "./core/CoreSwimlane/CoreSwimlane";
 import { AvailableSpace, CoreItem, SwimlaneT } from "../types";
 
-interface TimelineBodyProps<T> {
+interface TimelaneBodyProps<T> {
   lanes: SwimlaneT[];
   items: CoreItem<T>[];
   renderItem?: (item: CoreItem<T>, isDragged: boolean) => ReactElement;
@@ -22,7 +22,7 @@ interface TimelineBodyProps<T> {
   onLaneContextMenu?: (lane: SwimlaneT, when: Date, e: MouseEvent) => void;
 }
 
-export function TimelineBody<T>({
+export function TimelaneBody<T>({
   lanes,
   items,
   renderItem,
@@ -30,9 +30,9 @@ export function TimelineBody<T>({
   onLaneClick = () => undefined,
   onLaneDoubleClick = () => undefined,
   onLaneContextMenu = () => undefined,
-}: TimelineBodyProps<T>) {
+}: TimelaneBodyProps<T>) {
   return (
-    <div className="timeline-body">
+    <div className="timelane-body">
       {lanes.map((lane) => (
         <CoreSwimlane<T>
           key={lane.id}

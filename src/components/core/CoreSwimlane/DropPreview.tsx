@@ -16,7 +16,7 @@ export default function DropPreview({
 }: PropsWithChildren<DropPreviewProps>) {
   return (
     <div
-      className="timeline-drop-preview"
+      className="timelane-drop-preview"
       style={{
         left: `${x}px`,
         top: `${y}px`,

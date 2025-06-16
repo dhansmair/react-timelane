@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Timeline from "./components/Timeline";
+import MyTimelane from "./components/MyTimelane";
 import type Allocation from "./models/Allocation";
 import useLocalStorage from "./hooks/useLocalStorage";
 import { DEFAULT_ALLOCATIONS, DEFAULT_RESOURCES } from "./constants";
-import { TimelineWrapper, type TimelineSettings } from "react-timelane";
+import { TimelaneWrapper, type TimelaneSettings } from "react-timelane";
 import "react-timelane/style.css";
 import "./App.css";
 
@@ -15,7 +15,7 @@ function App() {
 
   const [focusedDay, setFocusedDay] = useState<Date | null>(null);
 
-  const defaultSettings: TimelineSettings = {
+  const defaultSettings: TimelaneSettings = {
     showMonths: true,
     showWeeks: true,
     showDays: true,
@@ -29,10 +29,10 @@ function App() {
 
   return (
     <>
-      <h1>Timeline Demo</h1>
+      <h1>Timelane Demo</h1>
       <div style={{ width: "100%", height: "600px", border: "1px solid #ccc" }}>
-        <TimelineWrapper {...defaultSettings}>
-          <Timeline
+        <TimelaneWrapper {...defaultSettings}>
+          <MyTimelane
             resources={DEFAULT_RESOURCES}
             allocations={allocations}
             onAreaSearchClick={() => {}}
@@ -50,7 +50,7 @@ function App() {
             focusedDay={focusedDay}
             setFocusedDay={setFocusedDay}
           />
-        </TimelineWrapper>
+        </TimelaneWrapper>
       </div>
     </>
   );

@@ -1,9 +1,9 @@
 import { ItemId, SwimlaneId } from "../types";
-import { useTimelineContext } from "./useTimelineContext";
+import { useTimelaneContext } from "./useTimelaneContext";
 import { dateToPixel } from "../components/core/utils";
 
 export const useScroll = () => {
-  const { settings } = useTimelineContext();
+  const { settings } = useTimelaneContext();
 
   function scrollTo(destination: { horz?: Date; vert?: SwimlaneId } | ItemId) {
     if (destination instanceof Object) {
@@ -22,7 +22,7 @@ export const useScroll = () => {
   function scrollToDate(date: Date) {
     window.requestAnimationFrame(() => {
       const el: HTMLElement | null = document.getElementById(
-        "timeline-background-date-anchor"
+        "timelane-background-date-anchor"
       );
 
       if (el) {
@@ -42,7 +42,7 @@ export const useScroll = () => {
   function scrollToLane(laneId: SwimlaneId) {
     window.requestAnimationFrame(() => {
       const el: HTMLElement | null = document.getElementById(
-        `timeline-swimlane-${laneId}`
+        `timelane-swimlane-${laneId}`
       );
 
       if (el) {
@@ -54,7 +54,7 @@ export const useScroll = () => {
   function scrollToItem(itemId: ItemId) {
     window.requestAnimationFrame(() => {
       const el: HTMLElement | null = document.getElementById(
-        `timeline-item-${itemId}`
+        `timelane-item-${itemId}`
       );
 
       if (el) {
