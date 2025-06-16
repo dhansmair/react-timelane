@@ -4,12 +4,12 @@ import {
 } from "@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types";
 import { addDays, differenceInCalendarDays, setHours } from "date-fns";
 import {
-  CoreItem,
+  Item,
   Dimensions,
   Pixels,
   Position,
   Rectangle,
-  SwimlaneT,
+  Lane,
   TimeRange,
 } from "../types";
 import { max, min } from "date-fns";
@@ -22,7 +22,7 @@ import {
 } from "../types";
 
 export function getDropTargetDimensions(
-  lane: SwimlaneT,
+  lane: Lane,
   pixels: Pixels,
   range: TimeRange
 ): Dimensions {
@@ -32,12 +32,12 @@ export function getDropTargetDimensions(
   return { width, height };
 }
 
-export function getDropTargetHeight(lane: SwimlaneT, pixels: Pixels): number {
+export function getDropTargetHeight(lane: Lane, pixels: Pixels): number {
   return pixels.pixelsPerResource;
 }
 
 export function getDropTargetWidth(
-  lane: SwimlaneT,
+  lane: Lane,
   pixels: Pixels,
   range: TimeRange
 ): number {
@@ -47,8 +47,8 @@ export function getDropTargetWidth(
 }
 
 export function getItemRectangle<T>(
-  item: CoreItem<T>,
-  lane: SwimlaneT,
+  item: Item<T>,
+  lane: Lane,
   range: TimeRange,
   pixels: Pixels
 ): Rectangle {
@@ -62,8 +62,8 @@ export function getItemRectangle<T>(
 }
 
 export function getItemDimensions<T>(
-  item: CoreItem<T>,
-  lane: SwimlaneT,
+  item: Item<T>,
+  lane: Lane,
   pixels: Pixels
 ): Dimensions {
   const width =
@@ -90,8 +90,8 @@ export function offsetToPixel(
 }
 
 export function getItemPosition<T>(
-  item: CoreItem<T>,
-  lane: SwimlaneT,
+  item: Item<T>,
+  lane: Lane,
   start: Date,
   pixels: Pixels
 ): Position {
@@ -124,12 +124,12 @@ export function getGrabPosition(
 }
 
 export function getUpdatedItem<T>(
-  oldItem: CoreItem<T>,
-  swimlane: SwimlaneT,
+  oldItem: Item<T>,
+  swimlane: Lane,
   dropPreviewRect: Rectangle,
   pixels: Pixels,
   range: TimeRange
-): CoreItem<T> {
+): Item<T> {
   // convert drop preview position to item
   return {
     id: oldItem.id,
@@ -159,9 +159,9 @@ export function getUpdatedItem<T>(
 }
 
 export function getDropPreviewRectangle<S, T>(
-  swimlane: SwimlaneT,
-  items: CoreItem<T>[],
-  item: CoreItem<S>,
+  swimlane: Lane,
+  items: Item<T>[],
+  item: Item<S>,
   mousePosition: Position | null,
   grabInfo: GrabInfo,
   pixels: Pixels,
@@ -219,8 +219,8 @@ export function getDropPreviewRectangle<S, T>(
  * @returns
  */
 function getRectangleUnderCursor<T>(
-  swimlane: SwimlaneT,
-  item: CoreItem<T>,
+  swimlane: Lane,
+  item: Item<T>,
   grabInfo: GrabInfo,
   pixels: Pixels,
   mousePosition: Position
@@ -359,7 +359,7 @@ export function getOverlap(a: Rectangle, b: Rectangle): Rectangle | null {
   }
 }
 
-export function itemsDoOverlap<T>(a: CoreItem<T>, b: CoreItem<T>): boolean {
+export function itemsDoOverlap<T>(a: Item<T>, b: Item<T>): boolean {
   if (
     a.start >= b.end ||
     b.start >= a.end ||
@@ -387,8 +387,8 @@ export function isWithinTargetDimensions(
 export function getAvailableSpace<T>(
   clickedDate: Date,
   clickedOffset: number,
-  swimlane: SwimlaneT,
-  items: CoreItem<T>[],
+  swimlane: Lane,
+  items: Item<T>[],
   range: TimeRange
 ): AvailableSpace | null {
   const offsetBounds = getOffsetBounds(
@@ -424,14 +424,14 @@ function getOffsetBounds<T>(
   clickedDate: Date,
   clickedOffset: number,
   maxUpperBound: number,
-  items: CoreItem<T>[]
+  items: Item<T>[]
 ): null | OffsetBounds {
-  const allocationsAtDate: CoreItem<T>[] = items.filter((a) => {
+  const allocationsAtDate: Item<T>[] = items.filter((a) => {
     return a.start <= clickedDate && a.end >= clickedDate;
   });
 
   // 1. check if there is an allocation at the place where the click occurred
-  const allocationAtClick: CoreItem<T> | undefined = allocationsAtDate.find(
+  const allocationAtClick: Item<T> | undefined = allocationsAtDate.find(
     (a) => a.offset <= clickedOffset && a.offset + a.size >= clickedOffset
   );
 
@@ -469,10 +469,10 @@ function getDateBounds<T>(
   clickedDate: Date,
   minLowerBound: Date,
   maxUpperBound: Date,
-  items: CoreItem<T>[],
+  items: Item<T>[],
   offsetBounds: OffsetBounds
 ): DateBounds | null {
-  const dummyItem: CoreItem<null> = {
+  const dummyItem: Item<null> = {
     id: -1,
     swimlaneId: -1,
     start: minLowerBound,
@@ -482,7 +482,7 @@ function getDateBounds<T>(
     payload: null,
   };
 
-  const overlappingItems: CoreItem<T>[] = items.filter((a) =>
+  const overlappingItems: Item<T>[] = items.filter((a) =>
     itemsDoOverlap(a, dummyItem)
   );
 

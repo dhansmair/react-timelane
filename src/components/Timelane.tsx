@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { TimelaneLane } from "./TimelaneLane/TimelaneLane";
 import { TimelaneBody } from "./TimelaneBody";
-import { TimelaneLayout } from "./layout/TimelaneLayout";
+import { TimelaneLayout } from "./TimelaneLayout/TimelaneLayout";
 import { TimelaneHeader } from "./TimelaneHeader/TimelaneHeader";
 import { TimelaneBackground } from "./TimelaneBackground";
 import { TimelaneAside } from "./TimelaneAside";

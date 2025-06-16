@@ -1,16 +1,16 @@
 import { MouseEvent, PropsWithChildren, ReactElement } from "react";
 import { useTimelaneContext } from "../hooks/useTimelaneContext";
-import { SwimlaneT } from "../types";
+import { Lane } from "../types";
 import { TimelaneLayout } from "..";
 
 interface TimelaneAsideProps {
-  lanes: SwimlaneT[];
-  focusedLane?: SwimlaneT | null;
-  setFocusedLane?: (lane: SwimlaneT | null) => void;
-  onLaneHeaderClick?: (lane: SwimlaneT, e: MouseEvent) => void;
-  onLaneHeaderDoubleClick?: (lane: SwimlaneT, e: MouseEvent) => void;
-  onLaneHeaderContextMenu?: (lane: SwimlaneT, e: MouseEvent) => void;
-  renderLaneHeader?: (lane: SwimlaneT) => ReactElement;
+  lanes: Lane[];
+  focusedLane?: Lane | null;
+  setFocusedLane?: (lane: Lane | null) => void;
+  onLaneHeaderClick?: (lane: Lane, e: MouseEvent) => void;
+  onLaneHeaderDoubleClick?: (lane: Lane, e: MouseEvent) => void;
+  onLaneHeaderContextMenu?: (lane: Lane, e: MouseEvent) => void;
+  renderLaneHeader?: (lane: Lane) => ReactElement;
 }
 
 export function TimelaneAside({
@@ -79,6 +79,6 @@ function LaneHeader({
   );
 }
 
-function defaultRenderLaneHeader(lane: SwimlaneT) {
+function defaultRenderLaneHeader(lane: Lane) {
   return <div>{lane.id}</div>;
 }

@@ -1,4 +1,4 @@
-export { TimelaneLayout } from "./components/layout/TimelaneLayout";
+export { TimelaneLayout } from "./components/TimelaneLayout/TimelaneLayout";
 export { TimelaneAside } from "./components/TimelaneAside";
 export { TimelaneBackground } from "./components/TimelaneBackground";
 export { TimelaneLane } from "./components/TimelaneLane/TimelaneLane";

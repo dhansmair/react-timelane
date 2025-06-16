@@ -1,25 +1,25 @@
 import { MouseEvent, ReactElement } from "react";
 import { TimelaneLane } from "./TimelaneLane/TimelaneLane";
-import { AvailableSpace, CoreItem, SwimlaneT } from "../types";
+import { AvailableSpace, Item, Lane } from "../types";
 
 interface TimelaneBodyInnerProps<T> {
-  lanes: SwimlaneT[];
-  items: CoreItem<T>[];
-  renderItem?: (item: CoreItem<T>, isDragged: boolean) => ReactElement;
-  onItemUpdate?: (item: CoreItem<T>) => void;
+  lanes: Lane[];
+  items: Item<T>[];
+  renderItem?: (item: Item<T>, isDragged: boolean) => ReactElement;
+  onItemUpdate?: (item: Item<T>) => void;
   onLaneClick?: (
-    lane: SwimlaneT,
+    lane: Lane,
     when: Date,
     availableSpace: AvailableSpace | null,
     e: MouseEvent
   ) => void;
   onLaneDoubleClick?: (
-    lane: SwimlaneT,
+    lane: Lane,
     when: Date,
     availableSpace: AvailableSpace | null,
     e: MouseEvent
   ) => void;
-  onLaneContextMenu?: (lane: SwimlaneT, when: Date, e: MouseEvent) => void;
+  onLaneContextMenu?: (lane: Lane, when: Date, e: MouseEvent) => void;
 }
 
 /**

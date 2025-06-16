@@ -5,22 +5,16 @@ import {
   getUpdatedItem as getUpdatedItem,
 } from "../utils";
 import { PropsWithChildren } from "react";
-import {
-  CoreItem,
-  Position,
-  Rectangle,
-  SwimlaneT,
-  TimelaneSettings,
-} from "../../types";
+import { Item, Position, Rectangle, Lane, TimelaneSettings } from "../../types";
 
 interface TimelaneItemProps<T> {
-  item: CoreItem<T>;
-  lane: SwimlaneT;
+  item: Item<T>;
+  lane: Lane;
   settings: TimelaneSettings;
   onDragStart: (grabPosition: Position, relativeGrabPosition: Position) => void;
   onDrop: () => void;
   onDrag: () => void;
-  onUpdate: (updatedItem: CoreItem<T>) => void;
+  onUpdate: (updatedItem: Item<T>) => void;
   onResizeStart: () => void;
 }
 
@@ -47,7 +41,7 @@ export default function TimelaneItem<T>({
       onDragStart={onDragStart}
       onDrop={onDrop}
       onUpdate={(rectangle: Rectangle) => {
-        const updatedItem: CoreItem<T> = getUpdatedItem(
+        const updatedItem: Item<T> = getUpdatedItem(
           item,
           lane,
           rectangle,

@@ -1,9 +1,9 @@
 import { ItemId } from "./ItemId";
-import { SwimlaneId } from "./SwimlaneId";
+import { LaneId } from "./LaneId";
 
-export type CoreItem<T = void> = {
+export type Item<T = void> = {
   id: ItemId;
-  swimlaneId: SwimlaneId;
+  swimlaneId: LaneId;
   start: Date;
   end: Date;
   size: number;
@@ -11,7 +11,7 @@ export type CoreItem<T = void> = {
   payload: T;
 };
 
-export function isCoreItem(a: object): a is CoreItem {
+export function isItem(a: object): a is Item {
   return (
     "id" in a &&
     "swimlaneId" in a &&

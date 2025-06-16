@@ -1,12 +1,12 @@
 import { PropsWithChildren } from "react";
 import { TimelaneSettingsProvider } from "./TimelaneSettingsProvider";
-import { SwimlaneT } from "../types";
+import { Lane } from "../types";
 import "./Timelane.scss";
 import { TimelaneLayout } from "..";
 
 interface TimelaneWrapperProps {
   focusedDay?: Date | null;
-  focusedSwimlane?: SwimlaneT | null;
+  focusedSwimlane?: Lane | null;
   start?: Date;
   end?: Date;
   pixelsPerDay?: number;

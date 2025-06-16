@@ -1,11 +1,11 @@
-import { ItemId, SwimlaneId } from "../types";
+import { ItemId, LaneId } from "../types";
 import { useTimelaneContext } from "./useTimelaneContext";
 import { dateToPixel } from "../components/utils";
 
 export const useScroll = () => {
   const { settings } = useTimelaneContext();
 
-  function scrollTo(destination: { horz?: Date; vert?: SwimlaneId } | ItemId) {
+  function scrollTo(destination: { horz?: Date; vert?: LaneId } | ItemId) {
     if (destination instanceof Object) {
       if (destination.horz !== undefined) {
         scrollToDate(destination.horz);
@@ -39,7 +39,7 @@ export const useScroll = () => {
     });
   }
 
-  function scrollToLane(laneId: SwimlaneId) {
+  function scrollToLane(laneId: LaneId) {
     window.requestAnimationFrame(() => {
       const el: HTMLElement | null = document.getElementById(
         `timelane-swimlane-${laneId}`

@@ -17,22 +17,22 @@ import OverlapIndicator from "./OverlapIndicator";
 
 import {
   AvailableSpace,
-  CoreItem,
+  Item,
   Dimensions,
   GrabInfo,
   Grid,
   Position,
   Rectangle,
-  SwimlaneT,
-  isCoreItem,
+  Lane,
+  isItem,
 } from "../../types";
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
 interface TimelaneLaneProps<T> {
-  swimlane: SwimlaneT;
-  items: CoreItem<T>[];
+  swimlane: Lane;
+  items: Item<T>[];
   focused?: boolean;
-  onItemUpdate?: (item: CoreItem<T>) => void;
+  onItemUpdate?: (item: Item<T>) => void;
   onMouseUp?: (e: MouseEvent) => void;
   onClick?: (
     when: Date,
@@ -45,7 +45,7 @@ interface TimelaneLaneProps<T> {
     e: MouseEvent
   ) => void;
   onContextMenu?: (when: Date, e: MouseEvent) => void;
-  renderItem?: (item: CoreItem<T>, isDragged: boolean) => ReactElement;
+  renderItem?: (item: Item<T>, isDragged: boolean) => ReactElement;
   onResizeStart?: (data: T) => void;
 }
 
@@ -74,7 +74,7 @@ export function TimelaneLane<T>({
     settings
   );
 
-  const [draggedItem, setDraggedItem] = useState<CoreItem<T> | null>(null);
+  const [draggedItem, setDraggedItem] = useState<Item<T> | null>(null);
 
   const [dropPreviewRect, setDropPreviewRect] = useState<Rectangle | null>(
     null
@@ -99,7 +99,7 @@ export function TimelaneLane<T>({
   }
 
   function handleDrag(mousePos: Position, grabInfo: GrabInfo, data: object) {
-    if (!isCoreItem(data)) return;
+    if (!isItem(data)) return;
 
     const newDropPreviewRect: Rectangle | null = getDropPreviewRectangle(
       swimlane,
@@ -116,14 +116,10 @@ export function TimelaneLane<T>({
     setDropPreviewRect(newDropPreviewRect);
   }
 
-  function handleDrop(
-    mousePos: Position,
-    grabInfo: GrabInfo,
-    data: CoreItem<T>
-  ) {
-    if (!isCoreItem(data) || dropPreviewRect === null) return;
+  function handleDrop(mousePos: Position, grabInfo: GrabInfo, data: Item<T>) {
+    if (!isItem(data) || dropPreviewRect === null) return;
 
-    const updatedItem: CoreItem<T> = getUpdatedItem<T>(
+    const updatedItem: Item<T> = getUpdatedItem<T>(
       data,
       swimlane,
       dropPreviewRect,
@@ -230,10 +226,7 @@ export function TimelaneLane<T>({
   );
 }
 
-function defaultRenderItem<T>(
-  item: CoreItem<T>,
-  isDragged: boolean
-): ReactElement {
+function defaultRenderItem<T>(item: Item<T>, isDragged: boolean): ReactElement {
   return (
     <div>
       {item.id} ({format(item.start, "yyyy-mm-dd")} -{" "}
