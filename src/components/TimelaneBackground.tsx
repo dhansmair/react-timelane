@@ -7,9 +7,7 @@ interface TimelaneBackgroundProps {
   focusedDay?: Date | null;
 }
 
-export default function TimelaneBackground({
-  focusedDay,
-}: TimelaneBackgroundProps) {
+export function TimelaneBackground({ focusedDay }: TimelaneBackgroundProps) {
   const { settings } = useTimelaneContext();
 
   return (

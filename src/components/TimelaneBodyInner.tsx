@@ -1,5 +1,5 @@
 import { MouseEvent, ReactElement } from "react";
-import CoreSwimlane from "./core/CoreSwimlane/CoreSwimlane";
+import { CoreSwimlane } from "./core/CoreSwimlane/CoreSwimlane";
 import { AvailableSpace, CoreItem, SwimlaneT } from "../types";
 
 interface TimelaneBodyInnerProps<T> {
@@ -22,6 +22,9 @@ interface TimelaneBodyInnerProps<T> {
   onLaneContextMenu?: (lane: SwimlaneT, when: Date, e: MouseEvent) => void;
 }
 
+/**
+ * @deprecated The component should not be used
+ */
 export function TimelaneBodyInner<T>({
   lanes,
   items,

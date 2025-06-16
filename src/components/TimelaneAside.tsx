@@ -13,7 +13,7 @@ interface TimelaneAsideProps {
   renderLaneHeader?: (lane: SwimlaneT) => ReactElement;
 }
 
-export default function TimelaneAside({
+export function TimelaneAside({
   lanes,
   focusedLane,
   setFocusedLane = () => undefined,

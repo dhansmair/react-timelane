@@ -6,14 +6,8 @@ import {
   type CoreItem,
   type ItemId,
   type TimelaneSettings,
-  TimelaneLayout,
-  TimelaneHeader,
-  TimelaneAside,
-  TimelaneBackground,
-  TimelaneBody,
+  TimelaneSettingsProvider,
   useScroll,
-  TimelaneWrapper,
-  CoreSwimlane,
 } from "react-timelane";
 import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
@@ -23,6 +17,8 @@ import {
   DEFAULT_ALLOCATION_DESCRIPTION,
   DEFAULT_ALLOCATION_NAME,
 } from "../constants";
+
+import { Timelane as TL } from "react-timelane";
 
 const defaultSettings: TimelaneSettings = {
   showMonths: true,
@@ -53,25 +49,10 @@ interface MyTimelaneProps {
 
 export default function MyTimelane(props: MyTimelaneProps) {
   return (
-    <TimelaneWrapper {...defaultSettings}>
+    <TimelaneSettingsProvider settings={defaultSettings}>
       <MyTimelaneContent {...props} />
-    </TimelaneWrapper>
+    </TimelaneSettingsProvider>
   );
-}
-
-interface MyTimelaneContentProps {
-  resources: Resource[];
-  allocations: Allocation[];
-  focusedDay?: Date | null;
-  setFocusedResource?: (resource: Resource | null) => void;
-  setFocusedDay?: (day: Date | null) => void;
-  onAllocationCreate?: (allocation: Allocation) => void;
-  onAllocationUpdate?: (allocation: Allocation) => void;
-  onAllocationDelete?: (allocation: Allocation) => void;
-  onAllocationClick?: (allocation: Allocation, e: MouseEvent | null) => void;
-  onAllocationContextMenu?: (allocation: Allocation, e: MouseEvent) => void;
-  onAreaSearchClick: (area: Resource) => void;
-  onAreaClick?: (area: Resource, e: MouseEvent) => void;
 }
 
 function MyTimelaneContent({
@@ -81,7 +62,7 @@ function MyTimelaneContent({
   setFocusedDay,
   onAllocationCreate = () => {},
   onAllocationUpdate = () => {},
-}: MyTimelaneContentProps) {
+}: MyTimelaneProps) {
   function handleResourceDoubleClick(
     resource: Resource,
     when: Date,
@@ -169,8 +150,8 @@ function MyTimelaneContent({
   }
 
   return (
-    <>
-      <TimelaneHeader
+    <TL.Container>
+      <TL.Header
         focusedDay={focusedDay}
         setFocusedDay={setFocusedDay}
         onDayClick={({ day }) => {
@@ -183,14 +164,14 @@ function MyTimelaneContent({
           console.log("week clicked", firstDay);
         }}
       />
-      <TimelaneBody
+      <TL.Body
         onSelect={(selection) => {
           console.info(selection);
           setSelection(selection);
         }}
       >
         {lanes.map((lane) => (
-          <CoreSwimlane
+          <TL.Lane
             key={lane.id}
             swimlane={lane}
             items={items.filter((item) => item.swimlaneId === lane.id)}
@@ -211,16 +192,16 @@ function MyTimelaneContent({
             )}
           />
         ))}
-      </TimelaneBody>
-      <TimelaneBackground focusedDay={focusedDay} />
-      <TimelaneAside
-        swimlanes={lanes}
-        onSwimlaneHeaderClick={(lane) => {
+      </TL.Body>
+      <TL.Background focusedDay={focusedDay} />
+      <TL.Aside
+        lanes={lanes}
+        onLaneHeaderClick={(lane) => {
           scrollTo({ vert: lane.id });
         }}
-        renderSwimlaneHeader={(lane) => <div>{lane.id}</div>}
+        renderLaneHeader={(lane) => <div>{lane.id}</div>}
       />
-      <TimelaneLayout.Corner />
-    </>
+      <TL.Layout.Corner />
+    </TL.Container>
   );
 }

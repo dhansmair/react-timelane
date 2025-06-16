@@ -51,7 +51,7 @@ interface CoreSwimlaneProps<T> {
   onResizeStart?: (data: T) => void;
 }
 
-export default function CoreSwimlane<T>({
+export function CoreSwimlane<T>({
   swimlane,
   items,
   focused = false,

@@ -1,11 +1,10 @@
-export { default as TimelaneLayout } from "./components/layout/TimelaneLayout";
-export { default as TimelaneAside } from "./components/TimelaneAside";
-export { default as TimelaneBackground } from "./components/TimelaneBackground";
-export { default as TimelaneWrapper } from "./components/TimelaneWrapper";
-export { default as CoreSwimlane } from "./components/core/CoreSwimlane/CoreSwimlane";
-export { TimelaneBodyInner } from "./components/TimelaneBodyInner";
+export { TimelaneLayout } from "./components/layout/TimelaneLayout";
+export { TimelaneAside } from "./components/TimelaneAside";
+export { TimelaneBackground } from "./components/TimelaneBackground";
+export { CoreSwimlane } from "./components/core/CoreSwimlane/CoreSwimlane";
 export { TimelaneBody } from "./components/TimelaneBody";
-export { TimelaneSelectionLayer } from "./components/TimelaneSelectionLayer";
+export { Timelane } from "./components/Timelane";
+export { TimelaneSettingsProvider } from "./components/TimelaneSettingsProvider";
 export * from "./components/TimelaneHeader";
 
 export * from "./types";

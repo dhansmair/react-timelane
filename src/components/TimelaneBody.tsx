@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import TimelaneLayout from "./layout/TimelaneLayout";
+import { TimelaneLayout } from "./layout/TimelaneLayout";
 import { TimelaneSelectionLayer } from "./TimelaneSelectionLayer";
 
 interface TimelaneBodyProps {

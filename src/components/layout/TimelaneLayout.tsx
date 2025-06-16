@@ -1,7 +1,7 @@
 import { PropsWithChildren, useRef } from "react";
 import "./layout.scss";
 
-function TimelaneLayout({ children }: PropsWithChildren<{}>) {
+export function TimelaneLayout({ children }: PropsWithChildren<{}>) {
   const ref = useRef<HTMLDivElement>(null);
   return (
     <div
@@ -89,5 +89,3 @@ TimelaneLayout.Background = TimelaneLayoutBackground;
 TimelaneLayout.Footer = TimelaneLayoutFooter;
 TimelaneLayout.Aside = TimelaneLayoutAside;
 TimelaneLayout.Corner = TimelaneLayoutCorner;
-
-export default TimelaneLayout;

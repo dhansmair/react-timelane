@@ -18,6 +18,9 @@ interface TimelaneWrapperProps {
   focusedDate?: Date | null;
 }
 
+/**
+ * @deprecated The component should not be used
+ */
 export default function TimelaneWrapper({
   children,
   start = new Date(2025, 1, 1),
