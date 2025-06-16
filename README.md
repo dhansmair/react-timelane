@@ -26,7 +26,7 @@ npm install react-timelane
 
 ## Code Example
 
-see `docs/src/components/MyTimelane.tsx` for the full example:
+The following code example shows a basic custom Timelane, focusing on the component structure. See [docs/src/components/MyTimelane.tsx](https://github.com/dhansmair/react-timelane/blob/main/docs/src/components/MyTimelane.tsx) for the full example:
 
 ```typescript
 import { addDays, min } from "date-fns";
@@ -35,10 +35,7 @@ import {
   type AvailableSpace,
   type Lane,
   type Item,
-  type ItemId,
-  type TimelaneSettings,
-  TimelaneSettingsProvider,
-  useScroll,
+  type ItemId
 } from "react-timelane";
 import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
@@ -46,17 +43,6 @@ import AllocationComponent from "./AllocationComponent";
 
 import { Timelane as TL } from "react-timelane";
 
-const defaultSettings: TimelaneSettings = {
-  showMonths: true,
-  showWeeks: true,
-  showDays: true,
-  start: new Date(2025, 3, 1),
-  end: new Date(2025, 6, 2),
-  pixelsPerDay: 50,
-  pixelsPerResource: 100,
-  allowOverlaps: false,
-  focusedDate: null,
-};
 
 interface MyTimelaneProps {
   resources: Resource[];
