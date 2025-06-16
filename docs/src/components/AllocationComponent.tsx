@@ -9,15 +9,15 @@ interface AllocationComponentProps {
   allocation: Allocation;
   isSelected?: boolean;
   isDragged?: boolean;
-  onClick: (allocation: Allocation, e: MouseEvent) => void;
-  onContextMenu: (allocation: Allocation, e: MouseEvent) => void;
+  onClick?: (allocation: Allocation, e: MouseEvent) => void;
+  onContextMenu?: (allocation: Allocation, e: MouseEvent) => void;
 }
 export default function AllocationComponent({
   allocation,
   isSelected = false,
   isDragged = false,
-  onClick,
-  onContextMenu,
+  onClick = () => undefined,
+  onContextMenu = () => undefined,
 }: AllocationComponentProps) {
   const ref = useRef<HTMLDivElement>(null);
 

@@ -5,16 +5,15 @@ import {
   type SwimlaneT,
   type CoreItem,
   type ItemId,
+  type TimelaneSettings,
   TimelaneLayout,
   TimelaneHeader,
   TimelaneAside,
   TimelaneBackground,
   TimelaneBody,
-  TimelaneSelectionLayer,
   useScroll,
-  type TimelaneSettings,
   TimelaneWrapper,
-  TimelaneBodyInner,
+  CoreSwimlane,
 } from "react-timelane";
 import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
@@ -133,6 +132,42 @@ function MyTimelaneContent({
 
   const { scrollTo } = useScroll();
 
+  function handleItemUpdate(item: CoreItem<Allocation>) {
+    console.log("item update", item);
+
+    const updatedAllocation: Allocation = {
+      ...item.payload,
+      resourceId: item.swimlaneId,
+      start: item.start,
+      end: item.end,
+      size: item.size,
+      offset: item.offset,
+    };
+
+    onAllocationUpdate(updatedAllocation);
+  }
+
+  function handleLaneClick(lane: SwimlaneT, when: Date) {
+    console.log("clicked", lane, when);
+    scrollTo({ horz: when });
+  }
+
+  function handleLaneDoubleClick(
+    lane: SwimlaneT,
+    when: Date,
+    availableSpace: AvailableSpace | null
+  ) {
+    console.log("double clicked", lane);
+
+    const resource: Resource | undefined = resources.find(
+      (a) => a.id === lane.id
+    );
+
+    if (resource !== undefined) {
+      handleResourceDoubleClick(resource, when, availableSpace);
+    }
+  }
+
   return (
     <>
       <TimelaneHeader
@@ -154,50 +189,28 @@ function MyTimelaneContent({
           setSelection(selection);
         }}
       >
-        <TimelaneBodyInner
-          lanes={lanes}
-          items={items}
-          renderItem={(item, isDragged) => (
-            <AllocationComponent
-              allocation={item.payload}
-              isDragged={isDragged}
-              onClick={() => {
-                scrollTo(item.id);
-              }}
-              onContextMenu={() => {}}
-              isSelected={selection.includes(item.id)}
-            />
-          )}
-          onLaneClick={(lane, when) => {
-            console.log("clicked", lane, when);
-            scrollTo({ horz: when });
-          }}
-          onLaneDoubleClick={(lane, when, availableSpace) => {
-            console.log("double clicked", lane);
-
-            const resource: Resource | undefined = resources.find(
-              (a) => a.id === lane.id
-            );
-
-            if (resource !== undefined) {
-              handleResourceDoubleClick(resource, when, availableSpace);
+        {lanes.map((lane) => (
+          <CoreSwimlane
+            key={lane.id}
+            swimlane={lane}
+            items={items.filter((item) => item.swimlaneId === lane.id)}
+            onItemUpdate={handleItemUpdate}
+            onClick={(when) => handleLaneClick(lane, when)}
+            onDoubleClick={(when, availableSpace) =>
+              handleLaneDoubleClick(lane, when, availableSpace)
             }
-          }}
-          onItemUpdate={(item) => {
-            console.log("item update", item);
-
-            const updatedAllocation: Allocation = {
-              ...item.payload,
-              resourceId: item.swimlaneId,
-              start: item.start,
-              end: item.end,
-              size: item.size,
-              offset: item.offset,
-            };
-
-            onAllocationUpdate(updatedAllocation);
-          }}
-        />
+            renderItem={(item, isDragged) => (
+              <AllocationComponent
+                allocation={item.payload}
+                isDragged={isDragged}
+                isSelected={selection.includes(item.id)}
+                onClick={() => {
+                  scrollTo(item.id);
+                }}
+              />
+            )}
+          />
+        ))}
       </TimelaneBody>
       <TimelaneBackground focusedDay={focusedDay} />
       <TimelaneAside
