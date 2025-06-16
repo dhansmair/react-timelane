@@ -11,11 +11,11 @@ import {
   Rectangle,
   SwimlaneT,
   TimelaneSettings,
-} from "../../../types";
+} from "../../types";
 
-interface CoreItemComponentProps<T> {
+interface TimelaneItemProps<T> {
   item: CoreItem<T>;
-  swimlane: SwimlaneT;
+  lane: SwimlaneT;
   settings: TimelaneSettings;
   onDragStart: (grabPosition: Position, relativeGrabPosition: Position) => void;
   onDrop: () => void;
@@ -24,8 +24,8 @@ interface CoreItemComponentProps<T> {
   onResizeStart: () => void;
 }
 
-export default function CoreItemComponent<T>({
-  swimlane,
+export default function TimelaneItem<T>({
+  lane,
   item,
   settings,
   children,
@@ -34,13 +34,9 @@ export default function CoreItemComponent<T>({
   onDrop,
   onUpdate,
   onResizeStart,
-}: PropsWithChildren<CoreItemComponentProps<T>>) {
-  const rectangle = getItemRectangle(item, swimlane, settings, settings);
-  const boundingRectangle = getDropTargetDimensions(
-    swimlane,
-    settings,
-    settings
-  );
+}: PropsWithChildren<TimelaneItemProps<T>>) {
+  const rectangle = getItemRectangle(item, lane, settings, settings);
+  const boundingRectangle = getDropTargetDimensions(lane, settings, settings);
 
   return (
     <DragResizeComponent<T>
@@ -53,7 +49,7 @@ export default function CoreItemComponent<T>({
       onUpdate={(rectangle: Rectangle) => {
         const updatedItem: CoreItem<T> = getUpdatedItem(
           item,
-          swimlane,
+          lane,
           rectangle,
           settings,
           settings

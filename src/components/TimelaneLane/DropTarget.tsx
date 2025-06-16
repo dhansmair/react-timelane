@@ -3,7 +3,7 @@ import { DragLocationHistory } from "@atlaskit/pragmatic-drag-and-drop/dist/type
 import { PropsWithChildren, useEffect, useRef } from "react";
 import invariant from "tiny-invariant";
 import { getGrabPosition } from "../utils";
-import { GrabInfo, Position } from "../../../types";
+import { GrabInfo, Position } from "../../types";
 
 interface DropTargetProps {
   onDragStart?: (mousePos: Position, grabInfo: GrabInfo, data: any) => void;

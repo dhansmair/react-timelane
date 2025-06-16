@@ -1,5 +1,5 @@
 import { MouseEvent, ReactElement } from "react";
-import { CoreSwimlane } from "./core/CoreSwimlane/CoreSwimlane";
+import { TimelaneLane } from "./TimelaneLane/TimelaneLane";
 import { AvailableSpace, CoreItem, SwimlaneT } from "../types";
 
 interface TimelaneBodyInnerProps<T> {
@@ -37,7 +37,7 @@ export function TimelaneBodyInner<T>({
   return (
     <>
       {lanes.map((lane) => (
-        <CoreSwimlane<T>
+        <TimelaneLane<T>
           key={lane.id}
           swimlane={lane}
           items={items.filter((item) => item.swimlaneId === lane.id)}

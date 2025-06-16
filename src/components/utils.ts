@@ -1,23 +1,162 @@
-import { max, min } from "date-fns";
 import {
-  getItemDimensions,
-  getItemRectangle,
-  getDropTargetDimensions,
-} from "../utils";
+  DragLocationHistory,
+  ElementDragPayload,
+} from "@atlaskit/pragmatic-drag-and-drop/dist/types/internal-types";
+import { addDays, differenceInCalendarDays, setHours } from "date-fns";
 import {
-  AvailableSpace,
   CoreItem,
-  DateBounds,
   Dimensions,
-  GrabInfo,
-  Grid,
-  OffsetBounds,
   Pixels,
   Position,
   Rectangle,
   SwimlaneT,
   TimeRange,
-} from "../../../types";
+} from "../types";
+import { max, min } from "date-fns";
+import {
+  AvailableSpace,
+  DateBounds,
+  GrabInfo,
+  Grid,
+  OffsetBounds,
+} from "../types";
+
+export function getDropTargetDimensions(
+  lane: SwimlaneT,
+  pixels: Pixels,
+  range: TimeRange
+): Dimensions {
+  const width = getDropTargetWidth(lane, pixels, range);
+  const height = getDropTargetHeight(lane, pixels);
+
+  return { width, height };
+}
+
+export function getDropTargetHeight(lane: SwimlaneT, pixels: Pixels): number {
+  return pixels.pixelsPerResource;
+}
+
+export function getDropTargetWidth(
+  lane: SwimlaneT,
+  pixels: Pixels,
+  range: TimeRange
+): number {
+  return Math.abs(
+    (differenceInCalendarDays(range.end, range.start) + 1) * pixels.pixelsPerDay
+  );
+}
+
+export function getItemRectangle<T>(
+  item: CoreItem<T>,
+  lane: SwimlaneT,
+  range: TimeRange,
+  pixels: Pixels
+): Rectangle {
+  const dimensions = getItemDimensions(item, lane, pixels);
+  const position = getItemPosition(item, lane, range.start, pixels);
+
+  return {
+    ...dimensions,
+    ...position,
+  };
+}
+
+export function getItemDimensions<T>(
+  item: CoreItem<T>,
+  lane: SwimlaneT,
+  pixels: Pixels
+): Dimensions {
+  const width =
+    differenceInCalendarDays(item.end, item.start) * pixels.pixelsPerDay;
+
+  const height = (item.size / lane.capacity) * pixels.pixelsPerResource;
+
+  return { width, height };
+}
+
+export function dateToPixel(date: Date, start: Date, pixels: Pixels) {
+  return (
+    differenceInCalendarDays(date, start) * pixels.pixelsPerDay +
+    pixels.pixelsPerDay / 2
+  );
+}
+
+export function offsetToPixel(
+  offset: number,
+  capacity: number,
+  pixels: Pixels
+) {
+  return (offset / capacity) * pixels.pixelsPerResource;
+}
+
+export function getItemPosition<T>(
+  item: CoreItem<T>,
+  lane: SwimlaneT,
+  start: Date,
+  pixels: Pixels
+): Position {
+  const x = dateToPixel(item.start, start, pixels);
+  const y = offsetToPixel(item.offset, lane.capacity, pixels);
+
+  return { x, y };
+}
+
+export function getGrabPosition(
+  source: ElementDragPayload,
+  location: DragLocationHistory
+) {
+  const sourceRect = source.element.getBoundingClientRect();
+
+  const grabPosition: Position = {
+    x: sourceRect.x - location.initial.input.pageX,
+    y: sourceRect.y - location.initial.input.pageY,
+  };
+
+  const relativeGrabPosition: Position = {
+    x: grabPosition.x / sourceRect.width,
+    y: grabPosition.y / sourceRect.height,
+  };
+
+  return {
+    absolute: grabPosition,
+    relative: relativeGrabPosition,
+  };
+}
+
+export function getUpdatedItem<T>(
+  oldItem: CoreItem<T>,
+  swimlane: SwimlaneT,
+  dropPreviewRect: Rectangle,
+  pixels: Pixels,
+  range: TimeRange
+): CoreItem<T> {
+  // convert drop preview position to item
+  return {
+    id: oldItem.id,
+    swimlaneId: swimlane.id,
+
+    start: setHours(
+      addDays(range.start, Math.floor(dropPreviewRect.x / pixels.pixelsPerDay)),
+      12
+    ),
+    end: setHours(
+      addDays(
+        range.start,
+        Math.floor(
+          (dropPreviewRect.x + dropPreviewRect.width) / pixels.pixelsPerDay
+        )
+      ),
+      12
+    ),
+    offset: Math.floor(
+      (dropPreviewRect.y / pixels.pixelsPerResource) * swimlane.capacity
+    ),
+    size: Math.floor(
+      (dropPreviewRect.height / pixels.pixelsPerResource) * swimlane.capacity
+    ),
+    payload: oldItem.payload,
+  };
+}
 
 export function getDropPreviewRectangle<S, T>(
   swimlane: SwimlaneT,
@@ -183,31 +322,28 @@ function getNearestDropDestinationWithoutOverlap(
 
 /**
  * Returns true if two rectangles (l1, r1) and (l2, r2) overlap
- * @param el1
- * @param el2
+ * @param a
+ * @param b
  * @returns
  */
-export function doOverlap(el1: Rectangle, el2: Rectangle): boolean {
-  if (el1.x >= el2.x + el2.width || el2.x >= el1.x + el1.width) {
+export function doOverlap(a: Rectangle, b: Rectangle): boolean {
+  if (a.x >= b.x + b.width || b.x >= a.x + a.width) {
     return false;
   }
 
-  if (el1.y >= el2.y + el2.height || el2.y >= el1.y + el1.height) {
+  if (a.y >= b.y + b.height || b.y >= a.y + a.height) {
     return false;
   }
 
   return true;
 }
 
-export function getOverlap(
-  rect1: Rectangle,
-  rect2: Rectangle
-): Rectangle | null {
+export function getOverlap(a: Rectangle, b: Rectangle): Rectangle | null {
   // Calculate the coordinates of the overlapping region
-  const overlapX1 = Math.max(rect1.x, rect2.x);
-  const overlapY1 = Math.max(rect1.y, rect2.y);
-  const overlapX2 = Math.min(rect1.x + rect1.width, rect2.x + rect2.width);
-  const overlapY2 = Math.min(rect1.y + rect1.height, rect2.y + rect2.height);
+  const overlapX1 = Math.max(a.x, b.x);
+  const overlapY1 = Math.max(a.y, b.y);
+  const overlapX2 = Math.min(a.x + a.width, b.x + b.width);
+  const overlapY2 = Math.min(a.y + a.height, b.y + b.height);
 
   // Check if there is an overlap
   if (overlapX1 < overlapX2 && overlapY1 < overlapY2) {

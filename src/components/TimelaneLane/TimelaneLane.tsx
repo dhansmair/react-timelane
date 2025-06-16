@@ -8,13 +8,11 @@ import {
   getItemRectangle,
   getDropTargetDimensions as getSwimlaneDimensions,
   getUpdatedItem as getUpdatedItem,
-} from "../utils";
-import {
   getAvailableSpace,
   getDropPreviewRectangle,
   getOverlap,
-} from "./utils";
-import CoreItemComponent from "../CoreItem/CoreItemComponent";
+} from "../utils";
+import TimelaneItem from "../TimelaneItem/TimelaneItem";
 import OverlapIndicator from "./OverlapIndicator";
 
 import {
@@ -27,10 +25,10 @@ import {
   Rectangle,
   SwimlaneT,
   isCoreItem,
-} from "../../../types";
-import { useTimelaneContext } from "../../../hooks/useTimelaneContext";
+} from "../../types";
+import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
-interface CoreSwimlaneProps<T> {
+interface TimelaneLaneProps<T> {
   swimlane: SwimlaneT;
   items: CoreItem<T>[];
   focused?: boolean;
@@ -51,7 +49,7 @@ interface CoreSwimlaneProps<T> {
   onResizeStart?: (data: T) => void;
 }
 
-export function CoreSwimlane<T>({
+export function TimelaneLane<T>({
   swimlane,
   items,
   focused = false,
@@ -62,7 +60,7 @@ export function CoreSwimlane<T>({
   onContextMenu = () => {},
   renderItem = defaultRenderItem,
   onResizeStart = () => {},
-}: CoreSwimlaneProps<T>) {
+}: TimelaneLaneProps<T>) {
   const { settings } = useTimelaneContext();
 
   const grid: Grid = {
@@ -199,11 +197,11 @@ export function CoreSwimlane<T>({
         onDrop={handleDrop}
       >
         {items.map((item, index) => (
-          <CoreItemComponent<T>
+          <TimelaneItem<T>
             key={index}
             item={item}
             settings={settings}
-            swimlane={swimlane}
+            lane={swimlane}
             onDragStart={() => {
               setDraggedItem(item);
             }}
@@ -220,7 +218,7 @@ export function CoreSwimlane<T>({
               item,
               draggedItem !== null && draggedItem.id === item.id
             )}
-          </CoreItemComponent>
+          </TimelaneItem>
         ))}
         {dropPreviewRect && <DropPreview {...dropPreviewRect}></DropPreview>}
 

@@ -1,5 +1,5 @@
 import { eachDayOfInterval, format, isSunday } from "date-fns";
-import { dateToPixel } from "./core/utils";
+import { dateToPixel } from "./utils";
 import { useTimelaneContext } from "../hooks/useTimelaneContext";
 import { TimelaneLayout } from "..";
 

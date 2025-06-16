@@ -1,4 +1,4 @@
-import { Rectangle } from "../../../types";
+import { Rectangle } from "../../types";
 
 interface OverlapIndicatorProps {
   overlap: Rectangle;

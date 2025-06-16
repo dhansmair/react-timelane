@@ -1,6 +1,6 @@
 import { ItemId, SwimlaneId } from "../types";
 import { useTimelaneContext } from "./useTimelaneContext";
-import { dateToPixel } from "../components/core/utils";
+import { dateToPixel } from "../components/utils";
 
 export const useScroll = () => {
   const { settings } = useTimelaneContext();

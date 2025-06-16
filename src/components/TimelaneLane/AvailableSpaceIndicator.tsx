@@ -1,6 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { dateToPixel, offsetToPixel } from "../utils";
-import { getAvailableSpace } from "./utils";
+import { dateToPixel, offsetToPixel, getAvailableSpace } from "../utils";
 import { addDays, setHours } from "date-fns";
 import {
   AvailableSpace,
@@ -9,7 +8,7 @@ import {
   Rectangle,
   SwimlaneT,
   TimeRange,
-} from "../../../types";
+} from "../../types";
 
 interface AvailableSpaceIndicatorProps<T> {
   pixels: Pixels;
