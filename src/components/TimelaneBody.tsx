@@ -1,14 +1,20 @@
 import { PropsWithChildren } from "react";
 import TimelaneLayout from "./layout/TimelaneLayout";
+import { TimelaneSelectionLayer } from "./TimelaneSelectionLayer";
 
-interface TimelaneBodyProps {}
+interface TimelaneBodyProps {
+  onSelect?: (selection: number[]) => void;
+}
 
 export function TimelaneBody({
+  onSelect = () => undefined,
   children,
 }: PropsWithChildren<TimelaneBodyProps>) {
   return (
     <TimelaneLayout.Body>
-      <div className="timelane-body">{children}</div>
+      <TimelaneSelectionLayer onSelect={onSelect}>
+        <div className="timelane-body">{children}</div>
+      </TimelaneSelectionLayer>
     </TimelaneLayout.Body>
   );
 }

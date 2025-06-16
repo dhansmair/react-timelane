@@ -148,58 +148,56 @@ function MyTimelaneContent({
           console.log("week clicked", firstDay);
         }}
       />
-      <TimelaneBody>
-        <TimelaneSelectionLayer
-          onSelect={(selection) => {
-            console.info(selection);
-            setSelection(selection);
+      <TimelaneBody
+        onSelect={(selection) => {
+          console.info(selection);
+          setSelection(selection);
+        }}
+      >
+        <TimelaneBodyInner
+          lanes={lanes}
+          items={items}
+          renderItem={(item, isDragged) => (
+            <AllocationComponent
+              allocation={item.payload}
+              isDragged={isDragged}
+              onClick={() => {
+                scrollTo(item.id);
+              }}
+              onContextMenu={() => {}}
+              isSelected={selection.includes(item.id)}
+            />
+          )}
+          onLaneClick={(lane, when) => {
+            console.log("clicked", lane, when);
+            scrollTo({ horz: when });
           }}
-        >
-          <TimelaneBodyInner
-            lanes={lanes}
-            items={items}
-            renderItem={(item, isDragged) => (
-              <AllocationComponent
-                allocation={item.payload}
-                isDragged={isDragged}
-                onClick={() => {
-                  scrollTo(item.id);
-                }}
-                onContextMenu={() => {}}
-                isSelected={selection.includes(item.id)}
-              />
-            )}
-            onLaneClick={(lane, when) => {
-              console.log("clicked", lane, when);
-              scrollTo({ horz: when });
-            }}
-            onLaneDoubleClick={(lane, when, availableSpace) => {
-              console.log("double clicked", lane);
+          onLaneDoubleClick={(lane, when, availableSpace) => {
+            console.log("double clicked", lane);
 
-              const resource: Resource | undefined = resources.find(
-                (a) => a.id === lane.id
-              );
+            const resource: Resource | undefined = resources.find(
+              (a) => a.id === lane.id
+            );
 
-              if (resource !== undefined) {
-                handleResourceDoubleClick(resource, when, availableSpace);
-              }
-            }}
-            onItemUpdate={(item) => {
-              console.log("item update", item);
+            if (resource !== undefined) {
+              handleResourceDoubleClick(resource, when, availableSpace);
+            }
+          }}
+          onItemUpdate={(item) => {
+            console.log("item update", item);
 
-              const updatedAllocation: Allocation = {
-                ...item.payload,
-                resourceId: item.swimlaneId,
-                start: item.start,
-                end: item.end,
-                size: item.size,
-                offset: item.offset,
-              };
+            const updatedAllocation: Allocation = {
+              ...item.payload,
+              resourceId: item.swimlaneId,
+              start: item.start,
+              end: item.end,
+              size: item.size,
+              offset: item.offset,
+            };
 
-              onAllocationUpdate(updatedAllocation);
-            }}
-          />
-        </TimelaneSelectionLayer>
+            onAllocationUpdate(updatedAllocation);
+          }}
+        />
       </TimelaneBody>
       <TimelaneBackground focusedDay={focusedDay} />
       <TimelaneAside
