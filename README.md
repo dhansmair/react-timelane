@@ -2,6 +2,9 @@
 
 A React/TypeScript library to build timelines / horizontally scrollable calendars with multiple lanes.
 
+<img width="1145" alt="image" src="https://github.com/user-attachments/assets/a051f665-37ac-4292-9b85-7e1baa1bb84f" />
+
+
 ## Features
 
 react-timelane has a particular focus on usability and comes with many neat features:
