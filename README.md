@@ -1,54 +1,144 @@
-# React + TypeScript + Vite
+# react-timelane
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React/TypeScript library to build timelines / horizontally scrollable calendars with multiple lanes.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+react-timelane has a particular focus on usability and comes with many neat features:
 
-## Expanding the ESLint configuration
+- item drag and drop
+- item resizing
+- jump (scroll) to point in time, lane or item
+- item selection via mouse range
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Demo
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+https://dhansmair.github.io/react-timelane
+
+## Installation
+
+```bash
+npm install react-timelane
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Code Example
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+see `docs/src/components/MyTimelane.tsx` for the full example:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```typescript
+import { addDays, min } from "date-fns";
+import { useState, type MouseEvent } from "react";
+import {
+  type AvailableSpace,
+  type Lane,
+  type Item,
+  type ItemId,
+  type TimelaneSettings,
+  TimelaneSettingsProvider,
+  useScroll,
+} from "react-timelane";
+import type Allocation from "../models/Allocation";
+import type Resource from "../models/Resource";
+import AllocationComponent from "./AllocationComponent";
+
+import { Timelane as TL } from "react-timelane";
+
+const defaultSettings: TimelaneSettings = {
+  showMonths: true,
+  showWeeks: true,
+  showDays: true,
+  start: new Date(2025, 3, 1),
+  end: new Date(2025, 6, 2),
+  pixelsPerDay: 50,
+  pixelsPerResource: 100,
+  allowOverlaps: false,
+  focusedDate: null,
+};
+
+interface MyTimelaneProps {
+  resources: Resource[];
+  allocations: Allocation[];
+  onAllocationCreate: (allocation: Allocation) => void;
+  onAllocationUpdate: (allocation: Allocation) => void;
+}
+
+function MyTimelane({
+  resources,
+  allocations,
+  onAllocationCreate,
+  onAllocationUpdate,
+}: MyTimelaneProps) {
+  const [selection, setSelection] = useState<ItemId[]>([]);
+
+  const lanes: Lane[] = resources.map((resource) => ({
+    id: resource.id,
+    capacity: resource.capacity,
+  }));
+
+  const items: Item<Allocation>[] = allocations.map((allocation) => ({
+    id: allocation.id,
+    laneId: allocation.resourceId,
+    start: allocation.start,
+    end: allocation.end,
+    size: allocation.size,
+    offset: allocation.offset,
+    payload: allocation,
+  }));
+
+  function handleItemUpdate(item: Item<Allocation>) {
+    const updatedAllocation: Allocation = {
+      ...item.payload,
+      resourceId: item.laneId,
+      start: item.start,
+      end: item.end,
+      size: item.size,
+      offset: item.offset,
+    };
+
+    onAllocationUpdate(updatedAllocation);
+  }
+
+  return (
+    <TL.Container>
+      <TL.Header
+        onDayClick={({ day }) => {
+          console.log("day clicked", day);
+        }}
+        onMonthClick={({ firstDay }) => {
+          console.log("month clicked", firstDay);
+        }}
+        onWeekClick={({ firstDay }) => {
+          console.log("week clicked", firstDay);
+        }}
+      />
+      <TL.Body
+        onSelect={(selection) => {
+          setSelection(selection);
+        }}
+      >
+        {lanes.map((lane) => (
+          <TL.Lane
+            key={lane.id}
+            lane={lane}
+            items={items.filter((item) => item.laneId === lane.id)}
+            onItemUpdate={handleItemUpdate}
+            renderItem={(item, isDragged) => (
+              <AllocationComponent
+                allocation={item.payload}
+                isDragged={isDragged}
+                isSelected={selection.includes(item.id)}
+              />
+            )}
+          />
+        ))}
+      </TL.Body>
+      <TL.Background />
+      <TL.Aside
+        lanes={lanes}
+        renderLaneHeader={(lane) => <div>{lane.id}</div>}
+      />
+      <TL.Layout.Corner />
+    </TL.Container>
+  );
+}
 ```
