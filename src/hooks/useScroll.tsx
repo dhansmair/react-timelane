@@ -1,6 +1,6 @@
 import { ItemId, LaneId } from "../types";
-import { useTimelaneContext } from "./useTimelaneContext";
 import { dateToPixel } from "../components/utils";
+import { useTimelaneContext } from "./useTimelaneContext";
 
 export const useScroll = () => {
   const { settings } = useTimelaneContext();

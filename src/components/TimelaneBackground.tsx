@@ -1,7 +1,7 @@
 import { eachDayOfInterval, format, isSunday } from "date-fns";
 import { dateToPixel } from "./utils";
 import { useTimelaneContext } from "../hooks/useTimelaneContext";
-import { TimelaneLayout } from "..";
+import { TimelaneLayout } from "./TimelaneLayout/TimelaneLayout";
 
 interface TimelaneBackgroundProps {
   focusedDay?: Date | null;

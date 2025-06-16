@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { TimelaneSettings } from "../types/TimelaneSettings";
+import { TimelaneSettings } from "../types/";
 
 const defaultTimelaneSettings: TimelaneSettings = {
   start: new Date(2025, 1, 1),

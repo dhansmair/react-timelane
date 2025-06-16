@@ -2,8 +2,8 @@ import { addDays, min } from "date-fns";
 import { useState, type MouseEvent } from "react";
 import {
   type AvailableSpace,
-  type SwimlaneT,
-  type CoreItem,
+  type Lane,
+  type Item,
   type ItemId,
   type TimelaneSettings,
   TimelaneSettingsProvider,
@@ -96,12 +96,12 @@ function MyTimelaneContent({
 
   const [selection, setSelection] = useState<ItemId[]>([]);
 
-  const lanes: SwimlaneT[] = resources.map((resource) => ({
+  const lanes: Lane[] = resources.map((resource) => ({
     id: resource.id,
     capacity: resource.capacity,
   }));
 
-  const items: CoreItem<Allocation>[] = allocations.map((allocation) => ({
+  const items: Item<Allocation>[] = allocations.map((allocation) => ({
     id: allocation.id,
     swimlaneId: allocation.resourceId,
     start: allocation.start,
@@ -113,7 +113,7 @@ function MyTimelaneContent({
 
   const { scrollTo } = useScroll();
 
-  function handleItemUpdate(item: CoreItem<Allocation>) {
+  function handleItemUpdate(item: Item<Allocation>) {
     console.log("item update", item);
 
     const updatedAllocation: Allocation = {
@@ -128,13 +128,13 @@ function MyTimelaneContent({
     onAllocationUpdate(updatedAllocation);
   }
 
-  function handleLaneClick(lane: SwimlaneT, when: Date) {
+  function handleLaneClick(lane: Lane, when: Date) {
     console.log("clicked", lane, when);
     scrollTo({ horz: when });
   }
 
   function handleLaneDoubleClick(
-    lane: SwimlaneT,
+    lane: Lane,
     when: Date,
     availableSpace: AvailableSpace | null
   ) {

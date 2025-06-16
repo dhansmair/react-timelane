@@ -1,7 +1,7 @@
 import { MouseEvent, PropsWithChildren, ReactElement } from "react";
-import { useTimelaneContext } from "../hooks/useTimelaneContext";
 import { Lane } from "../types";
-import { TimelaneLayout } from "..";
+import { TimelaneLayout } from "./TimelaneLayout/TimelaneLayout";
+import { useTimelaneContext } from "../hooks/useTimelaneContext";
 
 interface TimelaneAsideProps {
   lanes: Lane[];
