@@ -4,53 +4,51 @@ import { SwimlaneT } from "../types";
 import { TimelaneLayout } from "..";
 
 interface TimelaneAsideProps {
-  swimlanes: SwimlaneT[];
-  focusedSwimlane?: SwimlaneT | null;
-  setFocusedSwimlane?: (lane: SwimlaneT | null) => void;
-  onSwimlaneHeaderClick?: (lane: SwimlaneT, e: MouseEvent) => void;
-  onSwimlaneHeaderDoubleClick?: (lane: SwimlaneT, e: MouseEvent) => void;
-  onSwimlaneHeaderContextMenu?: (lane: SwimlaneT, e: MouseEvent) => void;
-  renderSwimlaneHeader?: (lane: SwimlaneT) => ReactElement;
+  lanes: SwimlaneT[];
+  focusedLane?: SwimlaneT | null;
+  setFocusedLane?: (lane: SwimlaneT | null) => void;
+  onLaneHeaderClick?: (lane: SwimlaneT, e: MouseEvent) => void;
+  onLaneHeaderDoubleClick?: (lane: SwimlaneT, e: MouseEvent) => void;
+  onLaneHeaderContextMenu?: (lane: SwimlaneT, e: MouseEvent) => void;
+  renderLaneHeader?: (lane: SwimlaneT) => ReactElement;
 }
 
 export default function TimelaneAside({
-  swimlanes,
-  focusedSwimlane,
-  setFocusedSwimlane = () => undefined,
-  onSwimlaneHeaderClick = () => undefined,
-  onSwimlaneHeaderDoubleClick = () => undefined,
-  onSwimlaneHeaderContextMenu = () => undefined,
-  renderSwimlaneHeader = defaultRenderSwimlaneHeader,
+  lanes,
+  focusedLane,
+  setFocusedLane = () => undefined,
+  onLaneHeaderClick = () => undefined,
+  onLaneHeaderDoubleClick = () => undefined,
+  onLaneHeaderContextMenu = () => undefined,
+  renderLaneHeader = defaultRenderLaneHeader,
 }: TimelaneAsideProps) {
   const { settings } = useTimelaneContext();
 
   return (
     <TimelaneLayout.Aside>
       <div className="timelane-aside">
-        {swimlanes &&
-          swimlanes.map((lane) => (
-            <SwimlaneHeader
+        {lanes &&
+          lanes.map((lane) => (
+            <LaneHeader
               key={lane.id}
               height={settings.pixelsPerResource}
-              isFocused={
-                focusedSwimlane ? focusedSwimlane.id === lane.id : false
-              }
+              isFocused={focusedLane ? focusedLane.id === lane.id : false}
               onClick={(e) => {
-                setFocusedSwimlane(lane);
-                onSwimlaneHeaderClick(lane, e);
+                setFocusedLane(lane);
+                onLaneHeaderClick(lane, e);
               }}
-              onDoubleClick={(e) => onSwimlaneHeaderDoubleClick(lane, e)}
-              onContextMenu={(e) => onSwimlaneHeaderContextMenu(lane, e)}
+              onDoubleClick={(e) => onLaneHeaderDoubleClick(lane, e)}
+              onContextMenu={(e) => onLaneHeaderContextMenu(lane, e)}
             >
-              {renderSwimlaneHeader(lane)}
-            </SwimlaneHeader>
+              {renderLaneHeader(lane)}
+            </LaneHeader>
           ))}
       </div>
     </TimelaneLayout.Aside>
   );
 }
 
-interface SwimlaneHeaderProps {
+interface LaneHeaderProps {
   height: number;
   isFocused?: boolean;
   onClick?: (e: MouseEvent) => void;
@@ -58,14 +56,14 @@ interface SwimlaneHeaderProps {
   onContextMenu?: (e: MouseEvent) => void;
 }
 
-function SwimlaneHeader({
+function LaneHeader({
   height,
   isFocused,
   onClick,
   onDoubleClick,
   onContextMenu,
   children,
-}: PropsWithChildren<SwimlaneHeaderProps>) {
+}: PropsWithChildren<LaneHeaderProps>) {
   return (
     <div
       className={`timelane-aside-swimlane-header ${
@@ -81,6 +79,6 @@ function SwimlaneHeader({
   );
 }
 
-function defaultRenderSwimlaneHeader(lane: SwimlaneT) {
+function defaultRenderLaneHeader(lane: SwimlaneT) {
   return <div>{lane.id}</div>;
 }
