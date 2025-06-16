@@ -2,6 +2,7 @@ import { PropsWithChildren } from "react";
 import { TimelaneSettingsProvider } from "./TimelaneSettingsProvider";
 import { SwimlaneT } from "../types";
 import "./Timelane.scss";
+import { TimelaneLayout } from "..";
 
 interface TimelaneWrapperProps {
   focusedDay?: Date | null;
@@ -44,7 +45,7 @@ export default function TimelaneWrapper({
           focusedDate,
         }}
       >
-        {children}
+        <TimelaneLayout>{children}</TimelaneLayout>
       </TimelaneSettingsProvider>
     </div>
   );

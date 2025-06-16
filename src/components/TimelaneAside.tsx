@@ -1,6 +1,7 @@
 import { MouseEvent, PropsWithChildren, ReactElement } from "react";
 import { useTimelaneContext } from "../hooks/useTimelaneContext";
 import { SwimlaneT } from "../types";
+import { TimelaneLayout } from "..";
 
 interface TimelaneAsideProps {
   swimlanes: SwimlaneT[];
@@ -24,24 +25,28 @@ export default function TimelaneAside({
   const { settings } = useTimelaneContext();
 
   return (
-    <div className="timelane-aside">
-      {swimlanes &&
-        swimlanes.map((lane) => (
-          <SwimlaneHeader
-            key={lane.id}
-            height={settings.pixelsPerResource}
-            isFocused={focusedSwimlane ? focusedSwimlane.id === lane.id : false}
-            onClick={(e) => {
-              setFocusedSwimlane(lane);
-              onSwimlaneHeaderClick(lane, e);
-            }}
-            onDoubleClick={(e) => onSwimlaneHeaderDoubleClick(lane, e)}
-            onContextMenu={(e) => onSwimlaneHeaderContextMenu(lane, e)}
-          >
-            {renderSwimlaneHeader(lane)}
-          </SwimlaneHeader>
-        ))}
-    </div>
+    <TimelaneLayout.Aside>
+      <div className="timelane-aside">
+        {swimlanes &&
+          swimlanes.map((lane) => (
+            <SwimlaneHeader
+              key={lane.id}
+              height={settings.pixelsPerResource}
+              isFocused={
+                focusedSwimlane ? focusedSwimlane.id === lane.id : false
+              }
+              onClick={(e) => {
+                setFocusedSwimlane(lane);
+                onSwimlaneHeaderClick(lane, e);
+              }}
+              onDoubleClick={(e) => onSwimlaneHeaderDoubleClick(lane, e)}
+              onContextMenu={(e) => onSwimlaneHeaderContextMenu(lane, e)}
+            >
+              {renderSwimlaneHeader(lane)}
+            </SwimlaneHeader>
+          ))}
+      </div>
+    </TimelaneLayout.Aside>
   );
 }
 

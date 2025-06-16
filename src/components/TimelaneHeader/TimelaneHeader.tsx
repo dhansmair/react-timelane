@@ -3,6 +3,7 @@ import { MonthsHeader } from "./MonthsHeader";
 import { WeeksHeader } from "./WeeksHeader";
 import { DaysHeader } from "./DaysHeader";
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
+import { TimelaneLayout } from "../..";
 
 interface TimelaneHeaderProps {
   focusedDay?: Date | null;
@@ -30,35 +31,37 @@ export function TimelaneHeader({
   const { settings } = useTimelaneContext();
 
   return (
-    <div className="timelane-header">
-      {settings.showMonths && (
-        <MonthsHeader
-          range={settings}
-          pixels={settings}
-          setFocusedDay={setFocusedDay}
-          render={renderMonthHeader}
-          onMonthClick={onMonthClick}
-        />
-      )}
-      {settings.showWeeks && (
-        <WeeksHeader
-          range={settings}
-          pixels={settings}
-          setFocusedDay={setFocusedDay}
-          render={renderWeekHeader}
-          onWeekClick={onWeekClick}
-        />
-      )}
-      {settings.showDays && (
-        <DaysHeader
-          range={settings}
-          pixels={settings}
-          focusedDay={focusedDay}
-          setFocusedDay={setFocusedDay}
-          render={renderDayHeader}
-          onDayClick={onDayClick}
-        />
-      )}
-    </div>
+    <TimelaneLayout.Header>
+      <div className="timelane-header">
+        {settings.showMonths && (
+          <MonthsHeader
+            range={settings}
+            pixels={settings}
+            setFocusedDay={setFocusedDay}
+            render={renderMonthHeader}
+            onMonthClick={onMonthClick}
+          />
+        )}
+        {settings.showWeeks && (
+          <WeeksHeader
+            range={settings}
+            pixels={settings}
+            setFocusedDay={setFocusedDay}
+            render={renderWeekHeader}
+            onWeekClick={onWeekClick}
+          />
+        )}
+        {settings.showDays && (
+          <DaysHeader
+            range={settings}
+            pixels={settings}
+            focusedDay={focusedDay}
+            setFocusedDay={setFocusedDay}
+            render={renderDayHeader}
+            onDayClick={onDayClick}
+          />
+        )}
+      </div>
+    </TimelaneLayout.Header>
   );
 }
