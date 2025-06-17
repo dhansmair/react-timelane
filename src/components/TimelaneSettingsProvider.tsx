@@ -13,7 +13,7 @@ export const TimelaneSettingsProvider = ({
   const [settings, setSettings] = useState<TimelaneSettings>(_settings);
 
   useEffect(() => {
-    setSettings((prev) => ({ ...prev, _settings }));
+    setSettings((prev) => ({ ...prev, ..._settings }));
   }, [_settings]);
 
   return (
