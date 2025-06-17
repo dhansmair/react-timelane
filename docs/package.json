@@ -10,14 +10,17 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@atlaskit/pragmatic-drag-and-drop": "^1.7.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^7.1.1",
+    "antd": "^5.26.1",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-timelane": "^0.0.4"
+    "react-timelane": "^0.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

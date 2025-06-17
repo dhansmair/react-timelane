@@ -1,12 +1,10 @@
 import { addDays, min } from "date-fns";
-import { useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import {
   type AvailableSpace,
   type Lane,
   type Item,
   type ItemId,
-  type TimelaneSettings,
-  TimelaneSettingsProvider,
   useScroll,
 } from "react-timelane";
 import type Allocation from "../models/Allocation";
@@ -19,18 +17,6 @@ import {
 } from "../constants";
 
 import { Timelane as TL } from "react-timelane";
-
-const defaultSettings: TimelaneSettings = {
-  showMonths: true,
-  showWeeks: true,
-  showDays: true,
-  start: new Date(2025, 3, 1),
-  end: new Date(2025, 6, 2),
-  pixelsPerDay: 50,
-  pixelsPerResource: 100,
-  allowOverlaps: false,
-  focusedDate: null,
-};
 
 interface MyTimelaneProps {
   resources: Resource[];
@@ -45,14 +31,11 @@ interface MyTimelaneProps {
   onAllocationContextMenu?: (allocation: Allocation, e: MouseEvent) => void;
   onAreaSearchClick: (area: Resource) => void;
   onAreaClick?: (area: Resource, e: MouseEvent) => void;
+  searchText: string | null;
 }
 
 export default function MyTimelane(props: MyTimelaneProps) {
-  return (
-    <TimelaneSettingsProvider settings={defaultSettings}>
-      <MyTimelaneContent {...props} />
-    </TimelaneSettingsProvider>
-  );
+  return <MyTimelaneContent {...props} />;
 }
 
 function MyTimelaneContent({
@@ -62,7 +45,38 @@ function MyTimelaneContent({
   setFocusedDay,
   onAllocationCreate = () => {},
   onAllocationUpdate = () => {},
+  searchText,
 }: MyTimelaneProps) {
+  const [selection, setSelection] = useState<ItemId[]>([]);
+  const { scrollTo } = useScroll();
+
+  useEffect(() => {
+    if (searchText !== null) {
+      const searchNumber = Number.parseInt(searchText);
+
+      const searchedAllocation = allocations.find((a) => a.id === searchNumber);
+
+      if (searchedAllocation) {
+        scrollTo(searchNumber);
+      }
+    }
+  }, [allocations, searchText, scrollTo]);
+
+  const lanes: Lane[] = resources.map((resource) => ({
+    id: resource.id,
+    capacity: resource.capacity,
+  }));
+
+  const items: Item<Allocation>[] = allocations.map((allocation) => ({
+    id: allocation.id,
+    laneId: allocation.resourceId,
+    start: allocation.start,
+    end: allocation.end,
+    size: allocation.size,
+    offset: allocation.offset,
+    payload: allocation,
+  }));
+
   function handleResourceDoubleClick(
     resource: Resource,
     when: Date,
@@ -93,25 +107,6 @@ function MyTimelaneContent({
 
     onAllocationCreate(newAllocation);
   }
-
-  const [selection, setSelection] = useState<ItemId[]>([]);
-
-  const lanes: Lane[] = resources.map((resource) => ({
-    id: resource.id,
-    capacity: resource.capacity,
-  }));
-
-  const items: Item<Allocation>[] = allocations.map((allocation) => ({
-    id: allocation.id,
-    laneId: allocation.resourceId,
-    start: allocation.start,
-    end: allocation.end,
-    size: allocation.size,
-    offset: allocation.offset,
-    payload: allocation,
-  }));
-
-  const { scrollTo } = useScroll();
 
   function handleItemUpdate(item: Item<Allocation>) {
     console.log("item update", item);
