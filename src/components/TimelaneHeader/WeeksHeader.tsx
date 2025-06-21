@@ -8,7 +8,7 @@ import {
 } from "date-fns";
 import { renderWeekHeader } from "./renderingUtils";
 
-interface WeeksHeaderProps {
+export interface WeeksHeaderProps {
   range: TimeRange;
   pixels: Pixels;
   setFocusedDay?: (day: Date | null) => void;

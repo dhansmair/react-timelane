@@ -7,7 +7,7 @@ import {
 } from "date-fns";
 import { renderMonthHeader } from "./renderingUtils";
 
-interface MonthsHeaderProps {
+export interface MonthsHeaderProps {
   range: TimeRange;
   pixels: Pixels;
   setFocusedDay?: (day: Date | null) => void;

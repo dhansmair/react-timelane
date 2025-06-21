@@ -28,9 +28,15 @@ const defaultSettings: TimelaneSettings = {
   start: new Date(2025, 3, 1),
   end: new Date(2025, 6, 2),
   pixelsPerDay: 50,
-  pixelsPerResource: 100,
+  pixelsPerLane: 100,
   allowOverlaps: false,
   focusedDate: null,
+  enableItemDragging: true,
+  enableItemResizing: {
+    left: false,
+    right: false,
+    bottom: true,
+  },
 };
 
 function App() {
@@ -74,7 +80,7 @@ function App() {
             />
           </Flex>
         </div>
-        <div style={{ height: "600px", border: "1px solid #ccc" }}>
+        <div style={{ height: "600px" }}>
           <TimelaneSettingsProvider settings={settings}>
             <MyTimelane
               resources={DEFAULT_RESOURCES}
@@ -119,7 +125,7 @@ function App() {
               <IntegerStep
                 min={50}
                 max={300}
-                inputValue={settings.pixelsPerResource}
+                inputValue={settings.pixelsPerLane}
                 onChange={(newValue) => {
                   setSettings((prev) => ({
                     ...prev,
@@ -190,6 +196,93 @@ function App() {
               </Checkbox>
             </Col>
           </Row>
+          <Row>
+            <Col>
+              <Checkbox
+                checked={settings.enableItemDragging}
+                onChange={(e) =>
+                  setSettings((prev) => ({
+                    ...prev,
+                    enableItemDragging: e.target.checked,
+                  }))
+                }
+              >
+                enable item dragging
+              </Checkbox>
+            </Col>
+          </Row>
+          {settings.enableItemResizing === true ||
+          settings.enableItemResizing === false ? (
+            <Row>
+              <Col></Col>
+            </Row>
+          ) : (
+            <>
+              <Row>
+                <Col>enable item resizing:</Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Checkbox
+                    checked={settings.enableItemResizing.top}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        enableItemResizing: {
+                          ...(prev.enableItemResizing as object),
+                          top: e.target.checked,
+                        },
+                      }))
+                    }
+                  >
+                    top
+                  </Checkbox>
+                  <Checkbox
+                    checked={settings.enableItemResizing.left}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        enableItemResizing: {
+                          ...(prev.enableItemResizing as object),
+                          left: e.target.checked,
+                        },
+                      }))
+                    }
+                  >
+                    left
+                  </Checkbox>
+                  <Checkbox
+                    checked={settings.enableItemResizing.bottom}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        enableItemResizing: {
+                          ...(prev.enableItemResizing as object),
+                          bottom: e.target.checked,
+                        },
+                      }))
+                    }
+                  >
+                    bottom
+                  </Checkbox>
+                  <Checkbox
+                    checked={settings.enableItemResizing.right}
+                    onChange={(e) =>
+                      setSettings((prev) => ({
+                        ...prev,
+                        enableItemResizing: {
+                          ...(prev.enableItemResizing as object),
+                          right: e.target.checked,
+                        },
+                      }))
+                    }
+                  >
+                    right
+                  </Checkbox>
+                </Col>
+              </Row>
+            </>
+          )}
         </div>
       </Space>
     </main>

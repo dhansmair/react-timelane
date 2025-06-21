@@ -3,7 +3,7 @@ import { Pixels, TimeRange } from "../../types";
 import { eachDayOfInterval, isSameDay } from "date-fns";
 import { renderDayHeader } from "./renderingUtils";
 
-interface DaysHeaderProps {
+export interface DaysHeaderProps {
   range: TimeRange;
   pixels: Pixels;
   focusedDay?: Date | null;

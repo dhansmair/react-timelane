@@ -1,9 +1,9 @@
 import { MouseEvent, PropsWithChildren, ReactElement } from "react";
-import { Lane } from "../types";
-import { TimelaneLayout } from "./TimelaneLayout/TimelaneLayout";
-import { useTimelaneContext } from "../hooks/useTimelaneContext";
+import { Lane } from "../../types";
+import { TimelaneLayout } from "../TimelaneLayout/TimelaneLayout";
+import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
-interface TimelaneAsideProps {
+export interface TimelaneAsideProps {
   lanes: Lane[];
   focusedLane?: Lane | null;
   setFocusedLane?: (lane: Lane | null) => void;
@@ -31,7 +31,7 @@ export function TimelaneAside({
           lanes.map((lane) => (
             <LaneHeader
               key={lane.id}
-              height={settings.pixelsPerResource}
+              height={settings.pixelsPerLane}
               isFocused={focusedLane ? focusedLane.id === lane.id : false}
               onClick={(e) => {
                 setFocusedLane(lane);

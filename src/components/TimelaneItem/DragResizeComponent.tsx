@@ -4,6 +4,7 @@ import { draggable } from "@atlaskit/pragmatic-drag-and-drop/element/adapter";
 import { getGrabPosition } from "../utils";
 import { Resizable } from "re-resizable";
 import { Position, Rectangle, Dimensions, Item } from "../../types";
+import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
 interface DragResizeComponentProps<T> {
   item: Item<T>;
@@ -33,6 +34,7 @@ export default function DragResizeComponent<T>({
   onUpdate,
   onResizeStart,
 }: PropsWithChildren<DragResizeComponentProps<T>>) {
+  const { settings } = useTimelaneContext();
   const ref = useRef<HTMLDivElement>(null);
   const handleRef = useRef<HTMLDivElement>(null);
 
@@ -61,8 +63,9 @@ export default function DragResizeComponent<T>({
         onDrop();
       },
       getInitialData: () => ({ ...item }),
+      canDrag: () => settings.enableItemDragging,
     });
-  }, [item, onDrag, onDragStart, onDrop]);
+  }, [settings.enableItemDragging, item, onDrag, onDragStart, onDrop]);
 
   return (
     <div
@@ -88,12 +91,11 @@ export default function DragResizeComponent<T>({
       }}
     >
       <Resizable
-        enable={{
-          right: true,
-          left: true,
-          top: true,
-          bottom: true,
-        }}
+        enable={
+          settings.enableItemResizing === true
+            ? undefined
+            : settings.enableItemResizing
+        }
         handleClasses={{
           left: "timelane-item-resize-handle timelane-item-resize-handle-left",
           right:

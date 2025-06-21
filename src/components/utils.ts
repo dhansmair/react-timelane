@@ -33,7 +33,7 @@ export function getDropTargetDimensions(
 }
 
 export function getDropTargetHeight(lane: Lane, pixels: Pixels): number {
-  return pixels.pixelsPerResource;
+  return pixels.pixelsPerLane;
 }
 
 export function getDropTargetWidth(
@@ -69,7 +69,7 @@ export function getItemDimensions<T>(
   const width =
     differenceInCalendarDays(item.end, item.start) * pixels.pixelsPerDay;
 
-  const height = (item.size / lane.capacity) * pixels.pixelsPerResource;
+  const height = (item.size / lane.capacity) * pixels.pixelsPerLane;
 
   return { width, height };
 }
@@ -86,7 +86,7 @@ export function offsetToPixel(
   capacity: number,
   pixels: Pixels
 ) {
-  return (offset / capacity) * pixels.pixelsPerResource;
+  return (offset / capacity) * pixels.pixelsPerLane;
 }
 
 export function getItemPosition<T>(
@@ -149,10 +149,10 @@ export function getUpdatedItem<T>(
       12
     ),
     offset: Math.floor(
-      (dropPreviewRect.y / pixels.pixelsPerResource) * lane.capacity
+      (dropPreviewRect.y / pixels.pixelsPerLane) * lane.capacity
     ),
     size: Math.floor(
-      (dropPreviewRect.height / pixels.pixelsPerResource) * lane.capacity
+      (dropPreviewRect.height / pixels.pixelsPerLane) * lane.capacity
     ),
     payload: oldItem.payload,
   };

@@ -5,7 +5,7 @@ import { DaysHeader } from "./DaysHeader";
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 import { TimelaneLayout } from "../..";
 
-interface TimelaneHeaderProps {
+export interface TimelaneHeaderProps {
   focusedDay?: Date | null;
   setFocusedDay?: (day: Date | null) => void;
 

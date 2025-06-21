@@ -15,7 +15,7 @@
   position: relative;
   width: 100%;
   height: 100%;
-  border-left: 1px solid var(--timelane-border-color-normal);
+  border: 1px solid var(--timelane-border-color-normal);
 
   .timelane-header {
     top: 0;
@@ -105,6 +105,10 @@
       border-bottom: 1px solid gray;
       margin-top: -1px;
       overflow: hidden;
+
+      &:last-child {
+        margin-bottom: -1px;
+      }
 
       .timelane-drop-target {
         position: relative;

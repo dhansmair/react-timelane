@@ -13,3 +13,4 @@ export { type Lane } from "./Lane";
 export { type DateBounds } from "./DateBounds";
 export { type OffsetBounds } from "./OffsetBounds";
 export { type TimelaneSettings } from "./TimelaneSettings";
+export { type EnableResizing } from "./EnableResizing";

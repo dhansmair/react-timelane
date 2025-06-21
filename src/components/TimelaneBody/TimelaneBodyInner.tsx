@@ -1,6 +1,6 @@
 import { MouseEvent, ReactElement } from "react";
-import { TimelaneLane } from "./TimelaneLane/TimelaneLane";
-import { AvailableSpace, Item, Lane } from "../types";
+import { TimelaneLane } from "../TimelaneLane/TimelaneLane";
+import { AvailableSpace, Item, Lane } from "../../types";
 
 interface TimelaneBodyInnerProps<T> {
   lanes: Lane[];

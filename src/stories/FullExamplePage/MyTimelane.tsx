@@ -1,5 +1,5 @@
 import { addDays, min } from "date-fns";
-import { useEffect, useState, type MouseEvent } from "react";
+import { useState, type MouseEvent } from "react";
 import {
   type AvailableSpace,
   type Lane,
@@ -7,21 +7,23 @@ import {
   type ItemId,
   useScroll,
   TimelaneAllocation,
-} from "react-timelane";
+  Timelane as TL,
+} from "../../";
 import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
+
 import {
   DEFAULT_ALLOCATION_COLOR,
   DEFAULT_ALLOCATION_DESCRIPTION,
   DEFAULT_ALLOCATION_NAME,
 } from "../constants";
-
-import { Timelane as TL } from "react-timelane";
+import { TimelaneProps } from "../../components/Timelane/Timelane";
 
 interface MyTimelaneProps {
   resources: Resource[];
   allocations: Allocation[];
   focusedDay?: Date | null;
+  timelaneParameters: TimelaneProps;
   setFocusedResource?: (resource: Resource | null) => void;
   setFocusedDay?: (day: Date | null) => void;
   onAllocationCreate?: (allocation: Allocation) => void;
@@ -29,38 +31,33 @@ interface MyTimelaneProps {
   onAllocationDelete?: (allocation: Allocation) => void;
   onAllocationClick?: (allocation: Allocation, e: MouseEvent | null) => void;
   onAllocationContextMenu?: (allocation: Allocation, e: MouseEvent) => void;
-  onAreaSearchClick: (area: Resource) => void;
   onAreaClick?: (area: Resource, e: MouseEvent) => void;
-  searchText: string | null;
 }
 
-export default function MyTimelane(props: MyTimelaneProps) {
-  return <MyTimelaneContent {...props} />;
-}
-
-function MyTimelaneContent({
+export function MyTimelane({
   resources,
   allocations,
   focusedDay,
+  timelaneParameters,
   setFocusedDay,
   onAllocationCreate = () => {},
   onAllocationUpdate = () => {},
-  searchText,
-}: MyTimelaneProps) {
+}: // searchText,
+MyTimelaneProps) {
   const [selection, setSelection] = useState<ItemId[]>([]);
   const { scrollTo } = useScroll();
 
-  useEffect(() => {
-    if (searchText !== null) {
-      const searchNumber = Number.parseInt(searchText);
+  // useEffect(() => {
+  //   if (searchText !== null) {
+  //     const searchNumber = Number.parseInt(searchText);
 
-      const searchedAllocation = allocations.find((a) => a.id === searchNumber);
+  //     const searchedAllocation = allocations.find((a) => a.id === searchNumber);
 
-      if (searchedAllocation) {
-        scrollTo(searchNumber);
-      }
-    }
-  }, [allocations, searchText, scrollTo]);
+  //     if (searchedAllocation) {
+  //       scrollTo(searchNumber);
+  //     }
+  //   }
+  // }, [allocations, searchText, scrollTo]);
 
   const lanes: Lane[] = resources.map((resource) => ({
     id: resource.id,
@@ -145,7 +142,7 @@ function MyTimelaneContent({
   }
 
   return (
-    <TL.Container>
+    <TL {...timelaneParameters}>
       <TL.Header
         focusedDay={focusedDay}
         setFocusedDay={setFocusedDay}
@@ -198,6 +195,6 @@ function MyTimelaneContent({
         renderLaneHeader={(lane) => <div>{lane.id}</div>}
       />
       <TL.Layout.Corner />
-    </TL.Container>
+    </TL>
   );
 }

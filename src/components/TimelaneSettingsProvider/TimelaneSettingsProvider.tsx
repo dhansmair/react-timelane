@@ -1,15 +1,20 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import { TimelaneSettings } from "../types/TimelaneSettings";
+import { TimelaneSettings } from "../../types/TimelaneSettings";
 import { TimelaneSettingsContext } from "./TimelaneSettingsContext";
 
-interface TimelaneSettingsProviderProps {
+export interface TimelaneSettingsProviderProps {
   settings: TimelaneSettings;
 }
 
-export const TimelaneSettingsProvider = ({
+/**
+ * this is an example docstring
+ * @param param0
+ * @returns
+ */
+export function TimelaneSettingsProvider({
   settings: _settings,
   children,
-}: PropsWithChildren<TimelaneSettingsProviderProps>) => {
+}: PropsWithChildren<TimelaneSettingsProviderProps>) {
   const [settings, setSettings] = useState<TimelaneSettings>(_settings);
 
   useEffect(() => {
@@ -21,4 +26,4 @@ export const TimelaneSettingsProvider = ({
       {children}
     </TimelaneSettingsContext.Provider>
   );
-};
+}

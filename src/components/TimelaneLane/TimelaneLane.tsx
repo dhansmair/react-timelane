@@ -28,7 +28,7 @@ import {
 } from "../../types";
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
-interface TimelaneLaneProps<T> {
+export interface TimelaneLaneProps<T> {
   lane: Lane;
   items: Item<T>[];
   focused?: boolean;

@@ -1,8 +1,8 @@
 import { PropsWithChildren } from "react";
-import { TimelaneLayout } from "./TimelaneLayout/TimelaneLayout";
+import { TimelaneLayout } from "../TimelaneLayout/TimelaneLayout";
 import { TimelaneSelectionLayer } from "./TimelaneSelectionLayer";
 
-interface TimelaneBodyProps {
+export interface TimelaneBodyProps {
   onSelect?: (selection: number[]) => void;
 }
 
