@@ -48,5 +48,8 @@
       "default": "./dist/react-timelane.js"
     },
     "./style.css": "./dist/react-timelane.css"
-  }
+  },
+  "files": [
+    "dist"
+  ]
 }
