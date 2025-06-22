@@ -50,6 +50,9 @@
     "./style.css": "./dist/react-timelane.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "!dist/stories",
+    "!**/*.stories.ts",
+    "!**/*.stories.d.ts"
   ]
 }
