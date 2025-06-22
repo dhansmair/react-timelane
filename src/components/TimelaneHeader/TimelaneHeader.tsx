@@ -18,6 +18,13 @@ export interface TimelaneHeaderProps {
   onDayClick?: (_: { day: Date; e: MouseEvent }) => void;
 }
 
+/**
+ * The component `<TimelaneHeader>` renders labels for months, weeks and days.
+ *
+ * It must be a child component of `<Timelane>`.
+ * Properties such as `start`, `end`, `pixelsPerDay` are retrieved from the
+ * TimelaneContext, provided e.g. by the parent `<Timelane>` component.
+ */
 export function TimelaneHeader({
   focusedDay,
   setFocusedDay = () => {},

@@ -7,9 +7,11 @@ export interface TimelaneSettingsProviderProps {
 }
 
 /**
- * this is an example docstring
- * @param param0
- * @returns
+ * `<TimelaneSettingsProvider>` can be wrapped around a `<Timelane>` to provide
+ * the settings context. Settings will be overwritten by any prop set on `<Timelane>` itself.
+ *
+ * It is needed when you want to use the `useScroll` hook outside of a Timelane component,
+ * since `useScroll` requires access to the settings `start`, `end`, and `pixelsPerDay`.
  */
 export function TimelaneSettingsProvider({
   settings: _settings,

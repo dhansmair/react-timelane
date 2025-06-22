@@ -7,5 +7,9 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
+  typescript: {
+    reactDocgen: "react-docgen-typescript",
+  },
+  staticDirs: [{ from: "../src/stories/assets", to: "/assets" }],
 };
 export default config;

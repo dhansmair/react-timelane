@@ -172,11 +172,10 @@ MyTimelaneProps) {
             onDoubleClick={(when, availableSpace) =>
               handleLaneDoubleClick(lane, when, availableSpace)
             }
-            renderItem={(item, isDragged) => (
+            renderItem={(item) => (
               <TimelaneAllocation
                 name={`${item.payload.name} (${item.id})`}
                 description={item.payload.description}
-                isDragged={isDragged}
                 isSelected={selection.includes(item.id)}
                 onClick={() => {
                   scrollTo(item.id);

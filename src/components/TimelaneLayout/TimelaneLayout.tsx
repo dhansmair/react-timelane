@@ -1,7 +1,16 @@
 import { PropsWithChildren, useRef } from "react";
 import "./layout.scss";
 
-export function TimelaneLayout({ children }: PropsWithChildren<{}>) {
+/**
+ * The component `<TimelaneLayout>` is internally used to structure the timelane layout.
+ * It provides regions for header, aside, body, footer and corner and ensures the
+ * elements are sticky on their respective positions.
+ * Child components should be used as `<TimelaneLayout.Header>`, `<TimelaneLayout.Aside>` and so on.
+ *
+ * The layout is mainly intended for internal use can still be be used to create
+ * custom sticky components that integrate with react-timelane.
+ */
+export function TimelaneLayout({ children }: PropsWithChildren) {
   const ref = useRef<HTMLDivElement>(null);
   return (
     <div
@@ -18,17 +27,20 @@ export function TimelaneLayout({ children }: PropsWithChildren<{}>) {
     </div>
   );
 }
-function TimelaneLayoutHeader({ children }: PropsWithChildren<{}>) {
+
+export function TimelaneLayoutHeader({ children }: PropsWithChildren) {
   return <div className="timelane-layout-header">{children}</div>;
 }
 
-function TimelaneLayoutBackground({ children }: PropsWithChildren<{}>) {
+export function TimelaneLayoutBackground({ children }: PropsWithChildren) {
   return <div className="timelane-layout-background">{children}</div>;
 }
-function TimelaneLayoutBody({ children }: PropsWithChildren<{}>) {
+
+export function TimelaneLayoutBody({ children }: PropsWithChildren) {
   return <div className="timelane-layout-body">{children}</div>;
 }
-function TimelaneLayoutFooter({ children }: PropsWithChildren<{}>) {
+
+export function TimelaneLayoutFooter({ children }: PropsWithChildren) {
   return <div className="timelane-layout-footer">{children}</div>;
 }
 
@@ -36,7 +48,7 @@ interface TimelaneLayoutAsideProps {
   side?: "left" | "right";
 }
 
-function TimelaneLayoutAside({
+export function TimelaneLayoutAside({
   side = "left",
   children,
 }: PropsWithChildren<TimelaneLayoutAsideProps>) {
@@ -57,7 +69,7 @@ interface TimelaneLayoutCornerProps {
   corner?: "top left" | "top right" | "bottom left" | "bottom right";
 }
 
-function TimelaneLayoutCorner({
+export function TimelaneLayoutCorner({
   corner = "top left",
   children,
 }: PropsWithChildren<TimelaneLayoutCornerProps>) {

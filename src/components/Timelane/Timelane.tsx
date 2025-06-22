@@ -30,7 +30,14 @@ export interface TimelaneProps {
 }
 
 /**
- * a component
+ * The component `<Timelane>` serves as the main container for
+ * `<TimelaneHeader>`, `<TimelaneAside>`, `<TimelaneBody>`, and so on.
+ *
+ * Child components can also be used via `Timelane.[name]`, e.g.,
+ * `Timelane.Header` is an alias for `TimelaneHeader`.
+ *
+ * This component also serves as a context provider. All properties
+ * (start, end, ...) will be accessible and used by child components.
  */
 export function Timelane({
   start,

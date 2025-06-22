@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { FullExamplePage } from "./FullExamplePage";
 
 const meta = {
-  title: "Full Example",
+  title: "Overview / Example",
   component: FullExamplePage,
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout

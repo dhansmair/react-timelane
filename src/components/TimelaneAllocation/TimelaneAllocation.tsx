@@ -6,15 +6,19 @@ export interface TimelaneAllocationProps {
   name: string;
   description: string;
   isSelected?: boolean;
-  isDragged?: boolean;
   onClick?: (e: MouseEvent) => void;
   onContextMenu?: (e: MouseEvent) => void;
 }
+
+/**
+ * `TimelaneAllocation` is a reference implementation to demonstrate how an item could be rendered.
+ *
+ * In the examples, it is passed to the `renderItem()` method of the `<TimelaneLane />` component.
+ */
 export function TimelaneAllocation({
   name,
   description,
   isSelected = false,
-  isDragged = false,
   onClick = () => undefined,
   onContextMenu = () => undefined,
 }: TimelaneAllocationProps) {

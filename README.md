@@ -4,7 +4,6 @@ A React/TypeScript library to build timelines / horizontally scrollable calendar
 
 <img width="1145" alt="image" src="https://github.com/user-attachments/assets/a051f665-37ac-4292-9b85-7e1baa1bb84f" />
 
-
 ## Features
 
 react-timelane has a particular focus on usability and comes with many neat features:
@@ -14,9 +13,9 @@ react-timelane has a particular focus on usability and comes with many neat feat
 - jump (scroll) to point in time, lane or item
 - item selection via mouse range
 
-## Demo
+## Documentation
 
-https://dhansmair.github.io/react-timelane
+Docs and various demos are provided via Storybook: https://dhansmair.github.io/react-timelane
 
 ## Installation
 
@@ -35,14 +34,13 @@ import {
   type AvailableSpace,
   type Lane,
   type Item,
-  type ItemId
+  type ItemId,
 } from "react-timelane";
 import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
 import AllocationComponent from "./AllocationComponent";
 
 import { Timelane as TL } from "react-timelane";
-
 
 interface MyTimelaneProps {
   resources: Resource[];

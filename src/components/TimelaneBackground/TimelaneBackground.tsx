@@ -7,6 +7,13 @@ export interface TimelaneBackgroundProps {
   focusedDay?: Date | null;
 }
 
+/**
+ * `<TimelaneBackground />` renders the vertical separators for weeks (gray) and days (lightgray).
+ *
+ * It must be a child component of `<Timelane>`.
+ *
+ * The dates `start` and `end` are retrieved from the TimelaneContext, provided by e.g. the parent `<Timelane>` component.
+ */
 export function TimelaneBackground({ focusedDay }: TimelaneBackgroundProps) {
   const { settings } = useTimelaneContext();
 

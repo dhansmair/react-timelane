@@ -1,11 +1,20 @@
 .example-page {
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
-    Noto Sans, sans-serif, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Nunito Sans", -apple-system, ".SFNSText-Regular",
+    "San Francisco", BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Helvetica,
+    Arial, sans-serif;
 
   main {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px;
+
+    .example-page-description {
+      font-size: 14px;
+      margin: 16px 0px;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 24px;
+      color: rgb(46, 52, 56);
+    }
 
     .timelane-container {
       height: 600px;

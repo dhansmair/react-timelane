@@ -5,7 +5,15 @@ import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
 export interface TimelaneAsideProps {
   lanes: Lane[];
+
+  /**
+   * deprecated
+   */
   focusedLane?: Lane | null;
+
+  /**
+   * deprecated
+   */
   setFocusedLane?: (lane: Lane | null) => void;
   onLaneHeaderClick?: (lane: Lane, e: MouseEvent) => void;
   onLaneHeaderDoubleClick?: (lane: Lane, e: MouseEvent) => void;
@@ -13,6 +21,13 @@ export interface TimelaneAsideProps {
   renderLaneHeader?: (lane: Lane) => ReactElement;
 }
 
+/**
+ * `<TimelaneAside>` renders lane headers. The lane header height is determined
+ * by the setting `pixelsPerLane`. The lane header content can be customized using
+ * the property `renderLaneHeader()`.
+ *
+ * It must be a child component of `<Timelane>`.
+ */
 export function TimelaneAside({
   lanes,
   focusedLane,

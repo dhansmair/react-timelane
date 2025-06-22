@@ -29,7 +29,7 @@ export function FullExamplePage(settings: FullExamplePageProps) {
       <main>
         <Meta title="Configure your project" />
         <h1>Timelane Example</h1>
-        <div>
+        <div className="example-page-description">
           <p>
             This example tries to demonstrate all features within one component.
           </p>

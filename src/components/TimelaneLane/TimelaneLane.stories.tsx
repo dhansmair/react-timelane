@@ -1,10 +1,10 @@
-// Replace your-framework with the framework you are using, e.g. react-vite, nextjs, nextjs-vite, etc.
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Timelane } from "../Timelane/Timelane";
 import { TimelaneBody } from "../TimelaneBody/TimelaneBody";
 import { TimelaneLane } from "../TimelaneLane/TimelaneLane";
 import { TimelaneAllocation } from "../TimelaneAllocation/TimelaneAllocation";
+import { fn } from "storybook/test";
 
 const meta = {
   component: TimelaneLane,
@@ -40,6 +40,10 @@ export const Primary: Story = {
         payload: null,
       },
     ],
+    onClick: fn(),
+    onDoubleClick: fn(),
+    onContextMenu: fn(),
+    onItemUpdate: fn(),
   },
   parameters: {
     start: new Date(2025, 4, 1),
@@ -47,14 +51,9 @@ export const Primary: Story = {
   },
   render: (args) => (
     <TimelaneLane
-      lane={args.lane}
-      items={args.items}
-      renderItem={(item, isDragged) => (
-        <TimelaneAllocation
-          name={`Allocation ${item.id}`}
-          description={""}
-          isDragged={isDragged}
-        />
+      {...args}
+      renderItem={(item) => (
+        <TimelaneAllocation name={`Allocation ${item.id}`} description={""} />
       )}
     />
   ),

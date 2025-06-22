@@ -29,7 +29,6 @@
       position: -webkit-sticky;
       top: 0;
       z-index: 101;
-      overflow: hidden;
     }
 
     .timelane-layout-body {
@@ -49,11 +48,11 @@
       position: -webkit-sticky;
       bottom: 0;
       z-index: 101;
-      border-top: 1px solid lightgray;
     }
 
     .timelane-layout-aside {
       grid-area: aside-l;
+      justify-self: stretch;
 
       position: sticky;
       position: -webkit-sticky;
@@ -65,7 +64,6 @@
 
         right: 0;
         left: initial;
-        border-left: 1px solid lightgray;
       }
     }
 

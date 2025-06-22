@@ -49,6 +49,12 @@ export interface TimelaneLaneProps<T> {
   onResizeStart?: (data: T) => void;
 }
 
+/**
+ * `<TimelaneLane>` (or `<Timelane.Lane>`) is a container for items. It takes care of
+ * rendering items, drop previews, and overlap indicators. It is also the drop target for DnD functionality.
+ *
+ * It must be a child component of `<TimelaneBody>`.
+ */
 export function TimelaneLane<T>({
   lane,
   items,

@@ -76,7 +76,7 @@ export const Primary: Story = {
   },
   render: (args) => (
     <TimelaneSettingsProvider settings={args.settings}>
-      <TL>
+      <TL pixelsPerDay={100}>
         <TL.Header />
         <TL.Body>
           {lanes.map((lane) => (
@@ -88,7 +88,6 @@ export const Primary: Story = {
                 <TimelaneAllocation
                   name={`Allocation ${item.id}`}
                   description={""}
-                  isDragged={isDragged}
                 />
               )}
             />

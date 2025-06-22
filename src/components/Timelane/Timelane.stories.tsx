@@ -86,7 +86,6 @@ export const Primary: Story = {
               <TimelaneAllocation
                 name={`Allocation ${item.id}`}
                 description={""}
-                isDragged={isDragged}
               />
             )}
           />
