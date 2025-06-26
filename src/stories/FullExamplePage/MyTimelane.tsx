@@ -165,7 +165,8 @@ MyTimelaneProps) {
         {lanes.map((lane) => (
           <TL.Lane
             key={lane.id}
-            lane={lane}
+            id={lane.id}
+            capacity={lane.capacity}
             items={items.filter((item) => item.laneId === lane.id)}
             onItemUpdate={handleItemUpdate}
             onClick={(when) => handleLaneClick(lane, when)}

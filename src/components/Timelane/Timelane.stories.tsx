@@ -1,4 +1,3 @@
-// Replace your-framework with the framework you are using, e.g. react-vite, nextjs, nextjs-vite, etc.
 import type { Meta, StoryObj } from "@storybook/react-vite";
 
 import { Timelane as TL } from "./Timelane";
@@ -77,12 +76,13 @@ export const Primary: Story = {
     <TL {...args}>
       <TL.Header />
       <TL.Body>
-        {lanes.map((lane) => (
+        {lanes.map(({ id, capacity }) => (
           <TL.Lane
-            key={lane.id}
-            lane={lane}
-            items={items.filter((item) => item.laneId === lane.id)}
-            renderItem={(item, isDragged) => (
+            key={id}
+            id={id}
+            capacity={capacity}
+            items={items.filter((item) => item.laneId === id)}
+            renderItem={(item) => (
               <TimelaneAllocation
                 name={`Allocation ${item.id}`}
                 description={""}

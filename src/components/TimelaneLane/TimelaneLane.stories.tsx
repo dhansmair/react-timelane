@@ -16,10 +16,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    lane: {
-      id: 0,
-      capacity: 100,
-    },
+    id: 0,
+    capacity: 100,
     items: [
       {
         id: 0,

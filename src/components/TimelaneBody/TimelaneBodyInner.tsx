@@ -39,7 +39,8 @@ export function TimelaneBodyInner<T>({
       {lanes.map((lane) => (
         <TimelaneLane<T>
           key={lane.id}
-          lane={lane}
+          id={lane.id}
+          capacity={lane.capacity}
           items={items.filter((item) => item.laneId === lane.id)}
           renderItem={renderItem}
           onItemUpdate={onItemUpdate}

@@ -25,8 +25,8 @@ export const Primary: Story = {
   ),
   render: (args) => (
     <TimelaneBody {...args}>
-      <TimelaneLane lane={{ id: 0, capacity: 100 }} items={[]} />
-      <TimelaneLane lane={{ id: 1, capacity: 100 }} items={[]} />
+      <TimelaneLane id={0} />
+      <TimelaneLane id={1} />
     </TimelaneBody>
   ),
 };

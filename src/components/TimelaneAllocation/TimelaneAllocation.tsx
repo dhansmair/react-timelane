@@ -4,7 +4,7 @@ const SCALE_THRESHOLD_IN_PX = 30;
 
 export interface TimelaneAllocationProps {
   name: string;
-  description: string;
+  description?: string;
   isSelected?: boolean;
   onClick?: (e: MouseEvent) => void;
   onContextMenu?: (e: MouseEvent) => void;
@@ -17,7 +17,7 @@ export interface TimelaneAllocationProps {
  */
 export function TimelaneAllocation({
   name,
-  description,
+  description = "",
   isSelected = false,
   onClick = () => undefined,
   onContextMenu = () => undefined,

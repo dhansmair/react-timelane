@@ -23,14 +23,16 @@ import {
   Grid,
   Position,
   Rectangle,
-  Lane,
   isItem,
+  LaneId,
+  Lane,
 } from "../../types";
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
 export interface TimelaneLaneProps<T> {
-  lane: Lane;
-  items: Item<T>[];
+  id: LaneId;
+  capacity?: number;
+  items?: Item<T>[];
   focused?: boolean;
   onItemUpdate?: (item: Item<T>) => void;
   onMouseUp?: (e: MouseEvent) => void;
@@ -56,8 +58,9 @@ export interface TimelaneLaneProps<T> {
  * It must be a child component of `<TimelaneBody>`.
  */
 export function TimelaneLane<T>({
-  lane,
-  items,
+  id,
+  capacity = 100,
+  items = [],
   focused = false,
   onItemUpdate = () => {},
   onMouseUp = () => {},
@@ -67,6 +70,7 @@ export function TimelaneLane<T>({
   renderItem = defaultRenderItem,
   onResizeStart = () => {},
 }: TimelaneLaneProps<T>) {
+  const lane: Lane = { id, capacity };
   const { settings } = useTimelaneContext();
 
   const grid: Grid = {
@@ -97,7 +101,7 @@ export function TimelaneLane<T>({
     const clientRect = e.currentTarget.getBoundingClientRect();
     const relativePxOffsetY = (e.pageY - clientRect.top) / clientRect.height;
 
-    return relativePxOffsetY * lane.capacity;
+    return relativePxOffsetY * capacity;
   }
 
   function handleDrag(mousePos: Position, grabInfo: GrabInfo, data: object) {
@@ -176,9 +180,9 @@ export function TimelaneLane<T>({
 
   return (
     <div
-      id={`timelane-lane-${lane.id}`}
+      id={`timelane-lane-${id}`}
       className={`timelane-lane ${focused ? "timelane-lane-focused" : ""}`}
-      data-timelane-lane-id={lane.id}
+      data-timelane-lane-id={id}
       style={dimensions}
       onMouseUp={onMouseUp}
       onClick={(e) => handleClick(e, "single")}

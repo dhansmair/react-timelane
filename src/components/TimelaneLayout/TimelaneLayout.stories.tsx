@@ -40,7 +40,7 @@ const style: CSSProperties = {
 
 export const Primary: Story = {
   args: {},
-  render: (args) => (
+  render: () => (
     <TimelaneLayout>
       <TimelaneLayout.Header>
         <div style={style}>header</div>

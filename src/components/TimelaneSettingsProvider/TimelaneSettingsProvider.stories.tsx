@@ -79,16 +79,14 @@ export const Primary: Story = {
       <TL pixelsPerDay={100}>
         <TL.Header />
         <TL.Body>
-          {lanes.map((lane) => (
+          {lanes.map(({ id, capacity }) => (
             <TL.Lane
-              key={lane.id}
-              lane={lane}
-              items={items.filter((item) => item.laneId === lane.id)}
-              renderItem={(item, isDragged) => (
-                <TimelaneAllocation
-                  name={`Allocation ${item.id}`}
-                  description={""}
-                />
+              key={id}
+              id={id}
+              capacity={capacity}
+              items={items.filter((item) => item.laneId === id)}
+              renderItem={(item) => (
+                <TimelaneAllocation name={`Allocation ${item.id}`} />
               )}
             />
           ))}
