@@ -21,10 +21,8 @@ export default defineConfig({
     rollupOptions: {
       external: ["react", "react/jsx-runtime"],
       output: {
-        // Put chunk files at <output>/chunks
-        chunkFileNames: "chunks/[name].[hash].js",
-        // Put chunk styles at <output>/assets
-        assetFileNames: "assets/[name][extname]",
+        preserveModules: true,
+        preserveModulesRoot: "src",
         entryFileNames: "[name].js",
       },
     },

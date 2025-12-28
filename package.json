@@ -1,6 +1,6 @@
 {
   "name": "react-timelane",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -46,15 +46,14 @@
   "repository": {
     "url": "https://github.com/dhansmair/react-timelane"
   },
-  "main": "./dist/react-timelane.js",
-  "module": "./dist/react-timelane.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "default": "./dist/react-timelane.js"
-    },
-    "./style.css": "./dist/react-timelane.css"
+      "default": "./dist/index.js"
+    }
   },
   "files": [
     "dist",
