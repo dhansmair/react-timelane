@@ -7,6 +7,13 @@ export interface TimelaneAsideProps {
   lanes: Lane[];
 
   /**
+   * the width in px
+   */
+  width?: number;
+
+  side?: "left" | "right";
+
+  /**
    * deprecated
    */
   focusedLane?: Lane | null;
@@ -30,6 +37,8 @@ export interface TimelaneAsideProps {
  */
 export function TimelaneAside({
   lanes,
+  width = 100,
+  side = "left",
   focusedLane,
   setFocusedLane = () => undefined,
   onLaneHeaderClick = () => undefined,
@@ -40,8 +49,8 @@ export function TimelaneAside({
   const { settings } = useTimelaneContext();
 
   return (
-    <TimelaneLayout.Aside>
-      <div className="timelane-aside">
+    <TimelaneLayout.Aside side={side}>
+      <div className="timelane-aside" style={{ width: `${width}px` }}>
         {lanes &&
           lanes.map((lane) => (
             <LaneHeader

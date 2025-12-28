@@ -1,8 +1,13 @@
+:root {
+  --border: 1px solid lightgray;
+}
+
 .timelane-layout {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: auto;
+  border: var(--border);
 
   .timelane-layout-inner {
     position: relative;
@@ -29,6 +34,7 @@
       position: -webkit-sticky;
       top: 0;
       z-index: 101;
+      border-bottom: var(--border);
     }
 
     .timelane-layout-body {
@@ -48,6 +54,7 @@
       position: -webkit-sticky;
       bottom: 0;
       z-index: 101;
+      border-top: var(--border);
     }
 
     .timelane-layout-aside {
@@ -58,12 +65,15 @@
       position: -webkit-sticky;
       left: 0;
       z-index: 101;
+      border-right: var(--border);
 
       &.timelane-layout-aside-right {
         grid-area: aside-r;
 
         right: 0;
         left: initial;
+        border-left: var(--border);
+        border-right: none;
       }
     }
 
@@ -76,29 +86,29 @@
         grid-area: corner-tl;
         top: 0;
         left: 0;
-        border-bottom: 1px solid lightgray;
-        border-right: 1px solid lightgray;
+        border-bottom: var(--border);
+        border-right: var(--border);
       }
       &.timelane-layout-corner-top-right {
         grid-area: corner-tr;
         top: 0;
         right: 0;
-        border-bottom: 1px solid lightgray;
-        border-left: 1px solid lightgray;
+        border-bottom: var(--border);
+        border-left: var(--border);
       }
       &.timelane-layout-corner-bottom-left {
         grid-area: corner-bl;
         bottom: 0;
         left: 0;
-        border-top: 1px solid lightgray;
-        border-right: 1px solid lightgray;
+        border-top: var(--border);
+        border-right: var(--border);
       }
       &.timelane-layout-corner-bottom-right {
         grid-area: corner-br;
         bottom: 0;
         right: 0;
-        border-top: 1px solid lightgray;
-        border-left: 1px solid lightgray;
+        border-top: var(--border);
+        border-left: var(--border);
       }
     }
   }

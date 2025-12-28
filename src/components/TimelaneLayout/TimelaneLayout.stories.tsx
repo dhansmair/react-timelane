@@ -30,7 +30,6 @@ type Story = StoryObj<typeof meta>;
 const style: CSSProperties = {
   boxSizing: "border-box",
   padding: "20px",
-  border: "1px solid lightgray",
   width: "100%",
   height: "100%",
   backgroundImage:
