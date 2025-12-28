@@ -40,7 +40,7 @@ import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
 import AllocationComponent from "./AllocationComponent";
 
-import { Timelane as TL } from "react-timelane";
+import { Timelane } from "react-timelane";
 
 interface MyTimelaneProps {
   resources: Resource[];
@@ -86,8 +86,8 @@ function MyTimelane({
   }
 
   return (
-    <TL.Container>
-      <TL.Header
+    <Timelane>
+      <Timelane.Header
         onDayClick={({ day }) => {
           console.log("day clicked", day);
         }}
@@ -98,16 +98,17 @@ function MyTimelane({
           console.log("week clicked", firstDay);
         }}
       />
-      <TL.Body
+      <Timelane.Body
         onSelect={(selection) => {
           setSelection(selection);
         }}
       >
-        {lanes.map((lane) => (
-          <TL.Lane
-            key={lane.id}
-            lane={lane}
-            items={items.filter((item) => item.laneId === lane.id)}
+        {lanes.map(({id, capacity}) => (
+          <Timelane.Lane
+            key={id}
+            id={id}
+            capacity={capacity}
+            items={items.filter((item) => item.laneId === id)}
             onItemUpdate={handleItemUpdate}
             renderItem={(item, isDragged) => (
               <AllocationComponent
@@ -118,14 +119,14 @@ function MyTimelane({
             )}
           />
         ))}
-      </TL.Body>
-      <TL.Background />
-      <TL.Aside
+      </Timelane.Body>
+      <Timelane.Background />
+      <Timelane.Aside
         lanes={lanes}
         renderLaneHeader={(lane) => <div>{lane.id}</div>}
       />
-      <TL.Layout.Corner />
-    </TL.Container>
+      <Timelane.Layout.Corner />
+    </Timelane.Container>
   );
 }
 ```

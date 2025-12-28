@@ -7,7 +7,7 @@ import {
   type ItemId,
   useScroll,
   TimelaneAllocation,
-  Timelane as TL,
+  Timelane,
 } from "../../";
 import type Allocation from "../models/Allocation";
 import type Resource from "../models/Resource";
@@ -42,22 +42,9 @@ export function MyTimelane({
   setFocusedDay,
   onAllocationCreate = () => {},
   onAllocationUpdate = () => {},
-}: // searchText,
-MyTimelaneProps) {
+}: MyTimelaneProps) {
   const [selection, setSelection] = useState<ItemId[]>([]);
   const { scrollTo } = useScroll();
-
-  // useEffect(() => {
-  //   if (searchText !== null) {
-  //     const searchNumber = Number.parseInt(searchText);
-
-  //     const searchedAllocation = allocations.find((a) => a.id === searchNumber);
-
-  //     if (searchedAllocation) {
-  //       scrollTo(searchNumber);
-  //     }
-  //   }
-  // }, [allocations, searchText, scrollTo]);
 
   const lanes: Lane[] = resources.map((resource) => ({
     id: resource.id,
@@ -142,8 +129,8 @@ MyTimelaneProps) {
   }
 
   return (
-    <TL {...timelaneParameters}>
-      <TL.Header
+    <Timelane {...timelaneParameters}>
+      <Timelane.Header
         focusedDay={focusedDay}
         setFocusedDay={setFocusedDay}
         onDayClick={({ day }) => {
@@ -156,14 +143,14 @@ MyTimelaneProps) {
           console.log("week clicked", firstDay);
         }}
       />
-      <TL.Body
+      <Timelane.Body
         onSelect={(selection) => {
           console.info(selection);
           setSelection(selection);
         }}
       >
         {lanes.map((lane) => (
-          <TL.Lane
+          <Timelane.Lane
             key={lane.id}
             id={lane.id}
             capacity={lane.capacity}
@@ -185,16 +172,16 @@ MyTimelaneProps) {
             )}
           />
         ))}
-      </TL.Body>
-      <TL.Background focusedDay={focusedDay} />
-      <TL.Aside
+      </Timelane.Body>
+      <Timelane.Background focusedDay={focusedDay} />
+      <Timelane.Aside
         lanes={lanes}
         onLaneHeaderClick={(lane) => {
           scrollTo({ vert: lane.id });
         }}
         renderLaneHeader={(lane) => <div>{lane.id}</div>}
       />
-      <TL.Layout.Corner />
-    </TL>
+      <Timelane.Layout.Corner />
+    </Timelane>
   );
 }
