@@ -3,8 +3,8 @@ import { Lane } from "../../types";
 import { TimelaneLayout } from "../TimelaneLayout/TimelaneLayout";
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
-export interface TimelaneAsideProps {
-  lanes: Lane[];
+export interface TimelaneAsideProps<T = unknown> {
+  lanes: Lane<T>[];
 
   /**
    * the width in px
@@ -16,16 +16,16 @@ export interface TimelaneAsideProps {
   /**
    * deprecated
    */
-  focusedLane?: Lane | null;
+  focusedLane?: Lane<T> | null;
 
   /**
    * deprecated
    */
-  setFocusedLane?: (lane: Lane | null) => void;
-  onLaneHeaderClick?: (lane: Lane, e: MouseEvent) => void;
-  onLaneHeaderDoubleClick?: (lane: Lane, e: MouseEvent) => void;
-  onLaneHeaderContextMenu?: (lane: Lane, e: MouseEvent) => void;
-  renderLaneHeader?: (lane: Lane) => ReactElement;
+  setFocusedLane?: (lane: Lane<T> | null) => void;
+  onLaneHeaderClick?: (lane: Lane<T>, e: MouseEvent) => void;
+  onLaneHeaderDoubleClick?: (lane: Lane<T>, e: MouseEvent) => void;
+  onLaneHeaderContextMenu?: (lane: Lane<T>, e: MouseEvent) => void;
+  renderLaneHeader?: (lane: Lane<T>) => ReactElement;
 }
 
 /**
@@ -35,7 +35,7 @@ export interface TimelaneAsideProps {
  *
  * It must be a child component of `<Timelane>`.
  */
-export function TimelaneAside({
+export function TimelaneAside<T = unknown>({
   lanes,
   width = 100,
   side = "left",
@@ -45,7 +45,7 @@ export function TimelaneAside({
   onLaneHeaderDoubleClick = () => undefined,
   onLaneHeaderContextMenu = () => undefined,
   renderLaneHeader = defaultRenderLaneHeader,
-}: TimelaneAsideProps) {
+}: TimelaneAsideProps<T>) {
   const { settings } = useTimelaneContext();
 
   return (

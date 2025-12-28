@@ -29,7 +29,7 @@ import {
 } from "../../types";
 import { useTimelaneContext } from "../../hooks/useTimelaneContext";
 
-export interface TimelaneLaneProps<T> {
+export interface TimelaneLaneProps<T = unknown> {
   id: LaneId;
   capacity?: number;
   items?: Item<T>[];
@@ -48,7 +48,7 @@ export interface TimelaneLaneProps<T> {
   ) => void;
   onContextMenu?: (when: Date, e: MouseEvent) => void;
   renderItem?: (item: Item<T>, isDragged: boolean) => ReactElement;
-  onResizeStart?: (data: T) => void;
+  onResizeStart?: (data?: T) => void;
 }
 
 /**

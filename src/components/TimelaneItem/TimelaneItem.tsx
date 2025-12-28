@@ -7,7 +7,7 @@ import {
 import { PropsWithChildren } from "react";
 import { Item, Position, Rectangle, Lane, TimelaneSettings } from "../../types";
 
-interface TimelaneItemProps<T> {
+interface TimelaneItemProps<T = unknown> {
   item: Item<T>;
   lane: Lane;
   settings: TimelaneSettings;

@@ -22,22 +22,25 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-const lanes: Lane[] = [
+const lanes: Lane<string>[] = [
   {
     id: 0,
     capacity: 100,
+    payload: "one",
   },
   {
     id: 1,
     capacity: 100,
+    payload: "two",
   },
   {
     id: 2,
     capacity: 100,
+    payload: "three",
   },
 ];
 
-const items: Item<null>[] = [
+const items: Item[] = [
   {
     id: 0,
     laneId: 0,

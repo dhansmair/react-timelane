@@ -1,7 +1,7 @@
 import { ItemId } from "./ItemId";
 import { LaneId } from "./LaneId";
 
-export type Item<T = void> = {
+export type Item<T = unknown> = {
   id: ItemId;
   laneId: LaneId;
   start: Date;

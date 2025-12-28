@@ -10,7 +10,7 @@ import {
   TimeRange,
 } from "../../types";
 
-interface AvailableSpaceIndicatorProps<T> {
+interface AvailableSpaceIndicatorProps<T = unknown> {
   pixels: Pixels;
   range: TimeRange;
   lane: Lane;

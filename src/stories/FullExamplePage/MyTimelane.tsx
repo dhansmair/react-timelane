@@ -175,8 +175,8 @@ MyTimelaneProps) {
             }
             renderItem={(item) => (
               <TimelaneAllocation
-                name={`${item.payload.name} (${item.id})`}
-                description={item.payload.description}
+                name={`${item.payload?.name} (${item.id})`}
+                description={item.payload?.description}
                 isSelected={selection.includes(item.id)}
                 onClick={() => {
                   scrollTo(item.id);
