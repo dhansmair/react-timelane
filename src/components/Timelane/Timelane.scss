@@ -103,6 +103,10 @@
       margin-top: -1px;
       overflow: hidden;
 
+      &.timelane-lane-focused {
+        background: var(--timelane-focused-color);
+      }
+
       .timelane-drop-target {
         position: relative;
         width: 100%;
